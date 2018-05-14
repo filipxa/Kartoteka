@@ -3,13 +3,28 @@ package sw3.kartoteka.model;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+
+@Entity
 public class VrstaIzvedbe {
 	
-	private boolean isFilm;
+	@Column(nullable = false)
+	private boolean isFilm;  // nacin provere da li je film ili predstava
+	
+	@Column(nullable = false)
 	private String naziv;
+	
+	@Column
 	private Date godina;
+	
+	@Column
 	private Osoba reziser;
+	
+	@Column
 	private List<Osoba> glumci;
+	
+	@Column
 	private Double prosecnaOcena;
 	
 	

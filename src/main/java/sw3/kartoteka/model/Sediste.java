@@ -1,9 +1,18 @@
 package sw3.kartoteka.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+
+@Entity
 public class Sediste {
 
+	@Column
 	private boolean slobodno;
+	
+	@Column
 	private int red;
+	
+	@Column
 	private int kolona;
 	
 	

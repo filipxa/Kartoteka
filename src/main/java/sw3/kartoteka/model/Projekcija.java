@@ -4,14 +4,36 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
 public class Projekcija {
 	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(unique = true, nullable = false)
 	private Integer idProjekcije;
+	
+	@Column
 	private VrstaIzvedbe vrstaIzvedbe;
+	
+	@Column
 	private Sala sala;
+	
+	@Column
 	private List<Karta> prodateKarte;
+	
+	@Column
 	private Map<Integer, Integer> rezervisaneKarte; // <idKarte, idKorisnika>
+	
+	@Column
 	private List<Karta> karteNaPopustu;
+	
+	@Column
 	private Date termin;
 	
 	

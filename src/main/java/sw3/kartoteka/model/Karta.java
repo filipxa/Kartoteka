@@ -1,15 +1,34 @@
 package sw3.kartoteka.model;
 
+import static javax.persistence.GenerationType.IDENTITY;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
 @Entity
 public class Karta {
 	
+	@Column(nullable = false, unique = true)
+	@Id
+	@GeneratedValue(strategy = IDENTITY)
 	private Integer idKarte;
+	
+	@Column
 	private Sala sala;
+	
+	@Column
 	private Sediste sediste;
+	
+	@Column
+	@GeneratedValue(strategy = IDENTITY)  // ne znam da li treba
 	private Integer idKupca;
+	
+	@Column
 	private int popust;
+	
+	@Column
 	private int cena;
 	
 	public int getIdKarte() {

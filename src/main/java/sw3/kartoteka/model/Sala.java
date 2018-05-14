@@ -2,11 +2,27 @@ package sw3.kartoteka.model;
 
 import java.util.List;
 
-public class Sala {
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
+@Entity
+public class Sala {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(nullable = false, unique = true)
 	private String idSale;
+	
+	@Column
 	private int brRedova;
+	
+	@Column
 	private int brKolona;
+	
+	@Column
 	private List<Sediste> sedista;
 	
 	
