@@ -11,26 +11,26 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
-//@Entity
+@Entity
 public class Pozoriste {
-	// Fali jos stvari Repertoar nije dovar treba lista filmova/bioskopa
-	// Adresa treba da senapravi za mape
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(unique = true, nullable = false)
 	private Integer id;
-
+	
+	
 	@Column(nullable = false)
 	private boolean isPozoriste;
+	
+	@Column(nullable = false)
+	private Repertoar repertoar;
 
 	@Column(nullable = false)
 	private String naziv;
 
 	@Column(nullable = false)
-	private String adresa;
-
-	@Column
-	private String repertoar;
+	private Adresa adresa;
 
 	@Column
 	private String promotivniOpis;
@@ -45,6 +45,14 @@ public class Pozoriste {
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+
+	public Repertoar getRepertoar() {
+		return repertoar;
+	}
+
+	public void setRepertoar(Repertoar repertoar) {
+		this.repertoar = repertoar;
 	}
 
 	public boolean isPozoriste() {
@@ -63,20 +71,12 @@ public class Pozoriste {
 		this.naziv = naziv;
 	}
 
-	public String getAdresa() {
+	public Adresa getAdresa() {
 		return adresa;
 	}
 
-	public void setAdresa(String adresa) {
+	public void setAdresa(Adresa adresa) {
 		this.adresa = adresa;
-	}
-
-	public String getRepertoar() {
-		return repertoar;
-	}
-
-	public void setRepertoar(String repertoar) {
-		this.repertoar = repertoar;
 	}
 
 	public String getPromotivniOpis() {
@@ -94,5 +94,8 @@ public class Pozoriste {
 	public void setKarteBrzaRezervacija(List<Karta> karteBrzaRezervacija) {
 		this.karteBrzaRezervacija = karteBrzaRezervacija;
 	}
+
+
+	
 
 }
