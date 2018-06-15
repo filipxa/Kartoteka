@@ -13,4 +13,8 @@ public interface KorisnikServisInterface {
 	Korisnik save(Korisnik korisnik);
 	
 	void delete(Korisnik korisnik);
+	
+	Korisnik findByEmail(String email);
+	
+	Korisnik findByuuid(String uuid);
 }

@@ -4,10 +4,12 @@ import static javax.persistence.GenerationType.IDENTITY;
 
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
@@ -16,12 +18,12 @@ public class Korisnik {
 	//dodati anotacije za poslednje clanove klase
 	
 	@Id
-	@GeneratedValue(strategy = IDENTITY)
-	@Column(unique = true, nullable = false)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "user_id")
 	private Integer idKorisnika;
 
 	@Column(nullable = false)
-	private TipKorisnika tipKorisnika;
+	private String tip;
 
 	@Column(nullable = false)
 	private String ime;
@@ -31,18 +33,32 @@ public class Korisnik {
 
 	@Column(nullable = false)
 	private String email;
+	
+	@Column(nullable = false)
+	private String password;
 
 	@ManyToMany
 	@Column(nullable = false)
 	private List<Korisnik> listaPrijatelja;
 	
-	private Map<Integer, Integer> ocenjeniFilmoviISerije; // <idTipaProjekcija, ocena>
+	@Column(name = "uuid")
+	private String uuid;
 	
-	private Map<Integer, Integer> ocenjeniBioskopiIPozorista; // <idPozoristBioskopa, ocena>
+	@Column(name = "activated")
+	private Boolean activated;
 	
-	private List<Rekvizit> rekviziti;
+//	private Map<Integer, Integer> ocenjeniFilmoviISerije; // <idTipaProjekcija, ocena>
+//	
+//	private Map<Integer, Integer> ocenjeniBioskopiIPozorista; // <idPozoristBioskopa, ocena>
+//	
+	//private List<Rekvizit> rekviziti;
+	
+	public Korisnik() {
+		activated=false;
+		uuid = UUID.randomUUID().toString();
+	}
 
-	public int getIdKorisnika() {
+	public Integer getIdKorisnika() {
 		return idKorisnika;
 	}
 
@@ -74,13 +90,7 @@ public class Korisnik {
 		this.email = email;
 	}
 
-	public TipKorisnika getTipKorisnika() {
-		return tipKorisnika;
-	}
 
-	public void setTipKorisnika(TipKorisnika tipKorisnika) {
-		this.tipKorisnika = tipKorisnika;
-	}
 
 	public List<Korisnik> getListaPrijatelja() {
 		return listaPrijatelja;
@@ -89,33 +99,69 @@ public class Korisnik {
 	public void setListaPrijatelja(List<Korisnik> listaPrijatelja) {
 		this.listaPrijatelja = listaPrijatelja;
 	}
+	
+	
 
-	public Map<Integer, Integer> getOcenjeniFilmoviISerije() {
-		return ocenjeniFilmoviISerije;
-	}
+//	public Map<Integer, Integer> getOcenjeniFilmoviISerije() {
+//		return ocenjeniFilmoviISerije;
+//	}
+//
+//	public void setOcenjeniFilmoviISerije(Map<Integer, Integer> ocenjeniFilmoviISerije) {
+//		this.ocenjeniFilmoviISerije = ocenjeniFilmoviISerije;
+//	}
+//
+//	public Map<Integer, Integer> getOcenjeniBioskopiIPozorista() {
+//		return ocenjeniBioskopiIPozorista;
+//	}
+//
+//	public void setOcenjeniBioskopiIPozorista(Map<Integer, Integer> ocenjeniBioskopiIPozorista) {
+//		this.ocenjeniBioskopiIPozorista = ocenjeniBioskopiIPozorista;
+//	}
 
-	public void setOcenjeniFilmoviISerije(Map<Integer, Integer> ocenjeniFilmoviISerije) {
-		this.ocenjeniFilmoviISerije = ocenjeniFilmoviISerije;
-	}
-
-	public Map<Integer, Integer> getOcenjeniBioskopiIPozorista() {
-		return ocenjeniBioskopiIPozorista;
-	}
-
-	public void setOcenjeniBioskopiIPozorista(Map<Integer, Integer> ocenjeniBioskopiIPozorista) {
-		this.ocenjeniBioskopiIPozorista = ocenjeniBioskopiIPozorista;
-	}
-
-	public List<Rekvizit> getRekviziti() {
-		return rekviziti;
-	}
-
-	public void setRekviziti(List<Rekvizit> rekviziti) {
-		this.rekviziti = rekviziti;
-	}
+//	public List<Rekvizit> getRekviziti() {
+//		return rekviziti;
+//	}
+//
+//	public void setRekviziti(List<Rekvizit> rekviziti) {
+//		this.rekviziti = rekviziti;
+//	}
 
 	public void setIdKorisnika(Integer idKorisnika) {
 		this.idKorisnika = idKorisnika;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+
+
+	public Boolean getActivated() {
+		return activated;
+	}
+
+	public void setActivated(Boolean activated) {
+		this.activated = activated;
+	}
+
+	public String getUuid() {
+		return uuid;
+	}
+
+	public void setUuid(String uuid) {
+		this.uuid = uuid;
+	}
+
+	public String getTip() {
+		return tip;
+	}
+
+	public void setTip(String tip) {
+		this.tip = tip;
 	}
 
 }

@@ -8,3 +8,5 @@ gradle-app.setting
 !gradle-wrapper.jar
 
 \.settings/
+
+bin/main/application\.properties

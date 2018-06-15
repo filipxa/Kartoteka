@@ -1,0 +1,68 @@
+
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav
+    #navDrawer
+    class="sidenav"
+    position="start"
+    fixedInViewport="true"
+    [attr.role]= "navigation"
+    mode="side"
+    [opened]="userService.loggedUser!=null">
+    
+    <mat-toolbar color="primary" class="toolbar">Menu  <span class="example-spacer"></span>
+      <button
+      *ngIf="userService.loggedUser && navDrawer.opened"
+        type="button"
+        aria-label="Toggle sidenav"
+        mat-icon-button
+        
+        (click)="navDrawer.toggle()"
+        > <mat-icon aria-label="Side nav toggle icon\">arrow_back</mat-icon>
+      </button>
+    </mat-toolbar>
+    <mat-nav-list>
+      <a mat-list-item href="/first-page">First page</a>
+      <a mat-list-item href="/second-page">Second page</a>
+      <a mat-list-item href="/third-page">Third page</a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content >
+    <mat-toolbar color="primary" class="toolbar">
+      <button
+      *ngIf="userService.loggedUser && !navDrawer.opened"
+        type="button"
+        aria-label="Toggle sidenav"
+        mat-icon-button
+        
+        (click)="navDrawer.toggle()"
+        >
+        <mat-icon aria-label="Side nav toggle icon\">menu</mat-icon>
+      </button>
+      <span class="example-spacer"></span>
+      <app-login-small *ngIf="userService.loggedUser==null" ></app-login-small>
+      
+      <button *ngIf="userService.loggedUser" mat-button class="user-button" (click)="UserDrawer.toggle()" >{{userService.loggedUser.name}}</button>
+      
+    </mat-toolbar>
+    
+        <mat-sidenav
+        #UserDrawer
+        class="sidenav"
+        position="end"
+        fixedInViewport="true"
+        [attr.role]= "navigation"
+        mode="side"
+        fixedTopGap=64
+        [opened]="userService.loggedUser!=null">
+        <mat-nav-list>
+         <a mat-list-item (click)="userService.logOut()" > Log out</a>
+          <a mat-list-item href="/second-page">Second page</a>
+          <a mat-list-item href="/third-page">Third page</a>
+        </mat-nav-list>
+      </mat-sidenav>
+
+       <router-outlet class="router-out"></router-outlet>
+  </mat-sidenav-content>
+  
+ 
+</mat-sidenav-container>

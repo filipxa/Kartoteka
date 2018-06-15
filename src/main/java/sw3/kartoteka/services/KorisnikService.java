@@ -38,5 +38,14 @@ public class KorisnikService implements KorisnikServisInterface {
 		korisnikRepositorijum.delete(korisnik);
 
 	}
+	@Override
+	public Korisnik findByEmail(String email) {
+		return korisnikRepositorijum.findByEmail(email);
+	}
+
+	@Override
+	public Korisnik findByuuid(String uuid) {
+		return korisnikRepositorijum.findByuuid(uuid);
+	}
 
 }
