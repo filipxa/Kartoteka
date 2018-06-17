@@ -7,7 +7,7 @@ import javax.persistence.Entity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import sw3.kartoteka.model.Korisnik;
+import sw3.kartoteka.model.entity.Korisnik;
 import sw3.kartoteka.repository.KorisnikRepositorijum;
 
 @Service

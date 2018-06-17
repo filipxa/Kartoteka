@@ -6,7 +6,7 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
-import sw3.kartoteka.model.Korisnik;
+import sw3.kartoteka.model.entity.Korisnik;
 
 @Service
 public class EMailService {

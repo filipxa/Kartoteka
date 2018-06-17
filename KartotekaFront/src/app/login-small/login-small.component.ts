@@ -23,7 +23,6 @@ export class LoginSmallComponent implements OnInit {
   onClick(username: string, password : string){
    if(username.trim().length>0 && password.trim().length>0){
     this.userService.logIn(username.trim(), password.trim());
-      this.router.navigate(['/']);
    }
       
   }

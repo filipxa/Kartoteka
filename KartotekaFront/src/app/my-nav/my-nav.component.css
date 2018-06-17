@@ -1,5 +1,6 @@
 .sidenav-container {
   height: 100%;
+  
 }
 
 .toolbar {
@@ -18,9 +19,15 @@
   height: 100%;
   
 }
+.lowerContainer{
+  display: flex;
+  flex-direction: column;
+}
 
 .router-out{
-  display: flex;
+  overflow-y: auto;
+  flex: 1;
+
 }
 
 .input{

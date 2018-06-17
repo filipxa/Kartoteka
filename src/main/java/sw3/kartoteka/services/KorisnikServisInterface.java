@@ -2,7 +2,7 @@ package sw3.kartoteka.services;
 
 import java.util.List;
 
-import sw3.kartoteka.model.Korisnik;
+import sw3.kartoteka.model.entity.Korisnik;
 
 public interface KorisnikServisInterface {
 

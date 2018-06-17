@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { User } from '../models/user';
 import { Observable, of } from 'rxjs';
 import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
-import { UserDTO } from '../models/userDTO';
+
 import { MatSnackBar } from '@angular/material';
 import { Router } from '@angular/router'
 
@@ -18,7 +18,6 @@ const getByEmailUrl : string = "http://localhost:8080/api/user/";
 })
 export class UserService {
 
- private user = 'http://localhost:8080/api/user';
   loggedUser : User;
   constructor(  private http: HttpClient, private snackBar : MatSnackBar, private router: Router) { }
   
@@ -28,8 +27,6 @@ export class UserService {
     {
       if(sessionStorage.getItem("loggedUser") !== null){
         this.loggedUser=JSON.parse(sessionStorage.getItem("loggedUser"));
-        console.log(this.loggedUser.name);
-        console.log(sessionStorage);
       }
       return of(this.loggedUser);
     }
@@ -41,11 +38,12 @@ export class UserService {
 
   logIn(email: string, password: string): void {
 
-    this.http.get<UserDTO>(getByEmailUrl + email, httpOptions).subscribe(result => 
+    this.http.get<User>(getByEmailUrl + email, httpOptions).subscribe(result => 
     {
+      
       if(result!=undefined)
     {
-      this.loggedUser = new User(result);
+      this.loggedUser = result;
       this.setLoggedUser();
       this.router.navigate(["/"]);
     } else 
@@ -64,17 +62,10 @@ export class UserService {
     
   }
 
-  register(fName : string, dlName : string, dEmail : string, dPassword : string, dTip : string) {
-    let user : UserDTO = {
-      id : -1,
-      email: dEmail,
-      name: fName,
-      lName: dlName,
-      password : dPassword,
-      tip : dTip
-    };
-
-    this.http.post<string>(registerUrl, user, httpOptions).subscribe(result => {if(result=="succes")
+  register(user : User) {
+    
+    this.http.post<string>(registerUrl, user, httpOptions).subscribe(result => {
+      if(result=="succes")
     {
      this.snackBar.open("Register successfully! Chek your email form activation link.","", {
        duration: 5000,
@@ -83,12 +74,14 @@ export class UserService {
 
     } else if (result=="email")
     {
-     this.snackBar.open("User with "+ dEmail.trim() + " already exists!","", {
+     this.snackBar.open("User with "+ user.email.trim() + " already exists!","", {
        duration: 3000,
      });
     }});
 
   }
+
+
 
   
 }

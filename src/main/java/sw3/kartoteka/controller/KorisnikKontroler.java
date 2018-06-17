@@ -1,5 +1,6 @@
 package sw3.kartoteka.controller;
 
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,8 +12,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import sw3.kartoteka.model.Korisnik;
+
 import sw3.kartoteka.model.dto.UserDTO;
+import sw3.kartoteka.model.entity.Korisnik;
 import sw3.kartoteka.services.EMailService;
 import sw3.kartoteka.services.KorisnikService;
 
@@ -40,12 +42,18 @@ public class KorisnikKontroler {
 		Korisnik user = korisnikService.findByEmail(email);
 		if(user == null){throw new Exception();}
 		UserDTO userDTO = new UserDTO(user);
+		
+		
 		return new ResponseEntity<UserDTO>(userDTO,HttpStatus.OK);
 		
 		}catch (Exception e) {
 			return new ResponseEntity<UserDTO>(HttpStatus.ACCEPTED);
 		}
 	}
+	
+
+
+	
 	
 	@PostMapping(value = "/register",consumes="application/json")
 	public ResponseEntity<String> register( @RequestBody UserDTO userDTO){
@@ -63,6 +71,8 @@ public class KorisnikKontroler {
 			newUser.setEmail(userDTO.getEmail());
 			newUser.setPrezime(userDTO.getlName());
 			newUser.setTip(userDTO.getTip());
+			newUser.setAdresa(userDTO.getAdresa());
+			newUser.setBrTelefona(userDTO.getTel());
 			newUser = korisnikService.save(newUser);
 			
 			try {
@@ -86,6 +96,7 @@ public class KorisnikKontroler {
 		if(user!=null) {
 			if(!user.getActivated()) {
 				user.setActivated(true);
+				korisnikService.save(user);
 				return String.format("<p>Succesfully activated! <p> <p>%s welcome to site!<p>", user.getIme());
 			} else {
 				return "User allready activated!";

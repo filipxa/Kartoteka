@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '../models/user'
 import { UserService } from '../services/user.service'
-import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
+import { FormControl, FormGroupDirective, NgForm, Validators, ValidatorFn, AbstractControl } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { Router } from '@angular/router'
 
@@ -22,6 +22,13 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 })
 export class RegisterPageComponent implements OnInit {
 
+  regExpValidator(nameRe: RegExp): ValidatorFn {
+    return (control: AbstractControl): {[key: string]: any} | null => {
+      const forbidden = nameRe.test(control.value);
+      return forbidden ? null : {'regexp': {value: control.value}};
+    };
+  }
+
   constructor(private userService: UserService, private router: Router,private snackBar : MatSnackBar) { }
 
   passwordFormControl = new FormControl('', [
@@ -32,6 +39,7 @@ export class RegisterPageComponent implements OnInit {
     Validators.required,
     Validators.email
   ]);
+
 
 
   passwordRFormControl = new FormControl('', [
@@ -46,7 +54,11 @@ export class RegisterPageComponent implements OnInit {
     Validators.required
   ]);
 
-  private onRegisterClick(fName : string, lName : string, email : string, password : string, password2 : string) : void
+  telFormControl = new FormControl('', [
+    this.regExpValidator(/^[0-9]*$/)
+  ]);
+  adresaFormControl = new FormControl('', []);
+  private onRegisterClick() : void
   {
     
     let poruka : string = "";
@@ -58,18 +70,34 @@ export class RegisterPageComponent implements OnInit {
     || this.passwordRFormControl.hasError('required') 
     || this.emailFormControl.hasError('required')
     || this.emailFormControl.hasError('email');
+    
     if (error)
     {
       this.snackBar.open("You must enter all fields correctly!","", {
         duration: 3000,
       });
-    } else if (password.trim()!=password2.trim())
+    } else if (this.passwordFormControl.value!=this.passwordRFormControl.value)
     {
       this.snackBar.open("You must enter matching passwords!","", {
         duration: 3000,
       });
     }  else{
-      this.userService.register(fName, lName, email, password, "korisnik");
+      
+      let user : User = {
+        id : -1,
+        email: this.emailFormControl.value,
+        name: this.fNameFormControl.value,
+        lName: this.lNameFormControl.value,
+        password : this.passwordFormControl.value,
+        tip : "korisnik",
+        activated: false,
+        tel: this.telFormControl.value,
+        adresa: this.adresaFormControl.value
+      };
+
+
+
+      this.userService.register(user);
 
     }
 

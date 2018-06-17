@@ -30,7 +30,7 @@
     </mat-form-field></td>
   </tr>
   <tr>
-    <td> <mat-form-field class="input">
+    <td> <mat-form-field class="example-full-width">
       <input #password class="input" matInput placeholder="Password" type="password" [formControl]="passwordFormControl"
       [errorStateMatcher]="matcher">
       <mat-error *ngIf="passwordFormControl.hasError('required')">
@@ -48,8 +48,26 @@
     </mat-form-field></td>
   </tr>
   <tr>
+      
+      <td><mat-form-field >
+          <span matPrefix>+381 &nbsp;</span>
+        <input #tel matInput placeholder="Tel" type="tel" [formControl]="telFormControl"
+        [errorStateMatcher]="matcher">
+        <mat-error *ngIf="telFormControl.hasError('regexp')">
+          telphone can only consists of digits
+        </mat-error>
+        
+      </mat-form-field></td>
+    </tr>
+    <tr>
+        <td><mat-form-field >
+          <input #city matInput placeholder="City" type="text" [formControl]="adresaFormControl" >
+        </mat-form-field></td>
+      </tr>
+  <tr>
+
     <td>
-      <button class="button" type="button"  mat-button  (click)="onRegisterClick(fName.value, lName.value, email.value, password.value, password2.value)" > Register</button>
+      <button class="button" type="button"  mat-button  (click)="onRegisterClick()" > Register</button>
     </td>
   </tr>
 </table>
