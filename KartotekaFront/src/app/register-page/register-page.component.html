@@ -1,5 +1,12 @@
-<div class="main"><form class="main">
-  
+<div class="main">
+    <mat-card class="example-card">
+        <mat-card-header>
+            <div mat-card-avatar class="example-header-image"></div>
+            <mat-card-title>Registration form</mat-card-title>
+          </mat-card-header>
+
+
+        <form class="example-form" >
   <table class="table" cellspacing="0"><tr>
     <td><mat-form-field class="example-full-width">
       <input #fName matInput placeholder="First name" [formControl]="fNameFormControl"
@@ -71,6 +78,7 @@
     </td>
   </tr>
 </table>
-
 </form>
+</mat-card>  
+
 </div>

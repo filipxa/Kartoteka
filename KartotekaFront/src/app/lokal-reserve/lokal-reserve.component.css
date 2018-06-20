@@ -1,0 +1,18 @@
+.main{
+    margin: 0 auto;
+    position: absolute;
+
+    width: 100%;
+}
+
+.example-card {
+    max-width: 600px;
+    max-height: 900px;
+    margin: 0 auto;
+    margin-top: 1%;
+
+}
+.checked {
+    background-color: rgb(190, 193, 196);
+    
+  }

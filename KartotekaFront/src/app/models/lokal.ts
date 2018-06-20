@@ -1,4 +1,5 @@
 import { Repertoar } from "./repertoar";
+import { Sala } from "./sala";
 
 export class Lokal{
     id : number;
@@ -7,4 +8,5 @@ export class Lokal{
     naziv : string;
     adresa : string;
     promotivniOpis : string;
+    sala : Sala;
 }

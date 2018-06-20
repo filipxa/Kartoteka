@@ -12,16 +12,10 @@ import { User } from '../models/user'
 })
 export class MyNavComponent {
   loggedUser : User;
-  
-  
-  isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
-    .pipe(
-      map(result => result.matches)
-    );
-    
+
     getLoggedUser() : void {
-      this.userService.geLoggedUser()
-      .subscribe(user => this.loggedUser = user);
+      this.loggedUser =this.userService.getLoggedUser()
+      
     }
 
 

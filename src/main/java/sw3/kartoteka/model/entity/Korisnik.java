@@ -198,6 +198,23 @@ public class Korisnik {
 		this.brTelefona = brTelefona;
 	}
 
+	public Korisnik( String tip, String ime, String prezime, String email, String password,
+			List<Korisnik> listaPrijatelja, String uuid, Boolean activated, Integer brBodova, Integer brTelefona,
+			String adresa) {
+		super();
+		this.tip = tip;
+		this.ime = ime;
+		this.prezime = prezime;
+		this.email = email;
+		this.password = password;
+		this.listaPrijatelja = listaPrijatelja;
+		this.uuid = uuid;
+		this.activated = activated;
+		this.brBodova = brBodova;
+		this.brTelefona = brTelefona;
+		this.adresa = adresa;
+	}
+
 
 
 }

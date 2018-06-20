@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { TicketService } from '../services/ticket.service';
 import { Karta } from '../models/karta';
+import { Router } from '@angular/router'
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-tickets-page',
@@ -10,10 +12,16 @@ import { Karta } from '../models/karta';
 export class TicketsPageComponent implements OnInit {
   tickets : Karta[];
   cancelTickets : Karta[];
-  constructor(private ticketService : TicketService) { }
+  constructor(private ticketService : TicketService,  private router: Router,private userService : UserService ) { }
+
 
   ngOnInit() {
-    this.getTickets();
+    if (this.userService.loggedUser == null) {;
+      this.router.navigate(["/"]);
+    } else {
+      this.getTickets();
+    }
+    
   }
 
   format2digit(text : string):string{
@@ -54,7 +62,7 @@ export class TicketsPageComponent implements OnInit {
 
   cancelTicket(ticket : Karta){
     this.tickets = this.tickets.filter(t => t !== ticket);
-    this.ticketService.removeTicket(ticket);
+    this.ticketService.cancelTicket(ticket);
 
   }
 

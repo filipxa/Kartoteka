@@ -5,12 +5,7 @@ import {ErrorStateMatcher} from '@angular/material/core';
 import {Router} from "@angular/router";
 
 
-export class MyErrorStateMatcher implements ErrorStateMatcher {
-  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
-    const isSubmitted = form && form.submitted;
-    return !!(control && control.invalid && ( control.touched ));
-  }
-}
+
 
 @Component({
   selector: 'app-login-small',
@@ -20,22 +15,35 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 export class LoginSmallComponent implements OnInit {
 
   constructor(private userService : UserService, private router: Router) { }
-  onClick(username: string, password : string){
-   if(username.trim().length>0 && password.trim().length>0){
-    this.userService.logIn(username.trim(), password.trim());
-   }
-      
-  }
+  
   
   passwordFormControl = new FormControl('', [
     Validators.required
   ]);
 
   usernameFormControl = new FormControl('', [
-    Validators.required
+    Validators.required,
+    Validators.email
   ]);
 
-  matcher = new MyErrorStateMatcher();
+  onClick(){
+    let username = this.usernameFormControl.value;
+    let password = this.passwordFormControl.value;
+    this.passwordFormControl.markAsTouched();
+    this.usernameFormControl.markAsTouched(); 
+   if(username.trim().length>0 && password.trim().length>0){
+    this.userService.logIn(username.trim(), password.trim());
+   }
+      
+  }
+  onKey(event: any) { // without type info
+    if(event.key == "Enter"){
+      this.onClick();
+    }
+  }
+  
+
+
   ngOnInit() {
     
   }

@@ -2,6 +2,8 @@ package sw3.kartoteka.model.entity;
 
 
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,11 +11,21 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Transient;
 
 
 @Entity
 public class Sala {
 	
+	public Sala( int brRedova, int brKolona, Lokal lokal) {
+		super();
+		this.brRedova = brRedova;
+		this.brKolona = brKolona;
+		this.lokal = lokal;
+	}
+	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(nullable = false, unique = true, name = "sala_id")
@@ -25,10 +37,30 @@ public class Sala {
 	@Column
 	private int brKolona;
 	
+	@Transient
 	@ManyToOne
 	@JoinColumn(name = "lokal_id", referencedColumnName = "lokal_id", nullable = false)
 	private Lokal lokal;
 	
+	
+	@OneToMany
+	@Column
+	private List<Sediste> sedista;
+	
+	
+	public List<Sediste> getSedista() {
+		return sedista;
+	}
+
+
+	public void setSedista(List<Sediste> sedista) {
+		this.sedista = sedista;
+	}
+
+
+	public Sala() {
+		
+	}
 	
 	
 	public int getBrRedova() {

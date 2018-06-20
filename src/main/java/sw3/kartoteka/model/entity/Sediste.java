@@ -21,19 +21,32 @@ public class Sediste {
 	
 	@Column
 	private int kolona;
-	
+
+	public Integer getIdSedista() {
+		return idSedista;
+	}
+
+	public void setIdSedista(Integer idSedista) {
+		this.idSedista = idSedista;
+	}
 
 	public int getRed() {
 		return red;
 	}
+
 	public void setRed(int red) {
 		this.red = red;
 	}
+
 	public int getKolona() {
 		return kolona;
 	}
+
 	public void setKolona(int kolona) {
 		this.kolona = kolona;
 	}
+	
+
+
 	
 }

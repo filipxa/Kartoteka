@@ -1,7 +1,5 @@
 package sw3.kartoteka.model.entity;
 
-import static javax.persistence.FetchType.LAZY;
-
 import java.util.List;
 
 import javax.persistence.Column;
@@ -16,30 +14,46 @@ import javax.persistence.OneToMany;
 @Entity
 public class Lokal {
 	
+
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(unique = true, nullable = false, name = "lokal_id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column( nullable = false, name = "lokal_id")
 	private Integer id;
-	
-	
+
 	@Column(nullable = false)
 	private boolean isPozoriste;
 	
 	@ManyToOne
-	@JoinColumn(name = "repertoar_id", referencedColumnName = "repertoar_id", nullable = false)
+	@JoinColumn(name = "repertoar_id", referencedColumnName = "repertoar_id")
 	private Repertoar repertoar;
 
 	@Column(nullable = false)
 	private String naziv;
 
-	@Column(nullable = false)
+	@Column()
 	private String adresa;
 
 	@Column
 	private String promotivniOpis;
 	
+	@OneToMany
+	@Column
+	private List<Sala> sale;
+	
 	 
+	public List<Sala> getSale() {
+		return sale;
+	}
 
+
+	public void setSale(List<Sala> sale) {
+		this.sale = sale;
+	}
+
+
+	public Lokal() {
+		
+	}
 
 
 	public Integer getId() {
@@ -62,7 +76,7 @@ public class Lokal {
 		return isPozoriste;
 	}
 
-	public void setPozoriste(boolean isPozoriste) {
+	public void setIsPozoriste(boolean isPozoriste) {
 		this.isPozoriste = isPozoriste;
 	}
 
@@ -89,14 +103,10 @@ public class Lokal {
 	public void setPromotivniOpis(String promotivniOpis) {
 		this.promotivniOpis = promotivniOpis;
 	}
+	public void setPozoriste(boolean isPozoriste) {
+		this.isPozoriste = isPozoriste;
+	}
 
-//	public List<Karta> getKarteBrzaRezervacija() {
-//		return karteBrzaRezervacija;
-//	}
-//
-//	public void setKarteBrzaRezervacija(List<Karta> karteBrzaRezervacija) {
-//		this.karteBrzaRezervacija = karteBrzaRezervacija;
-//	}
 
 
 	

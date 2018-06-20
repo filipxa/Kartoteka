@@ -10,17 +10,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.mysql.jdbc.jmx.LoadBalanceConnectionGroupManager;
 
-import sw3.kartoteka.model.entity.Izvedba;
 import sw3.kartoteka.model.entity.Karta;
 import sw3.kartoteka.model.entity.Korisnik;
-import sw3.kartoteka.model.entity.Lokal;
-import sw3.kartoteka.model.entity.Naslov;
-import sw3.kartoteka.model.entity.Sala;
+
 import sw3.kartoteka.services.KartaService;
 import sw3.kartoteka.services.KorisnikService;
 
@@ -32,6 +29,7 @@ public class KartaController {
 	
 	@Autowired
 	KorisnikService korisnikService;
+	
 	
 	@GetMapping
 	public ResponseEntity<List<Karta>> getAll(){
@@ -45,23 +43,6 @@ public class KartaController {
 		
 		try {
 			List<Karta> karte = kartaService.findByKorisnik(korisnik); 
-			Karta k = new Karta();
-			Izvedba izvedba = new Izvedba();
-			Naslov naslov = new Naslov();
-			Lokal l = new Lokal();
-			Sala s = new Sala();
-			s.setIdSale(1);
-			s.setLokal(l);
-			l.setId(1);
-			l.setNaziv("Cineplexxx");
-			
-			naslov.setNaziv("Bolan");
-			izvedba.setNaslov(naslov);
-			izvedba.setTermin(new Date());
-			izvedba.setSala(s);
-			k.setIzvedba(izvedba);
-			karte.add(k);
-			k.setIdKarte(1);
 			
 			return new ResponseEntity<>(karte, HttpStatus.OK);
 		
@@ -72,7 +53,7 @@ public class KartaController {
 	}
 	
 	@DeleteMapping(value = "/delete/{id}")
-	public ResponseEntity<Void> deleteUser(@PathVariable("id") Integer id){
+	public ResponseEntity<Void> deleteKarta(@PathVariable("id") Integer id){
 		try{
 			Karta karta = kartaService.findOne(id);
 			if(karta == null){throw new Exception();}
@@ -82,6 +63,21 @@ public class KartaController {
 		}catch(Exception e){
 			return new ResponseEntity<Void>(HttpStatus.ACCEPTED);
 		}
+	}
+	@GetMapping(value = "/cancel/{id}")
+	public ResponseEntity<Void> cancelTicket(@PathVariable("id") Integer id){
+		try{
+			Karta karta = kartaService.findOne(id);
+			if(karta == null){throw new Exception();}
+			karta.setTip("slobodno");
+			karta.setKorisnik(null);
+			kartaService.save(karta);
+			
+			return new ResponseEntity<Void>(HttpStatus.OK);
+		}catch(Exception e){
+			return new ResponseEntity<Void>(HttpStatus.ACCEPTED);
+		}
+		
 	}
 	
 	

@@ -20,12 +20,12 @@ public class Naslov {
 	private Integer id;
 	
 	
-	@Column(nullable = false)
+	@Column()
 	private String naziv;
 	
 
 	@ManyToOne
-	@JoinColumn(name = "osoba_id", referencedColumnName = "osoba_id", nullable = false)
+	@JoinColumn(name = "osoba_id", referencedColumnName = "osoba_id")
 	private Osoba reziser;
 	
 	@Column

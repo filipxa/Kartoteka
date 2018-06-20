@@ -1,0 +1,76 @@
+
+ <div class="main">
+    <mat-card class="example-card">
+ <mat-vertical-stepper [linear]="true" #stepper (selectionChange) = "stepChanged($event)" class="example-card">
+    <mat-step [stepControl]="titleFormGroup" >
+      <form [formGroup]="titleFormGroup">
+        <ng-template matStepLabel>Choose Title </ng-template>
+        <mat-form-field>
+            <mat-select placeholder= "Title" required formControlName="titleCtrl" >
+                <mat-option *ngFor="let naslov of naslovi " [value]="naslov">
+                  {{naslov.naziv}}
+                </mat-option>
+              </mat-select>
+        </mat-form-field>
+      </form>
+    </mat-step>
+
+    <mat-step [stepControl]="dateFormGroup" >
+        <form [formGroup]="dateFormGroup">
+          <ng-template  matStepLabel>Choose date </ng-template>
+          <mat-form-field>
+              <mat-select placeholder= "Date" required formControlName="dateCtrl" >
+                  <mat-option *ngFor="let izvedba of izvedbe" [value]="izvedba">
+                    {{izvedba.datum}}
+                  </mat-option>
+                </mat-select>
+          </mat-form-field>
+        </form>
+      </mat-step>
+      <mat-step [stepControl]="timeFormGroup"  >
+          <form [formGroup]="timeFormGroup">
+            <ng-template  matStepLabel>Choose time </ng-template>
+            <mat-form-field>
+                <mat-select placeholder= "Time" required formControlName="timeCtrl" >
+                    <mat-option *ngFor="let izvedba of izvedbaTime" [value]="izvedba">
+                      {{izvedba.termin}}
+                    </mat-option>
+                  </mat-select>
+            </mat-form-field>
+          </form>
+        </mat-step>
+        <mat-step >
+          
+
+            <form>
+              <ng-template  matStepLabel>Choose seats </ng-template>
+              
+              <span *ngFor="let row of seats" class="checkbox">
+                {{(seats.indexOf(row)+1).toLocaleString('en-us', { minimumIntegerDigits: 2})}}
+                  <span *ngFor="let seat of row" class="checkbox">
+                  <label>
+                      <mat-checkbox class="checkbox" [class.checked]="seat.zauzeto" [disabled]="seat.zauzeto"  [value]="seat" (change) ="seatClick($event)"></mat-checkbox>
+                  </label>
+               </span>  
+               <p></p>  
+              </span>   
+            </form>
+          </mat-step>
+
+          <mat-step [optional] = "true" [stepControl]="friendsFormGroup"  >
+              <form [formGroup]="friendsFormGroup">
+                <ng-template  matStepLabel>Call friends </ng-template>
+                <div>
+                    <mat-form-field>
+                    <mat-select placeholder="Friends" formControlName="friendsCtrl" multiple (selectionChange) = "friendsChange($event)">
+                        <mat-option *ngFor="let friend of friends" [value]="friend">{{friend.name + " " + friend.lName}}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+              </form>
+            </mat-step>
+  
+  
+  </mat-vertical-stepper>
+</mat-card>
+</div>

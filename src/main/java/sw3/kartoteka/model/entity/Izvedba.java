@@ -24,24 +24,45 @@ public class Izvedba {
 	private Integer idIzvedba;
 	
 	
+	public Integer getIdIzvedba() {
+		return idIzvedba;
+	}
+	public void setIdIzvedba(Integer idIzvedba) {
+		this.idIzvedba = idIzvedba;
+	}
 	@ManyToOne
-	@JoinColumn(name = "sala_id", referencedColumnName = "sala_id", nullable = false)
+	@JoinColumn(name = "sala_id", referencedColumnName = "sala_id")
 	private Sala sala;
 	
+	public Izvedba(Integer idIzvedba, Sala sala, List<Karta> karte, Date termin, boolean isPredstava, Naslov naslov) {
+		super();
+		this.idIzvedba = idIzvedba;
+		this.sala = sala;
+		this.karte = karte;
+		this.termin = termin;
+		this.isPredstava = isPredstava;
+		this.naslov = naslov;
+	}
 	@Column
 	@OneToMany
 	private List<Karta> karte;
 	
 	
+	public List<Karta> getKarte() {
+		return karte;
+	}
+	public void setKarte(List<Karta> karte) {
+		this.karte = karte;
+	}
 	@Column
 	private Date termin;
 	
-	@Column(nullable = false)
+	@Column()
 	private boolean isPredstava;  
 	
 	
 	@ManyToOne
-	@JoinColumn(name = "naslov_id", referencedColumnName = "naslov_id", nullable = false)
+	@JoinColumn(name = "naslov_id", referencedColumnName = "naslov_id")
 	private Naslov naslov;
 	
 
@@ -51,6 +72,12 @@ public class Izvedba {
 	public void setPredstava(boolean isFilm) {
 		this.isPredstava = isFilm;
 	}
+	
+	public Izvedba() {
+		
+	}
+	
+
 
 
 	
@@ -70,7 +97,7 @@ public class Izvedba {
 	public Integer getIdProjekcije() {
 		return idIzvedba;
 	}
-	public void setIdProjekcije(Integer idProjekcije) {
+	public void setId(Integer idProjekcije) {
 		this.idIzvedba = idProjekcije;
 	}
 	public Naslov getNaslov() {

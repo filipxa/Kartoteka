@@ -40,6 +40,7 @@ public class UserDTO implements Serializable {
 		this.lName = lName;
 		this.password = password;
 		this.setTip(tip);
+		this.setAdresa(adresa);
 		this.setActivated(false);
 		this.tel = tel;
 

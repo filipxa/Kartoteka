@@ -13,6 +13,7 @@ export class Izvedba
     naslov : Naslov;
     reziser : Osoba;
     glumci : Array<Osoba>;
+    datum : string;
 
      
 

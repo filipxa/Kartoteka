@@ -1,6 +1,7 @@
 package sw3.kartoteka.controller;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,26 @@ public class KorisnikKontroler {
 	public ResponseEntity<List<Korisnik>> getAll(){
 		List<Korisnik> korisnici = korisnikService.findAll();
 		return new ResponseEntity<>(korisnici, HttpStatus.OK);
+	}
+	
+	@GetMapping(value = "/friends/{email}")
+	public ResponseEntity<List<UserDTO>> getAll(@PathVariable("email") String email){
+		List<Korisnik> korisnici = korisnikService.findAll();
+		try {
+			Korisnik user = korisnikService.findByEmail(email);
+			if(user == null){throw new Exception();}
+			List<UserDTO> rets = new ArrayList<UserDTO>();
+			
+			for(Korisnik friend : user.getListaPrijatelja()) {
+				rets.add(new UserDTO(friend));
+			}
+
+			return new ResponseEntity<List<UserDTO>> (rets,HttpStatus.OK);
+			
+			}catch (Exception e) {
+				return new ResponseEntity<List<UserDTO>>(HttpStatus.ACCEPTED);
+			}
+		
 	}
 	
 	

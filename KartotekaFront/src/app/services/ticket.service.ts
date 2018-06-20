@@ -14,29 +14,35 @@ const httpOptions = {
 };
 
 const getByUserId : string = "http://localhost:8080/api/karta/user/";
-const deleteById : string = "http://localhost:8080/api/karta/delete/";
+const cancelById : string = "http://localhost:8080/api/karta/cancel/";
 @Injectable({
   providedIn: 'root'
 })
 export class TicketService {
 
+  private loggedUser : User;
 
-  constructor(private userService: UserService, private http: HttpClient, private snackBar : MatSnackBar, private router: Router, ) { }
 
-  removeTicket(ticket : Karta)  {
-    console.log(deleteById + ticket.idKarte);
-   
-  this.http.delete<Karta>(deleteById + ticket.idKarte, httpOptions).subscribe(param=> 
+
+
+  constructor(private userService: UserService, private http: HttpClient, private snackBar : MatSnackBar, private router: Router ) {
+    
+   }
+
+  cancelTicket(ticket : Karta)  {
+   ticket.tip="slobodno";
+  this.http.get(cancelById + ticket.idKarte, httpOptions).subscribe(param=> 
     {
       this.snackBar.open("Ticket canceled !","", {
         duration: 2000,
       });
   });
   }
+
   getLoggedUserTickets() : Observable<Array<Karta>>{
-   let loggedUser = this.userService.loggedUser;
+   let loggedUser = this.userService.getLoggedUser();
    
-    return this.http.get<Array<Karta>>(getByUserId + loggedUser.id, httpOptions);
+    return this.http.get<Array<Karta>>(getByUserId + this.userService.loggedUser.email, httpOptions);
   }
 
 }
