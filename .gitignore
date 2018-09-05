@@ -11,4 +11,4 @@ gradle-app.setting
 
 bin/main/application\.properties
 
-bin/main/
+bin/

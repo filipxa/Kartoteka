@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import sw3.kartoteka.model.dto.UserDTO;
 import sw3.kartoteka.model.entity.Korisnik;
+import sw3.kartoteka.model.entity.Sediste;
 import sw3.kartoteka.services.EMailService;
 import sw3.kartoteka.services.KorisnikService;
 
@@ -125,6 +126,7 @@ public class KorisnikKontroler {
 		}
 		return "Bad activation link!";
 	}
+
 
 	
 	

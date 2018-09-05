@@ -13,6 +13,7 @@ import { StepperSelectionEvent, CdkStep } from '@angular/cdk/stepper';
 import { Sediste } from '../models/sediste';
 import { User } from '../models/user';
 import { UserService } from '../services/user.service';
+import { TicketService } from '../services/ticket.service';
 
 
 
@@ -55,6 +56,7 @@ export class LokalReserveComponent implements OnInit {
     private location: Location,
     private _formBuilder: FormBuilder,
     private userService: UserService,
+    private ticketService: TicketService,
     private snackBar: MatSnackBar,
     private router: Router
   ) { }
@@ -163,6 +165,11 @@ export class LokalReserveComponent implements OnInit {
       this.getFriends();
     }
 
+
+  }
+
+  onRezClick(){
+    this.ticketService.reserve(this.seatsForReservation, this.friendsRes);
 
   }
 
