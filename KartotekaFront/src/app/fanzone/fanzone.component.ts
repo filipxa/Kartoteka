@@ -25,6 +25,7 @@ export class FanzoneComponent implements OnInit {
   
 
   ngOnInit() {
+    this.getRekvizit();
   }
 
 }
