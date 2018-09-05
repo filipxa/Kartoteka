@@ -18,6 +18,8 @@ import { TicketsPageComponent } from './tickets-page/tickets-page.component';
 import { LokalSearchComponent } from './lokal-search/lokal-search.component';
 import { LokalReserveComponent } from './lokal-reserve/lokal-reserve.component';
 import { HomePageComponent } from './home-page/home-page.component';
+import { FanzoneComponent } from './fanzone/fanzone.component';
+import { RekvizitKarticaComponent } from './rekvizit-kartica/rekvizit-kartica.component';
 
 
 const appRoutes: Routes = [
@@ -25,6 +27,7 @@ const appRoutes: Routes = [
   { path: 'register', component: RegisterPageComponent },
   { path: '', component: HomePageComponent },
   { path: 'tickets', component: TicketsPageComponent },
+  { path: 'fanzone', component: FanzoneComponent },
   { path: 'lokal/reserve/:id', component: LokalReserveComponent },
   { path: 'profile', component: UserProfileCardComponent }
 ];
@@ -40,6 +43,8 @@ const appRoutes: Routes = [
     LokalSearchComponent,
     LokalReserveComponent,
     HomePageComponent,
+    FanzoneComponent,
+    RekvizitKarticaComponent
   ],
   imports: [
     BrowserModule,

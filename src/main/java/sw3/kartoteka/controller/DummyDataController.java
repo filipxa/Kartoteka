@@ -18,6 +18,7 @@ import sw3.kartoteka.model.entity.Karta;
 import sw3.kartoteka.model.entity.Korisnik;
 import sw3.kartoteka.model.entity.Lokal;
 import sw3.kartoteka.model.entity.Naslov;
+import sw3.kartoteka.model.entity.Rekvizit;
 import sw3.kartoteka.model.entity.Repertoar;
 import sw3.kartoteka.model.entity.Sala;
 import sw3.kartoteka.model.entity.Sediste;
@@ -30,6 +31,7 @@ import sw3.kartoteka.repository.SedisteRepository;
 import sw3.kartoteka.services.KartaService;
 import sw3.kartoteka.services.KorisnikService;
 import sw3.kartoteka.services.LokalService;
+import sw3.kartoteka.services.RekvizitService;
 @RestController
 @RequestMapping(value = "/api/dummy")
 public class DummyDataController {
@@ -57,6 +59,8 @@ public class DummyDataController {
 	@Autowired
 	SedisteRepository sedisteRepository;
 	
+	@Autowired
+	RekvizitService rekvizitService;
 	
 	@GetMapping()
 	public ResponseEntity<Korisnik> getKarte(){
@@ -96,6 +100,20 @@ public class DummyDataController {
 		lokal.setRepertoar(rep);
 		
 		lokalService.save(lokal);
+		
+		Rekvizit rekvizit = new Rekvizit();
+		rekvizit.setIdRekvizita(1);
+		rekvizit.setCena(200);
+		rekvizit.setNaziv("Naziv");
+		rekvizit.setOpis("Brutalno");
+		rekvizitService.save(rekvizit);
+		
+		rekvizit = new Rekvizit();
+		rekvizit.setIdRekvizita(2);
+		rekvizit.setCena(200);
+		rekvizit.setNaziv("Naziv 2");
+		rekvizit.setOpis("jos Brutalnije");
+		rekvizitService.save(rekvizit);
 		
 		
 		Sala sala = new Sala( 10, 10, lokal);

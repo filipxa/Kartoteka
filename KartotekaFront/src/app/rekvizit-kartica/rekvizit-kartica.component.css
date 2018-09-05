@@ -1,0 +1,9 @@
+.example-card {
+    max-width: 400px;
+  }
+  
+  .example-header-image {
+    background-image: url('https://static.thenounproject.com/png/363633-200.png');
+    background-size: cover;
+  }
+  
