@@ -20,7 +20,12 @@ export class FanzoneComponent implements OnInit {
   }
 
   initRekvizit(rekviziti: Rekvizit[]){
-    this.rekviziti = rekviziti;
+    this.rekviziti = new Array<Rekvizit>();
+    rekviziti.forEach(element => {
+      if(!element.korisnik){
+        this.rekviziti.push(element);
+      }
+    });
   }
   
 

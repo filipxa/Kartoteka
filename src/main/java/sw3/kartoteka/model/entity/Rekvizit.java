@@ -6,6 +6,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Rekvizit {
@@ -24,9 +26,12 @@ public class Rekvizit {
 	@Column
 	private int cena;
 
-	@Column
-	private boolean rezervisano;
+	@ManyToOne
+	@JoinColumn(name = "korisnik_id", referencedColumnName = "korisnik_id")
+	private Korisnik korisnik;
 
+
+	
 
 	public Integer getIdRekvizita() {
 		return idRekvizita;
@@ -34,6 +39,14 @@ public class Rekvizit {
 
 	public void setIdRekvizita(Integer idRekvizita) {
 		this.idRekvizita = idRekvizita;
+	}
+
+	public Korisnik getKorisnik() {
+		return korisnik;
+	}
+
+	public void setKorisnik(Korisnik korisnik) {
+		this.korisnik = korisnik;
 	}
 
 	public String getNaziv() {
@@ -58,13 +71,5 @@ public class Rekvizit {
 
 	public void setCena(int cena) {
 		this.cena = cena;
-	}
-
-	public boolean isRezervisano() {
-		return rezervisano;
-	}
-
-	public void setRezervisano(boolean rezervisano) {
-		this.rezervisano = rezervisano;
-	}
+	}	
 }

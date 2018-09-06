@@ -8,6 +8,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MyNavComponent } from './my-nav/my-nav.component';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatToolbarModule, MatCheckboxModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule, MatSnackBarModule, MatCardModule, MatStepperModule, MatSelectModule } from '@angular/material';
+import {MatTabsModule} from '@angular/material/tabs';
 import { LoginSmallComponent } from './login-small/login-small.component';
 import { MatInputModule } from '@angular/material/input';
 import { RegisterPageComponent } from './register-page/register-page.component';
@@ -63,7 +64,8 @@ const appRoutes: Routes = [
     MatInputModule,
     MatCardModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatTabsModule
   ],
   exports: [RouterModule, MatSnackBarModule, HttpClientModule],
   providers: [],
