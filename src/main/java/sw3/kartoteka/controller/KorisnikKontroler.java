@@ -4,6 +4,8 @@ package sw3.kartoteka.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,6 +31,9 @@ public class KorisnikKontroler {
 	
 	@Autowired
 	EMailService emailService;
+	
+	@Autowired
+	HttpServletRequest request;
 	
 	@GetMapping
 	public ResponseEntity<List<Korisnik>> getAll(){
@@ -69,7 +74,7 @@ public class KorisnikKontroler {
 		return new ResponseEntity<UserDTO>(userDTO,HttpStatus.OK);
 		
 		}catch (Exception e) {
-			return new ResponseEntity<UserDTO>(HttpStatus.ACCEPTED);
+			return new ResponseEntity<UserDTO>(HttpStatus.BAD_REQUEST);
 		}
 	}
 	
@@ -126,8 +131,49 @@ public class KorisnikKontroler {
 		}
 		return "Bad activation link!";
 	}
+	
+	@PostMapping(value="logged", consumes="application/json")
+	public ResponseEntity setLoggedIn(@RequestBody LoginDTO loginInfo ){
+		Korisnik korisnik = korisnikService.findByEmail(loginInfo.username);
+		if(korisnik==null || !korisnik.getPassword().equals(loginInfo.password)) {
+			return ResponseEntity.badRequest().body("Bad login");
+		} 
+		if(!korisnik.getActivated()) {
+			return ResponseEntity.badRequest().body("Follow link in email to activated your account.");
+		}
+		request.getSession().setAttribute("logged", korisnik);
+		
+		
+		return new ResponseEntity<UserDTO>(new UserDTO(korisnik), HttpStatus.OK);
+	}
+	
+	@GetMapping(value="logged")
+	public ResponseEntity<UserDTO> getLoggedIn(){
+		Korisnik proba = (Korisnik)request.getSession().getAttribute("logged");
+		System.out.println(proba.getEmail());
+		return new ResponseEntity<UserDTO>(new UserDTO(proba), HttpStatus.OK);
+	}
 
-
+	private static class LoginDTO
+	{
+		private String username;
+		private String password;
+		
+		
+		public String getUsername() {
+			return username;
+		}
+		public void setUsername(String username) {
+			this.username = username;
+		}
+		public String getPassword() {
+			return password;
+		}
+		public void setPassword(String password) {
+			this.password = password;
+		}
+		
+	}
 	
 	
 }
