@@ -1,4 +1,4 @@
-<mat-card class="example-card" *ngIf="rekvizit">
+<mat-card class="example-card" *ngIf="!rekvizit.rezervisano">
   <mat-card-header>
     <div mat-card-avatar class="example-header-image"></div>
     <mat-card-title>{{rekvizit.naziv}}</mat-card-title>
@@ -10,4 +10,7 @@
           {{rekvizit.opis}}
       </p>
   </mat-card-content>
+  <mat-card-actions>
+    <button type="button"  mat-button class="user-button" (click)="bookRekvizit()" > Book</button>
+  </mat-card-actions>
 </mat-card>

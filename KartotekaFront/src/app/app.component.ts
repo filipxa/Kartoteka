@@ -1,5 +1,6 @@
 
 import { Component } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 
 @Component({
@@ -9,4 +10,9 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'app';
+  private dummyUrl : string = "http://localhost:8080/api/dummy";
+  constructor(private http: HttpClient) { }
+  ngOnInit() {
+    this.http.get(this.dummyUrl);
+  }
 }
