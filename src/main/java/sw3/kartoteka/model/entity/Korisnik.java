@@ -63,6 +63,14 @@ public class Korisnik {
 //	
 	//private List<Rekvizit> rekviziti;
 	
+	@Override
+	public String toString() {
+		return "Korisnik [idKorisnika=" + idKorisnika + ", tip=" + tip + ", ime=" + ime + ", prezime=" + prezime
+				+ ", email=" + email + ", password=" + password + ", listaPrijatelja=" + listaPrijatelja + ", uuid="
+				+ uuid + ", activated=" + activated + ", brBodova=" + brBodova + ", brTelefona=" + brTelefona
+				+ ", adresa=" + adresa + "]";
+	}
+
 	public Integer getBrBodova() {
 		return brBodova;
 	}

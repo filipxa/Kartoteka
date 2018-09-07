@@ -1,14 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Rekvizit } from '../models/rekvizit';
 import { RekvizitService } from '../services/rekvizit.service';
-import {RekvizitKarticaComponent} from '../rekvizit-kartica/rekvizit-kartica.component';
 
 @Component({
-  selector: 'app-fanzone',
-  templateUrl: './fanzone.component.html',
-  styleUrls: ['./fanzone.component.css']
+  selector: 'app-rekvizit-lista-admin',
+  templateUrl: './rekvizit-lista-admin.component.html',
+  styleUrls: ['./rekvizit-lista-admin.component.css']
 })
-export class FanzoneComponent implements OnInit {
+export class RekvizitListaAdminComponent implements OnInit {
 
   rekviziti: Rekvizit[];
 

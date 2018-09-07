@@ -1,6 +1,6 @@
 package sw3.kartoteka.model.dto;
 
-
+import sw3.kartoteka.model.entity.Rekvizit;
 
 public class RekvizitDto {
 
@@ -22,6 +22,20 @@ public class RekvizitDto {
 		this.opis = opis;
 		this.cena = cena;
 		this.rezervisano = rezervisano;
+	}
+	
+	public RekvizitDto() {}
+	
+	public RekvizitDto(Rekvizit rekvizit) {
+		this.idRekvizita = rekvizit.getIdRekvizita();
+		this.naziv = rekvizit.getNaziv();
+		this.opis = rekvizit.getOpis();
+		this.cena = rekvizit.getCena();
+		if(rekvizit.getKorisnik() == null) { 
+			this.rezervisano = false;
+		}
+		else { 
+			this.rezervisano = true;}
 	}
 
 	public Integer getIdRekvizita() {

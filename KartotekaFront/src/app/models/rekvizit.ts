@@ -5,5 +5,5 @@ export class Rekvizit{
     naziv: string;
     opis: string;
     cena: number;
-    korisnik : User;
+    rezervisano : boolean;
 }

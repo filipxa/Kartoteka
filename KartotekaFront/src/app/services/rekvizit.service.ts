@@ -25,10 +25,37 @@ export class RekvizitService {
       catchError(this.handleError<Rekvizit[]>()));
   }
 
-  saveRekvizit(rekvizit:Rekvizit){
+  bookRekvizit(rekvizit:Rekvizit){
+    this.http.post<Rekvizit>(this.allRekvizitiUrl+"/book", rekvizit, httpOptions).subscribe(param=> 
+      {
+        this.snackBar.open("Item reserved!","", {
+          duration: 2000,
+        });
+    });
+  }
+
+  addRekvizit(rekvizit: Rekvizit){
     this.http.post<Rekvizit>(this.allRekvizitiUrl, rekvizit, httpOptions).subscribe(param=> 
       {
-        this.snackBar.open("Item reserve!","", {
+        this.snackBar.open("Item added!","", {
+          duration: 2000,
+        });
+    });
+  }
+  editRekvizit(rekvizit: Rekvizit){
+    this.http.post<Rekvizit>(this.allRekvizitiUrl, rekvizit, httpOptions).subscribe(param=> 
+      {
+        this.snackBar.open("Item changed!","", {
+          duration: 2000,
+        });
+    });
+  }
+
+  deleteRekvizit(rekvizit: Rekvizit){
+    var idS = String(rekvizit.idRekvizita);
+    this.http.delete<Rekvizit>(this.allRekvizitiUrl+"/" + idS,httpOptions).subscribe(param=> 
+      {
+        this.snackBar.open("Item deleted!","", {
           duration: 2000,
         });
     });

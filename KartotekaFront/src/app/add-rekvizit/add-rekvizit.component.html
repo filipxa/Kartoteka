@@ -1,0 +1,25 @@
+<form class="example-form">
+  <mat-form-field class="example-full-width">
+    <input matInput placeholder="Name" [formControl]="NameFormControl"
+    [errorStateMatcher]="matcher">
+    <mat-error *ngIf="NameFormControl.hasError('required')">
+      Name is required
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+    <input matInput type = "number" placeholder="Price" [formControl]="PriceFormControl"
+    [errorStateMatcher]="matcher">
+    <mat-error *ngIf="PriceFormControl.hasError('required')">
+      Name is required
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+    <textarea matInput placeholder="Description" [formControl]="DescriptionFormControl"></textarea>
+  </mat-form-field>
+  
+  <button type="button"  mat-stroked-button="user-button" (click)="addRekvizit()" > Add</button>
+</form>
+
+    

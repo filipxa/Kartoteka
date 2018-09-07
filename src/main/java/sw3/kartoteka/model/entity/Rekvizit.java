@@ -33,6 +33,12 @@ public class Rekvizit {
 
 	
 
+	@Override
+	public String toString() {
+		return "Rekvizit [idRekvizita=" + idRekvizita + ", naziv=" + naziv + ", opis=" + opis + ", cena=" + cena
+				+ ", korisnik=" + korisnik + "]";
+	}
+
 	public Integer getIdRekvizita() {
 		return idRekvizita;
 	}
