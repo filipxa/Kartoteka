@@ -2,13 +2,16 @@ package sw3.kartoteka.controller;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.request;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.codec.multipart.FormFieldPart;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -18,8 +21,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
+
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import sw3.kartoteka.model.dto.RekvizitDto;
 import sw3.kartoteka.model.entity.Korisnik;
@@ -66,10 +74,9 @@ public class RekvizitController {
 		
 	}
 	
-	@PostMapping()
-	public ResponseEntity<Void> save(@RequestParam("file") MultipartFile file, @RequestParam("rekvizit") FormFieldPart reDTO) {
+	@PostMapping(  consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.MULTIPART_FORM_DATA_VALUE})
+	public ResponseEntity<Void> save(@RequestPart("file") MultipartFile file, @RequestPart("rekvizit") RekvizitDto rDTO) {
 		//AKO SE BUDE KORISTILO TREBA PROVERITI ZA STA TREBA I PREPRAVITI rDTO u Rekvizti
-		RekvizitDto rDTO = new RekvizitDto();
 		try {
 			Rekvizit rekvizit = new Rekvizit();
 			if(rDTO.getIdRekvizita()!= -1) {

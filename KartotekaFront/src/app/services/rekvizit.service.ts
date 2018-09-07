@@ -36,9 +36,8 @@ export class RekvizitService {
 
   addRekvizit(rekvizit: Rekvizit, file: File) {
     let sendData = new FormData();
-    let pera = {user: "sss", pass: "sss"};
     sendData.append('file', file);
-    sendData.append('rekvizit',new Blob([JSON.stringify(pera)], {type : 'application/json'}) );
+    sendData.append('rekvizit',new Blob([JSON.stringify(rekvizit)], {type : 'application/json'}) );
     console.log(sendData);
     this.http.post(this.allRekvizitiUrl, sendData
     ).subscribe(
