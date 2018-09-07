@@ -1,0 +1,29 @@
+<form class="example-form">
+  <mat-form-field class="example-full-width">
+    <input matInput placeholder="Name" value = "{{rekvizit.naziv}}"
+    [formControl]="NameFormControl"
+    (ngModelChange)="valuechangeNaziv($event)"
+    [errorStateMatcher]="matcher" >
+    <mat-error *ngIf="NameFormControl.hasError('minLength')">
+      Name is required
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+    <input matInput type = "number" placeholder="Price" 
+    [formControl]="PriceFormControl"
+    (ngModelChange)="valuechangeCena($event)"
+    [errorStateMatcher]="matcher" value="{{rekvizit.cena}}">
+    <mat-error *ngIf="PriceFormControl.hasError('minLength')">
+      Name is required
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+    <textarea matInput placeholder="Description" [formControl]="DescriptionFormControl" value="{{rekvizit.opis}}"></textarea>
+  </mat-form-field>
+  
+  <button type="button"  mat-stroked-button="user-button" (click)="addRekvizit()" > Save</button>
+</form>
+
+    

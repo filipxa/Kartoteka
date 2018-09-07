@@ -26,7 +26,9 @@
       <a mat-list-item routerLink="/theatres">Theatres</a>
       <a mat-list-item routerLink="/cinema">Cinemas</a>
       <a *ngIf="userService.loggedUser && (userService.loggedUser.tip == 'korisnik') " mat-list-item routerLink="/tickets">My Tickets</a>
-      <a *ngIf="userService.loggedUser && (userService.loggedUser.tip == 'korisnik') " mat-list-item routerLink="/fanzone">Fan zone</a>
+      <a *ngIf="userService.loggedUser && (userService.loggedUser.tip == 'korisnik') " mat-list-item routerLink="/fanzone">Fan Zone</a>
+      <a *ngIf="userService.loggedUser && (userService.loggedUser.tip == 'fan') " mat-list-item routerLink="/addRekvizit">Add Item</a>
+      <a *ngIf="userService.loggedUser && (userService.loggedUser.tip == 'fan') " mat-list-item routerLink="/rekvizitAllEdit">Edit Item</a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content class="lowerContainer" >

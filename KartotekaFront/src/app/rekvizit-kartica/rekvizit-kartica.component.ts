@@ -12,8 +12,8 @@ export class RekvizitKarticaComponent implements OnInit {
   constructor(private rekvizitService: RekvizitService, private userSrvice: UserService) { }
 
   bookRekvizit(){
-    this.rekvizit.korisnik = this.userSrvice.getLoggedUser();
-    this.rekvizitService.saveRekvizit(this.rekvizit);
+    this.rekvizit.rezervisano = true;
+    this.rekvizitService.bookRekvizit(this.rekvizit);
   }
   ngOnInit() {
   }

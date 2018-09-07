@@ -68,6 +68,8 @@ public class DummyDataController {
 		korisnikService.save(korisnik1);
 		Korisnik korisnik = new Korisnik( "korisnik", "Pera", "Peric", "filipxa@gmail.com", "123", new ArrayList<Korisnik>(), "131232131", true, 0, 63666458, "Beograd");
 		korisnikService.save(korisnik);
+		Korisnik korisnik2 = new Korisnik( "fan", "Filip", "Micic", "a@a.com", "123", new ArrayList<Korisnik>(), "131232131", true, 0, 63666458, "Beograd");
+		korisnikService.save(korisnik2);
 		korisnik = korisnikService.findByEmail("filipxa@hotmail.com");
 		korisnik1 = korisnikService.findByEmail("filipxa@gmail.com");
 		

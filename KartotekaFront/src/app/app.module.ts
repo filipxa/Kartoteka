@@ -21,6 +21,10 @@ import { LokalReserveComponent } from './lokal-reserve/lokal-reserve.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { FanzoneComponent } from './fanzone/fanzone.component';
 import { RekvizitKarticaComponent } from './rekvizit-kartica/rekvizit-kartica.component';
+import { AddRekvizitComponent } from './add-rekvizit/add-rekvizit.component';
+import { RekvizitKarticaAdminComponent } from './rekvizit-kartica-admin/rekvizit-kartica-admin.component';
+import { RekvizitListaAdminComponent } from './rekvizit-lista-admin/rekvizit-lista-admin.component';
+import { RekvizitEditAdminComponent } from './rekvizit-edit-admin/rekvizit-edit-admin.component';
 
 
 const appRoutes: Routes = [
@@ -30,7 +34,10 @@ const appRoutes: Routes = [
   { path: 'tickets', component: TicketsPageComponent },
   { path: 'fanzone', component: FanzoneComponent },
   { path: 'lokal/reserve/:id', component: LokalReserveComponent },
-  { path: 'profile', component: UserProfileCardComponent }
+  { path: 'profile', component: UserProfileCardComponent },
+  { path: 'addRekvizit', component: AddRekvizitComponent },
+  { path: 'rekvizitAllEdit', component: RekvizitListaAdminComponent },
+  { path: 'rekvizitEdit', component: RekvizitEditAdminComponent }
 ];
 
 @NgModule({
@@ -45,7 +52,11 @@ const appRoutes: Routes = [
     LokalReserveComponent,
     HomePageComponent,
     FanzoneComponent,
-    RekvizitKarticaComponent
+    RekvizitKarticaComponent,
+    AddRekvizitComponent,
+    RekvizitKarticaAdminComponent,
+    RekvizitListaAdminComponent,
+    RekvizitEditAdminComponent
   ],
   imports: [
     BrowserModule,
