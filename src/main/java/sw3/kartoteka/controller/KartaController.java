@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -89,26 +90,32 @@ public class KartaController {
 	}
 	
 	@PostMapping(value = "/rez", consumes = { "application/json" })
-	public ResponseEntity<Void> reserveTicketes(@RequestBody RezTicketDTO dto) {
+	public ResponseEntity<?> reserveTicketes(@RequestBody RezTicketDTO dto, HttpSession session) {
+		Integer loggedId = ((Korisnik)session.getAttribute("logged")).getIdKorisnika();
+		
 		try {
+			if(loggedId==null) {
+				throw new Exception("You must be logged in.");
+			}
 			for(Sediste sediste : dto.seats) {
 				Karta karta = kartaService.findbySediste(sediste);
 				if (karta == null) {
 					throw new Exception();
 				}
 				
-				UserDTO toSet = null;
+				Integer userId = null;
 				if(dto.friends.size()>0) {
-					toSet = dto.friends.get(0);
+					userId = dto.friends.get(0).getId();
 					dto.friends.remove(0);
 				} else {
-					toSet = dto.logged;
+					userId = loggedId;
 				}
+				
 				karta.setTip("zauzeto");
-				Korisnik k = korisnikService.findOne(toSet.getId());
+				Korisnik k = korisnikService.findOne(userId);
 				karta.setKorisnik(k);
 				kartaService.save(karta);
-				if(toSet!= dto.logged) {
+				if(userId!= loggedId) {
 					//TODO Poslati mail prijateljima
 				}
 				
@@ -117,7 +124,7 @@ public class KartaController {
 
 			return new ResponseEntity<Void>(HttpStatus.OK);
 		} catch (Exception e) {
-			return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<String>(e.getMessage() ,HttpStatus.BAD_REQUEST);
 		}
 
 	}
@@ -126,7 +133,6 @@ public class KartaController {
 	private static class RezTicketDTO {
 		private List<UserDTO> friends;
 		private List<Sediste> seats;
-		private UserDTO logged;
 		public List<UserDTO> getFriends() {
 			return friends;
 		}
@@ -138,12 +144,6 @@ public class KartaController {
 		}
 		public void setSeats(List<Sediste> seats) {
 			this.seats = seats;
-		}
-		public UserDTO getLogged() {
-			return logged;
-		}
-		public void setLogged(UserDTO logged) {
-			this.logged = logged;
 		}
 		
 	}

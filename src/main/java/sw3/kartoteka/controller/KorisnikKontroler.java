@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -133,7 +134,7 @@ public class KorisnikKontroler {
 	}
 	
 	@PostMapping(value="logged", consumes="application/json")
-	public ResponseEntity setLoggedIn(@RequestBody LoginDTO loginInfo ){
+	public ResponseEntity setLoggedIn(@RequestBody LoginDTO loginInfo, HttpSession session ){
 		Korisnik korisnik = korisnikService.findByEmail(loginInfo.username);
 		if(korisnik==null || !korisnik.getPassword().equals(loginInfo.password)) {
 			return ResponseEntity.badRequest().body("Bad login");
@@ -141,17 +142,20 @@ public class KorisnikKontroler {
 		if(!korisnik.getActivated()) {
 			return ResponseEntity.badRequest().body("Follow link in email to activated your account.");
 		}
-		request.getSession().setAttribute("logged", korisnik);
+		session.setAttribute("logged", korisnik);
 		
 		
 		return new ResponseEntity<UserDTO>(new UserDTO(korisnik), HttpStatus.OK);
 	}
 	
 	@GetMapping(value="logged")
-	public ResponseEntity<UserDTO> getLoggedIn(){
-		Korisnik proba = (Korisnik)request.getSession().getAttribute("logged");
-		System.out.println(proba.getEmail());
-		return new ResponseEntity<UserDTO>(new UserDTO(proba), HttpStatus.OK);
+	public ResponseEntity<UserDTO> getLoggedIn(HttpSession session){
+		Korisnik proba = (Korisnik)session.getAttribute("logged");
+		UserDTO rets = null;
+		if(proba!=null) {
+			rets = new UserDTO(proba);
+		}		
+		return new ResponseEntity<UserDTO>(rets, HttpStatus.OK);
 	}
 
 	private static class LoginDTO

@@ -11,7 +11,8 @@ import { Sediste } from '../models/sediste';
 
 
 const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+  withCredentials: true
 };
 
 
@@ -46,11 +47,9 @@ export class TicketService {
   }
 
   reserve(sedista : Array<Sediste>, prijatelji : Array<User>) {
-    let loggedUser = this.userService.getLoggedUser();
     let sendData = {};
     sendData["seats"] = sedista;
     sendData["friends"] = prijatelji;
-    sendData["logged"] = loggedUser;
     this.http.post(reserveTicketUrl, sendData, httpOptions).subscribe(
       result => {
         this.snackBar.open("Successfull! Reservation email will be sent to your adress.", "", {

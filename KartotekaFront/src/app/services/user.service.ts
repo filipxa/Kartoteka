@@ -9,10 +9,14 @@ import { Router } from '@angular/router'
 
 
 const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+  withCredentials: true
 };
+
+
 const registerUrl: string = "http://localhost:8080/api/user/register";
 const getByEmailUrl: string = "http://localhost:8080/api/user/";
+const loginURL: string = "http://localhost:8080/api/user/logged";
 const getFriendsUrl: string = "http://localhost:8080/api/user/friends/";
 @Injectable({
   providedIn: 'root'
@@ -22,34 +26,38 @@ export class UserService {
   public loggedUser: User;
   constructor(private http: HttpClient, private snackBar: MatSnackBar, private router: Router) { }
 
-  public getLoggedUser(): User {
+  public getLoggedUser(): Observable<User> {
     if (!this.loggedUser) {
-      if (sessionStorage.getItem("loggedUser") !== null) {
-        this.loggedUser=JSON.parse(sessionStorage.getItem("loggedUser"));
-      }
-      return this.loggedUser;
+      this.http.get<User>(loginURL, httpOptions).subscribe(result => {
+        this.loggedUser = result;
+      });
+     
+      return of(this.loggedUser);
     } else {
-      return this.loggedUser;
+      return of(this.loggedUser);
     }
-  }
-
-  private setLoggedUser(): void {
-    sessionStorage.setItem("loggedUser", JSON.stringify(this.loggedUser));
   }
 
   logIn(email: string, password: string): void {
 
-    this.http.get<User>(getByEmailUrl + email, httpOptions).subscribe(result => {
+    let sendData = {};
+    sendData["username"] = email;
+    sendData["password"]= password;
 
+    this.http.post<User>(loginURL, sendData, httpOptions).subscribe(result => {
       if (result != undefined) {
         this.loggedUser = result;
-        this.setLoggedUser();
         this.router.navigate(["/"]);
       } else {
         this.snackBar.open("Wrong email or password !", "", {
           duration: 3000,
         });
       }
+    }, error => {
+      this.snackBar.open("Bad login!", "", {
+        duration: 3000,
+      });
+
     });
   }
 

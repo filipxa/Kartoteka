@@ -14,7 +14,7 @@ export class MyNavComponent {
   loggedUser : User;
 
     getLoggedUser() : void {
-      this.loggedUser =this.userService.getLoggedUser()
+     this.userService.getLoggedUser().subscribe(user=> this.loggedUser=user);
       
     }
 
