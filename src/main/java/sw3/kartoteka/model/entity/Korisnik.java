@@ -10,6 +10,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.Transient;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Korisnik {
@@ -117,7 +120,7 @@ public class Korisnik {
 	}
 
 
-
+	@JsonIgnore
 	public List<Korisnik> getListaPrijatelja() {
 		return listaPrijatelja;
 	}

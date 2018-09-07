@@ -19,6 +19,7 @@ export class LokalService {
   constructor(  private http: HttpClient) { }
   private lokaliSerachUrl : string = "http://localhost:8080/api/lokal/search/";
   private lokalByIdUrls : string = "http://localhost:8080/api/lokal/byId/";
+  private allCinemas : string = "http://localhost:8080/api/lokal/cinemas";
 
   searchLokali(term: string): Observable<Lokal[]> {
     if (!term.trim()) {
@@ -30,6 +31,12 @@ export class LokalService {
   getLokal(id: number): Observable<Lokal> {
     return this.http.get<Lokal>(this.lokalByIdUrls + id).pipe(
       catchError(this.handleError<Lokal>(`getLokal id=${id}`))
+    );
+  }
+
+  getCinemas(): Observable<Lokal[]> {
+    return this.http.get<Lokal[]>(this.allCinemas).pipe(
+      catchError(this.handleError<Lokal[]>('getCinemas'))
     );
   }
 
