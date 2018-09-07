@@ -9,7 +9,11 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -40,6 +44,8 @@ import sw3.kartoteka.services.RekvizitService;
 @RestController
 @RequestMapping(value = "/api/rekviziti")
 public class RekvizitController {
+	
+
 	@Autowired
 	RekvizitService rekvizitService;
 	
@@ -74,7 +80,7 @@ public class RekvizitController {
 		
 	}
 	
-	@PostMapping(  consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.MULTIPART_FORM_DATA_VALUE})
+	@PostMapping()
 	public ResponseEntity<Void> save(@RequestPart("file") MultipartFile file, @RequestPart("rekvizit") RekvizitDto rDTO) {
 		//AKO SE BUDE KORISTILO TREBA PROVERITI ZA STA TREBA I PREPRAVITI rDTO u Rekvizti
 		try {
@@ -93,6 +99,12 @@ public class RekvizitController {
 		
 			rekvizitService.save(rekvizit);
 			System.out.println(rekvizit.getIdRekvizita());
+			
+			String fileName = fileStorageService.storeFile(file,"rekviziti",rekvizit.getIdRekvizita().toString());
+			
+			System.out.println(fileName);
+	        // Try to determine file's content type
+	        
 			return new ResponseEntity<>(HttpStatus.OK);
 		}catch (Exception e) {
 			// TODO: handle exception
