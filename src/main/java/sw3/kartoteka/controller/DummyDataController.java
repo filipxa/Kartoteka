@@ -95,13 +95,27 @@ public class DummyDataController {
 		rep.getIzvedbe().add(izvedba);
 		repertoarRepository.save(rep);
 		
-
+		// lokali
 		Lokal lokal = new Lokal();
 		lokal.setNaziv("Cineplexxx");
 		lokal.setIsPozoriste(false);
 		lokal.setRepertoar(rep);
 		
 		lokalService.save(lokal);
+		
+		Lokal lokal1 = new Lokal();
+		lokal1.setNaziv("Bioskop1");
+		lokal1.setIsPozoriste(false);
+		lokal1.setRepertoar(rep);
+		
+		lokalService.save(lokal1);
+		
+		Lokal lokal2 = new Lokal();
+		lokal2.setNaziv("Bioskop2");
+		lokal2.setIsPozoriste(false);
+		lokal2.setRepertoar(rep);
+		
+		lokalService.save(lokal2);
 		
 		Rekvizit rekvizit = new Rekvizit();
 		rekvizit.setIdRekvizita(1);
