@@ -5,6 +5,7 @@ import { Observable } from 'rxjs/internal/Observable';
 import { catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { MatSnackBar } from '@angular/material';
+import { Router } from '@angular/router';
 
 
 const httpOptions = {
@@ -15,53 +16,64 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class RekvizitService {
-  
-  constructor(private http: HttpClient, private snackBar: MatSnackBar) { }
-  private allRekvizitiUrl : string = "http://localhost:8080/api/rekvizti";
 
-  getRekvizti(): Observable<Rekvizit[]>{
+  constructor(private http: HttpClient, private snackBar: MatSnackBar, private router:Router) { }
+  private allRekvizitiUrl: string = "http://localhost:8080/api/rekviziti";
+
+  getRekvizti(): Observable<Rekvizit[]> {
 
     return this.http.get<Rekvizit[]>(this.allRekvizitiUrl).pipe(
       catchError(this.handleError<Rekvizit[]>()));
   }
 
-  bookRekvizit(rekvizit:Rekvizit){
-    this.http.post<Rekvizit>(this.allRekvizitiUrl+"/book", rekvizit, httpOptions).subscribe(param=> 
-      {
-        this.snackBar.open("Item reserved!","", {
-          duration: 2000,
-        });
+  bookRekvizit(rekvizit: Rekvizit) {
+    this.http.post<Rekvizit>(this.allRekvizitiUrl + "/book", rekvizit, httpOptions).subscribe(param => {
+      this.snackBar.open("Item reserved!", "", {
+        duration: 2000,
+      });
     });
   }
 
-  addRekvizit(rekvizit: Rekvizit){
-    this.http.post<Rekvizit>(this.allRekvizitiUrl, rekvizit, httpOptions).subscribe(param=> 
-      {
-        this.snackBar.open("Item added!","", {
+  addRekvizit(rekvizit: Rekvizit, file: File) {
+    let sendData = new FormData();
+    let pera = {user: "sss", pass: "sss"};
+    sendData.append('file', file);
+    sendData.append('rekvizit',new Blob([JSON.stringify(pera)], {type : 'application/json'}) );
+    console.log(sendData);
+    this.http.post(this.allRekvizitiUrl, sendData
+    ).subscribe(
+      data => { 
+        console.log(data);
+        this.snackBar.open("Item added!", "", {
+          duration: 2000,
+        }); 
+        this.router.navigate(["/rekvizitAllEdit"]);
+      },
+      error => {
+        this.snackBar.open("ERROR!", "", {
           duration: 2000,
         });
-    });
+      }
+    );
   }
-  editRekvizit(rekvizit: Rekvizit){
-    this.http.post<Rekvizit>(this.allRekvizitiUrl, rekvizit, httpOptions).subscribe(param=> 
-      {
-        this.snackBar.open("Item changed!","", {
-          duration: 2000,
-        });
+  editRekvizit(rekvizit: Rekvizit) {
+    this.http.post<Rekvizit>(this.allRekvizitiUrl, rekvizit, httpOptions).subscribe(param => {
+      this.snackBar.open("Item changed!", "", {
+        duration: 2000,
+      });
     });
   }
 
-  deleteRekvizit(rekvizit: Rekvizit){
+  deleteRekvizit(rekvizit: Rekvizit) {
     var idS = String(rekvizit.idRekvizita);
-    this.http.delete<Rekvizit>(this.allRekvizitiUrl+"/" + idS,httpOptions).subscribe(param=> 
-      {
-        this.snackBar.open("Item deleted!","", {
-          duration: 2000,
-        });
+    this.http.delete<Rekvizit>(this.allRekvizitiUrl + "/" + idS, httpOptions).subscribe(param => {
+      this.snackBar.open("Item deleted!", "", {
+        duration: 2000,
+      });
     });
   }
 
-  private handleError<T> (operation = 'operation', result?: T) {
+  private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
 
       // TODO: send the error to remote logging infrastructure

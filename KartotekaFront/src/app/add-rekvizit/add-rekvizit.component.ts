@@ -1,21 +1,57 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../services/user.service';
 import { RekvizitService } from '../services/rekvizit.service';
-import { FormControl, Validators } from '@angular/forms';
+import { FormControl, Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { Rekvizit } from '../models/rekvizit';
 import { MatSnackBar } from '@angular/material';
+import { UploadService } from '../services/upload.service';
+import { HttpClient } from  '@angular/common/http';
 
+import {Observable} from "rxjs";
+import { HttpHeaders } from '@angular/common/http';
+import { map } from 'rxjs/internal/operators/map';
 @Component({
   selector: 'app-add-rekvizit',
   templateUrl: './add-rekvizit.component.html',
   styleUrls: ['./add-rekvizit.component.css']
 })
 export class AddRekvizitComponent implements OnInit {
+  
 
-  constructor(private rekvizitService: RekvizitService, private userSrvice: UserService,private snackBar : MatSnackBar) { }
+  constructor(private uploadService: UploadService,
+    private rekvizitService: RekvizitService,
+    private userSrvice: UserService,
+    private snackBar : MatSnackBar,
+    private http:HttpClient,
+    private fb: FormBuilder) { }
+
+
+  file: File;
+  
+  form: FormGroup;
 
   ngOnInit() {
   }
+
+
+
+
+  valuechangeIMG(event) {
+    let fileList: FileList = event.target.files;
+    if(fileList.length > 0) {
+        this.file = fileList[0];
+        console.log(this.file);
+    }
+    console.log("cao");
+}
+
+  createForm() {
+    this.form = this.fb.group({
+      file_upload: null
+    });
+  }
+
+
 
   NameFormControl = new FormControl('', [
     Validators.required
@@ -46,8 +82,7 @@ export class AddRekvizitComponent implements OnInit {
         rezervisano: false
         
       };
-      console.log(rekvizit);
-      this.rekvizitService.addRekvizit(rekvizit);
+      this.rekvizitService.addRekvizit(rekvizit,this.file);
     }
 
     
