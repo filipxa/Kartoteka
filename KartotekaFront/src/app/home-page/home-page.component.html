@@ -5,8 +5,9 @@
         <app-user-profile-card></app-user-profile-card>
       </td>
       <td>
-      <mat-card class="search"><app-lokal-search></app-lokal-search></mat-card>
-      </td>
+        <div *ngIf="!userService.loggedUser"><app-home-page-visitor></app-home-page-visitor></div>
+        
+    </td>
     </tr>
   </table>
 </div>

@@ -16,7 +16,7 @@ const httpOptions = {
 };
 
 
-const getByUserId : string = "http://localhost:8080/api/karta/user/";
+const getLoggedUserTicketURL : string = "http://localhost:8080/api/karta/user/";
 const cancelById : string = "http://localhost:8080/api/karta/cancel/";
 const reserveTicketUrl : string = "http://localhost:8080/api/karta/rez";
 @Injectable({
@@ -43,7 +43,7 @@ export class TicketService {
   getLoggedUserTickets() : Observable<Array<Karta>>{
    let loggedUser = this.userService.getLoggedUser();
    
-    return this.http.get<Array<Karta>>(getByUserId + this.userService.loggedUser.email, httpOptions);
+    return this.http.get<Array<Karta>>(getLoggedUserTicketURL , httpOptions);
   }
 
   reserve(sedista : Array<Sediste>, prijatelji : Array<User>) {

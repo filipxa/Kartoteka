@@ -25,7 +25,15 @@ export class Repertoar{
             }
             let dt = new Date(izvedba.termin);
             izvedba.datum = dt.toDateString();
-            izvedba.termin = "" + dt.getHours() + ":" + dt.getMinutes();
+            let hours = "" + dt.getHours();
+            while(hours.length<2){
+                hours="0"+hours;
+            }
+            let minutes = "" +dt.getMinutes();
+            while(minutes.length<2){
+                minutes="0"+minutes;
+            }
+            izvedba.termin = "" + hours + ":" + minutes;
             rets.get(izvedba.naslov).push(izvedba);
         }
         return rets;
