@@ -1,17 +1,15 @@
-package sw3.kartoteka.controller;
+package sw3.kartoteka.model;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import java.util.Random;
+
+import javax.persistence.Entity;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Service;
 
 import sw3.kartoteka.model.entity.Izvedba;
 import sw3.kartoteka.model.entity.Karta;
@@ -23,7 +21,6 @@ import sw3.kartoteka.model.entity.Repertoar;
 import sw3.kartoteka.model.entity.Sala;
 import sw3.kartoteka.model.entity.Sediste;
 import sw3.kartoteka.repository.IzvedbaRepository;
-import sw3.kartoteka.repository.LokalRepository;
 import sw3.kartoteka.repository.NaslovRepository;
 import sw3.kartoteka.repository.RepertoarRepository;
 import sw3.kartoteka.repository.SalaRepository;
@@ -32,9 +29,9 @@ import sw3.kartoteka.services.KartaService;
 import sw3.kartoteka.services.KorisnikService;
 import sw3.kartoteka.services.LokalService;
 import sw3.kartoteka.services.RekvizitService;
-@RestController
-@RequestMapping(value = "/api/dummy")
-public class DummyDataController {
+
+@Service
+public class InitBean {
 	@Autowired
 	KartaService kartaService;
 	
@@ -62,22 +59,21 @@ public class DummyDataController {
 	@Autowired
 	RekvizitService rekvizitService;
 	
-	@GetMapping()
-	public ResponseEntity<Korisnik> getKarte(){
+	
+	public void fillData(){
 		Korisnik korisnik1 = new Korisnik( "korisnik", "Filip", "Micic", "filipxa@hotmail.com", "123", new ArrayList<Korisnik>(), "131232131", true, 0, 63666458, "Beograd");
 		korisnikService.save(korisnik1);
 		Korisnik korisnik = new Korisnik( "korisnik", "Pera", "Peric", "filipxa@gmail.com", "123", new ArrayList<Korisnik>(), "131232131", true, 0, 63666458, "Beograd");
 		korisnikService.save(korisnik);
 		Korisnik korisnik2 = new Korisnik( "fan", "Filip", "Micic", "a@a.com", "123", new ArrayList<Korisnik>(), "131232131", true, 0, 63666458, "Beograd");
 		korisnikService.save(korisnik2);
-		korisnik = korisnikService.findByEmail("filipxa@hotmail.com");
-		korisnik1 = korisnikService.findByEmail("filipxa@gmail.com");
 		
 		korisnik1.getListaPrijatelja().add(korisnik);
 		korisnik.getListaPrijatelja().add(korisnik1);
 		korisnikService.save(korisnik1);
 		korisnikService.save(korisnik);
 
+		Korisnik test = korisnikService.findByEmail(korisnik1.getEmail());
 		
 		Izvedba izvedba = new Izvedba();
 		izvedbaRepository.save(izvedba);
@@ -151,7 +147,7 @@ public class DummyDataController {
 				sedisteRepository.save(s);
 				sala.getSedista().add(s);
 				Karta k = new Karta();
-				kartaService.save(k);
+				
 				k.setCena(200);
 				k.setIzvedba(izvedba);
 				
@@ -161,8 +157,8 @@ public class DummyDataController {
 					k.setTip("slobodno");
 				}
 				k.setSediste(s);
-				
 				izvedba.getKarte().add(k);
+				kartaService.save(k);
 				
 			}
 			
@@ -171,7 +167,7 @@ public class DummyDataController {
 		salaRepository.save(sala);
 		izvedbaRepository.save(izvedba);
 		
-		return new ResponseEntity<>(HttpStatus.OK);
+		
 
 	}
 }
