@@ -28,6 +28,7 @@ import { RekvizitEditAdminComponent } from './rekvizit-edit-admin/rekvizit-edit-
 import { CinemaListComponent } from './cinema-list/cinema-list.component';
 import { CinemaListItemComponent } from './cinema-list-item/cinema-list-item.component';
 import { HomePageVisitorComponent } from './home-page-visitor/home-page-visitor.component';
+import { EditProfileAdminFanComponent } from './edit-profile-admin-fan/edit-profile-admin-fan.component';
 
 
 const appRoutes: Routes = [
@@ -41,6 +42,7 @@ const appRoutes: Routes = [
   { path: 'addRekvizit', component: AddRekvizitComponent },
   { path: 'rekvizitAllEdit', component: RekvizitListaAdminComponent },
   { path: 'rekvizitEdit', component: RekvizitEditAdminComponent },
+  { path: 'editAdminFan', component: EditProfileAdminFanComponent },
   { path: 'cinemas', component: CinemaListComponent}
 ];
 
@@ -63,7 +65,8 @@ const appRoutes: Routes = [
     RekvizitEditAdminComponent,
     CinemaListComponent,
     CinemaListItemComponent,
-    HomePageVisitorComponent
+    HomePageVisitorComponent,
+    EditProfileAdminFanComponent
   ],
   imports: [
     BrowserModule,

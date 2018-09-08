@@ -38,6 +38,11 @@ export class UserService {
     }
   }
 
+
+  public resetLoggedUser(user:User){
+    this.loggedUser = user;
+  }
+
   logIn(email: string, password: string): void {
 
     let sendData = {};

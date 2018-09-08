@@ -13,7 +13,10 @@ export class RekvizitKarticaAdminComponent implements OnInit {
   @Input() rekvizit: Rekvizit;
 
   constructor(private rekvizitService: RekvizitService, private userSrvice: UserService,private router: Router) { }
-
+  
+  imagePath: String;
+  altPhoto: String;
+  
   editRekvizit(id){
     console.log(id);
     
@@ -26,6 +29,8 @@ export class RekvizitKarticaAdminComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.imagePath = "http://localhost:8080/api/downloadFile/rekviziti/"+this.rekvizit.idRekvizita;
+    this.altPhoto = "https://www.freeiconspng.com/uploads/no-image-icon-4.png";
   }
 
 

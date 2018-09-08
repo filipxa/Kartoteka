@@ -62,6 +62,7 @@
 
           <a mat-list-item routerLink = "/profile">Profile</a>
           <a mat-list-item routerLink = "/friends">Friends</a>
+          <a *ngIf="userService.loggedUser && (userService.loggedUser.tip == 'fan') " mat-list-item routerLink = "/editAdminFan">Edit profile</a>
           <a mat-list-item (click)="userService.logOut()" > Log out</a>
         </mat-nav-list>
       </mat-sidenav>

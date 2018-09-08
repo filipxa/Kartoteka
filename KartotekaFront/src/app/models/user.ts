@@ -10,5 +10,4 @@ export class User {
   activated: boolean;
   adresa: string;
   tel: number;
-  
 }
