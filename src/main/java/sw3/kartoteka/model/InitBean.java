@@ -1,5 +1,7 @@
 package sw3.kartoteka.model;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Random;
@@ -130,9 +132,18 @@ public class InitBean {
 		lokal.getSale().add(sala);
 		lokalService.save(lokal);
 		
+		
+		String pattern = "yyyy-MM-dd HH:mm";
+		SimpleDateFormat simpleDateFormat =
+		        new SimpleDateFormat(pattern);
 
 		izvedba.setNaslov(naslov);
-		izvedba.setTermin(new Date());
+		try {
+			izvedba.setTermin(simpleDateFormat.parse("2018-09-09 03:05"));
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		izvedba.setSala(sala);
 		izvedba.setKarte(new ArrayList<Karta>());
 		Random r = new Random();

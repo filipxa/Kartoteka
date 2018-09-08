@@ -106,10 +106,7 @@ export class RegisterPageComponent implements OnInit {
   matcher = new MyErrorStateMatcher();
 
   ngOnInit() {
-    if (this.userService.loggedUser != null) {;
-      this.router.navigate(["/"]);
-    }
-
+    this.userService.redirectIfNotLogged("");
   }
 
 }
