@@ -18,8 +18,14 @@
   <mat-form-field class="example-full-width">
     <textarea matInput placeholder="Description" [formControl]="DescriptionFormControl"></textarea>
   </mat-form-field>
-  
+
+  <input class="ng-hide" 
+  id="input-file-id" 
+  multiple type="file" 
+  (change)="valuechangeIMG($event)">
+  <label for="input-file-id" class="md-button md-raised md-primary">Choose Files</label>
+  <br>
+  <br>
   <button type="button"  mat-stroked-button="user-button" (click)="addRekvizit()" > Add</button>
 </form>
 
-    

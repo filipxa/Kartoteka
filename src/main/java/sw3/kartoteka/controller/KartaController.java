@@ -46,9 +46,9 @@ public class KartaController {
 		return new ResponseEntity<>(karte, HttpStatus.OK);
 	}
 	
-	@GetMapping(value = "/user/{id}")
-	public ResponseEntity<List<Karta>> getKarte(@PathVariable("id") Integer id){
-		Korisnik korisnik = korisnikService.findOne(id);
+	@GetMapping(value = "/user")
+	public ResponseEntity<List<Karta>> getKarte(@PathVariable("id") Integer id, HttpSession session){
+		Korisnik korisnik = (Korisnik)session.getAttribute("logged");
 		
 		try {
 			List<Karta> karte = kartaService.findByKorisnik(korisnik); 

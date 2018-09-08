@@ -23,19 +23,31 @@ const getFriendsUrl: string = "http://localhost:8080/api/user/friends/";
 })
 export class UserService {
 
-  public loggedUser: User;
+  private static loggedUser: User;
   constructor(private http: HttpClient, private snackBar: MatSnackBar, private router: Router) { }
 
   public getLoggedUser(): Observable<User> {
-    if (!this.loggedUser) {
-      this.http.get<User>(loginURL, httpOptions).subscribe(result => {
-        this.loggedUser = result;
-      });
-     
-      return of(this.loggedUser);
+    if (!UserService.loggedUser) {
+      return this.http.get<User>(loginURL, httpOptions).pipe(
+        this.saveLoggedUser);
     } else {
-      return of(this.loggedUser);
+      return of( UserService.loggedUser);
     }
+  }
+
+  private saveLoggedUser(data :Observable<User>){
+    data.subscribe(result => {
+       UserService.loggedUser = result;
+    });
+    return data;
+  }
+
+  public redirectIfNotLogged (adress : String){
+    this.getLoggedUser().subscribe(data=>{
+     if(data==null){
+      this.router.navigate(["/"+adress])
+      } 
+    });
   }
 
   logIn(email: string, password: string): void {
@@ -46,7 +58,7 @@ export class UserService {
 
     this.http.post<User>(loginURL, sendData, httpOptions).subscribe(result => {
       if (result != undefined) {
-        this.loggedUser = result;
+        UserService.loggedUser = result;
         this.router.navigate(["/"]);
       } else {
         this.snackBar.open("Wrong email or password !", "", {
@@ -62,13 +74,13 @@ export class UserService {
   }
 
   public getFriends(): Observable<Array<User>> {
-    console.log(this.loggedUser);
-    return this.http.get<Array<User>>(getFriendsUrl + this.loggedUser.email, httpOptions);
+    console.log(UserService.loggedUser);
+    return this.http.get<Array<User>>(getFriendsUrl + UserService.loggedUser.email, httpOptions);
   }
 
 
   logOut(): void {
-    this.loggedUser = null;
+    UserService.loggedUser = null;
     sessionStorage.removeItem("loggedUser");
     this.router.navigate(["/"]);
 

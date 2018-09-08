@@ -16,11 +16,9 @@ export class TicketsPageComponent implements OnInit {
 
 
   ngOnInit() {
-    if (this.userService.loggedUser == null) {;
-      this.router.navigate(["/"]);
-    } else {
-      this.getTickets();
-    }
+    this.userService.redirectIfNotLogged("");
+    this.getTickets();
+
     
   }
 

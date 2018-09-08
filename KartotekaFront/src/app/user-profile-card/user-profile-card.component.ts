@@ -8,10 +8,11 @@ import { UserService } from '../services/user.service';
   styleUrls: ['./user-profile-card.component.css']
 })
 export class UserProfileCardComponent implements OnInit {
-
+  loggedUser : User;
   constructor(private userService : UserService) { }
 
   ngOnInit() {
+    this.userService.getLoggedUser().subscribe(user=> this.loggedUser=user);
   }
 
 }

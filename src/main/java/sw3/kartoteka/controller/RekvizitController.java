@@ -2,32 +2,50 @@ package sw3.kartoteka.controller;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.request;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.codec.multipart.FormFieldPart;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
+
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import sw3.kartoteka.model.dto.RekvizitDto;
 import sw3.kartoteka.model.entity.Korisnik;
 import sw3.kartoteka.model.entity.Rekvizit;
 import sw3.kartoteka.repository.RekvizitRepository;
+import sw3.kartoteka.services.FileStorageService;
 import sw3.kartoteka.services.KorisnikService;
 import sw3.kartoteka.services.RekvizitService;
 
 @RestController
-@RequestMapping(value = "/api/rekvizti")
+@RequestMapping(value = "/api/rekviziti")
 public class RekvizitController {
+	
+
 	@Autowired
 	RekvizitService rekvizitService;
 	
@@ -36,6 +54,9 @@ public class RekvizitController {
 	
 	@Autowired
 	KorisnikService korisnikService;
+	
+	@Autowired
+    private FileStorageService fileStorageService;
 	
 	@GetMapping
 	public ResponseEntity<List<RekvizitDto>> getAll(){
@@ -58,8 +79,9 @@ public class RekvizitController {
 		}
 		
 	}
-	@PostMapping(consumes = "application/json")
-	public ResponseEntity<Void> save(@RequestBody RekvizitDto rDTO) {
+	
+	@PostMapping()
+	public ResponseEntity<Void> save(@RequestPart(value="file", required = false) MultipartFile file, @RequestPart("rekvizit") RekvizitDto rDTO) {
 		//AKO SE BUDE KORISTILO TREBA PROVERITI ZA STA TREBA I PREPRAVITI rDTO u Rekvizti
 		try {
 			Rekvizit rekvizit = new Rekvizit();
@@ -76,9 +98,19 @@ public class RekvizitController {
 			
 		
 			rekvizitService.save(rekvizit);
+			
+			if(file!=null && !file.isEmpty()) {
+				String fileName = fileStorageService.storeFile(file,"rekviziti",rekvizit.getIdRekvizita().toString());
+				System.out.println(fileName);
+			}
+			
+			
+			
+	        // Try to determine file's content type
+	        
 			return new ResponseEntity<>(HttpStatus.OK);
 		}catch (Exception e) {
-			// TODO: handle exception
+			e.printStackTrace();
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
 		
@@ -88,23 +120,21 @@ public class RekvizitController {
 	@PostMapping(value = "/book", consumes = "application/json")
 	public ResponseEntity<Void> book(@RequestBody RekvizitDto rDTO) {
 		//tu sranje treba ispisati
+		System.out.println("BOOK");
 		try {
 			Rekvizit rekvizit = rekvizitService.findOne(rDTO.getIdRekvizita());
 			
-			Korisnik k = new Korisnik();
-			Korisnik proba = (Korisnik)request.getSession().getAttribute("logged");
-			System.out.println("Proba " + proba);
-			System.out.println(request.getSession().getAttribute("logged"));
-			k = (Korisnik)request.getSession().getAttribute("logged");
-			System.out.println(request.getSession().getAttribute("logged"));
-			System.out.println(k);
-			System.out.println(rekvizit);
-			rekvizit.setKorisnik(k);
+			Korisnik k = (Korisnik)request.getSession().getAttribute("logged");
+			Korisnik korisnikPravi = korisnikService.findByEmail(k.getEmail());
+			
+			rekvizit.setKorisnik(korisnikPravi);
 			
 			rekvizitService.save(rekvizit);
+			System.out.println(rekvizit.toString());
 			return new ResponseEntity<>(HttpStatus.OK);
 		}catch (Exception e) {
 			// TODO: handle exception
+			e.printStackTrace();
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
 		
@@ -117,6 +147,24 @@ public class RekvizitController {
 			return new ResponseEntity<Void>(HttpStatus.OK);
 		}catch (Exception e) {
 			return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
+		}
+		
+	}
+	
+	public static class Pera{
+		String user;
+		String pass;
+		public String getUser() {
+			return user;
+		}
+		public void setUser(String user) {
+			this.user = user;
+		}
+		public String getPass() {
+			return pass;
+		}
+		public void setPass(String pass) {
+			this.pass = pass;
 		}
 		
 	}

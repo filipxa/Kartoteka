@@ -63,9 +63,7 @@ export class LokalReserveComponent implements OnInit {
 
 
   initLokal(lokal: Lokal): any {
-    if (lokal == null) {;
-      this.router.navigate(["/"]);
-    }
+
     this.lokal = lokal;
     this.naslovi = Repertoar.getNaslovi(lokal.repertoar);
     this.naslovIzvedbeMap = Repertoar.extractNasloviIzvedbe(lokal.repertoar);
@@ -74,9 +72,8 @@ export class LokalReserveComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (this.userService.loggedUser == null) {;
-      this.router.navigate(["/"]);
-    }
+    this.userService.redirectIfNotLogged("");
+
 
     this.titleFormGroup = this._formBuilder.group({
       titleCtrl: ['', Validators.required]
