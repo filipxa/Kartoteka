@@ -81,7 +81,7 @@ public class RekvizitController {
 	}
 	
 	@PostMapping()
-	public ResponseEntity<Void> save(@RequestPart("file") MultipartFile file, @RequestPart("rekvizit") RekvizitDto rDTO) {
+	public ResponseEntity<Void> save(@RequestPart(value="file", required = false) MultipartFile file, @RequestPart("rekvizit") RekvizitDto rDTO) {
 		//AKO SE BUDE KORISTILO TREBA PROVERITI ZA STA TREBA I PREPRAVITI rDTO u Rekvizti
 		try {
 			Rekvizit rekvizit = new Rekvizit();
@@ -98,16 +98,19 @@ public class RekvizitController {
 			
 		
 			rekvizitService.save(rekvizit);
-			System.out.println(rekvizit.getIdRekvizita());
 			
-			String fileName = fileStorageService.storeFile(file,"rekviziti",rekvizit.getIdRekvizita().toString());
+			if(file!=null && !file.isEmpty()) {
+				String fileName = fileStorageService.storeFile(file,"rekviziti",rekvizit.getIdRekvizita().toString());
+				System.out.println(fileName);
+			}
 			
-			System.out.println(fileName);
+			
+			
 	        // Try to determine file's content type
 	        
 			return new ResponseEntity<>(HttpStatus.OK);
 		}catch (Exception e) {
-			// TODO: handle exception
+			e.printStackTrace();
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
 		
@@ -117,23 +120,21 @@ public class RekvizitController {
 	@PostMapping(value = "/book", consumes = "application/json")
 	public ResponseEntity<Void> book(@RequestBody RekvizitDto rDTO) {
 		//tu sranje treba ispisati
+		System.out.println("BOOK");
 		try {
 			Rekvizit rekvizit = rekvizitService.findOne(rDTO.getIdRekvizita());
 			
-			Korisnik k = new Korisnik();
-			Korisnik proba = (Korisnik)request.getSession().getAttribute("logged");
-			System.out.println("Proba " + proba);
-			System.out.println(request.getSession().getAttribute("logged"));
-			k = (Korisnik)request.getSession().getAttribute("logged");
-			System.out.println(request.getSession().getAttribute("logged"));
-			System.out.println(k);
-			System.out.println(rekvizit);
-			rekvizit.setKorisnik(k);
+			Korisnik k = (Korisnik)request.getSession().getAttribute("logged");
+			Korisnik korisnikPravi = korisnikService.findByEmail(k.getEmail());
+			
+			rekvizit.setKorisnik(korisnikPravi);
 			
 			rekvizitService.save(rekvizit);
+			System.out.println(rekvizit.toString());
 			return new ResponseEntity<>(HttpStatus.OK);
 		}catch (Exception e) {
 			// TODO: handle exception
+			e.printStackTrace();
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
 		

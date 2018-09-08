@@ -9,7 +9,8 @@ import { Router } from '@angular/router';
 
 
 const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+  withCredentials: true
 };
 
 @Injectable({
@@ -55,8 +56,12 @@ export class RekvizitService {
       }
     );
   }
-  editRekvizit(rekvizit: Rekvizit) {
-    this.http.post<Rekvizit>(this.allRekvizitiUrl, rekvizit, httpOptions).subscribe(param => {
+  editRekvizit(rekvizit: Rekvizit, file: File) {
+    let sendData = new FormData();
+    sendData.append('file', file);
+    sendData.append('rekvizit',new Blob([JSON.stringify(rekvizit)], {type : 'application/json'}) );
+    console.log(sendData);
+    this.http.post<Rekvizit>(this.allRekvizitiUrl, sendData).subscribe(param => {
       this.snackBar.open("Item changed!", "", {
         duration: 2000,
       });

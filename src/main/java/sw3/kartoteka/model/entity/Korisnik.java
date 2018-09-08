@@ -69,7 +69,7 @@ public class Korisnik {
 	@Override
 	public String toString() {
 		return "Korisnik [idKorisnika=" + idKorisnika + ", tip=" + tip + ", ime=" + ime + ", prezime=" + prezime
-				+ ", email=" + email + ", password=" + password + ", listaPrijatelja=" + listaPrijatelja + ", uuid="
+				+ ", email=" + email + ", password=" + password  + ", uuid="
 				+ uuid + ", activated=" + activated + ", brBodova=" + brBodova + ", brTelefona=" + brTelefona
 				+ ", adresa=" + adresa + "]";
 	}

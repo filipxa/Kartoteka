@@ -43,7 +43,7 @@ export class AddRekvizitComponent implements OnInit {
         console.log(this.file);
     }
     console.log("cao");
-}
+  }
 
   createForm() {
     this.form = this.fb.group({

@@ -21,6 +21,7 @@ export class RekvizitEditAdminComponent implements OnInit {
   cena: number;
   rezervisano : boolean;
   re: Rekvizit;
+  file: File;
   private sub: any;
 
   TestFormControl= new FormControl('caoss');
@@ -59,8 +60,8 @@ export class RekvizitEditAdminComponent implements OnInit {
     console.log(this.rezervisano);
     this.rekvizit = rr;
   }
-  valuechangeNaziv(newValue) {
 
+  valuechangeNaziv(newValue) {
     this.naziv = newValue;
     console.log(newValue);
   }
@@ -69,6 +70,16 @@ export class RekvizitEditAdminComponent implements OnInit {
     this.cena = newValue;
     console.log(newValue);
   }
+
+  valuechangeIMG(event) {
+    let fileList: FileList = event.target.files;
+    if(fileList.length > 0) {
+        this.file = fileList[0];
+        console.log(this.file);
+    }
+    console.log("cao");
+  }
+
   private addRekvizit(): void {
     let error : boolean = false;
     error = 
@@ -105,7 +116,7 @@ export class RekvizitEditAdminComponent implements OnInit {
         rekvizit.opis =this.opis;
       }
       console.log(rekvizit);
-      this.rekvizitService.editRekvizit(rekvizit);
+      this.rekvizitService.editRekvizit(rekvizit, this.file);
     }
   }
 
