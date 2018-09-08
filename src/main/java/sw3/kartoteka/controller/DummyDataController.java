@@ -77,10 +77,7 @@ public class DummyDataController {
 		korisnik.getListaPrijatelja().add(korisnik1);
 		korisnikService.save(korisnik1);
 		korisnikService.save(korisnik);
-		
-		
-		
-		korisnikService.save(korisnik1);
+
 		
 		Izvedba izvedba = new Izvedba();
 		izvedbaRepository.save(izvedba);
@@ -118,14 +115,12 @@ public class DummyDataController {
 		lokalService.save(lokal2);
 		
 		Rekvizit rekvizit = new Rekvizit();
-		rekvizit.setIdRekvizita(1);
 		rekvizit.setCena(200);
 		rekvizit.setNaziv("Naziv");
 		rekvizit.setOpis("Brutalno");
 		rekvizitService.save(rekvizit);
 		
 		rekvizit = new Rekvizit();
-		rekvizit.setIdRekvizita(2);
 		rekvizit.setCena(200);
 		rekvizit.setNaziv("Naziv 2");
 		rekvizit.setOpis("jos Brutalnije");
@@ -173,7 +168,7 @@ public class DummyDataController {
 		}
 
 		salaRepository.save(sala);
-		izvedbaRepository.save(izvedba);
+//		izvedbaRepository.save(izvedba);
 		
 		return new ResponseEntity<>(HttpStatus.OK);
 
