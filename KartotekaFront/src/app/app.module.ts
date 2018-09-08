@@ -28,6 +28,7 @@ import { RekvizitEditAdminComponent } from './rekvizit-edit-admin/rekvizit-edit-
 import { CinemaListComponent } from './cinema-list/cinema-list.component';
 import { CinemaListItemComponent } from './cinema-list-item/cinema-list-item.component';
 import { HomePageVisitorComponent } from './home-page-visitor/home-page-visitor.component';
+import { TheatreListComponent } from './theatre-list/theatre-list.component';
 
 
 const appRoutes: Routes = [
@@ -41,7 +42,8 @@ const appRoutes: Routes = [
   { path: 'addRekvizit', component: AddRekvizitComponent },
   { path: 'rekvizitAllEdit', component: RekvizitListaAdminComponent },
   { path: 'rekvizitEdit', component: RekvizitEditAdminComponent },
-  { path: 'cinemas', component: CinemaListComponent}
+  { path: 'cinemas', component: CinemaListComponent},
+  { path: 'theatres', component: TheatreListComponent}
 ];
 
 @NgModule({
@@ -63,7 +65,8 @@ const appRoutes: Routes = [
     RekvizitEditAdminComponent,
     CinemaListComponent,
     CinemaListItemComponent,
-    HomePageVisitorComponent
+    HomePageVisitorComponent,
+    TheatreListComponent
   ],
   imports: [
     BrowserModule,

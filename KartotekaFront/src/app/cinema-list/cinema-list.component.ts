@@ -25,6 +25,7 @@ export class CinemaListComponent implements OnInit {
 
   ngOnInit() {
     this.getCinemas();
+    
   }
 
 }
