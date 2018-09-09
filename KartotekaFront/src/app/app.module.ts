@@ -25,12 +25,13 @@ import { AddRekvizitComponent } from './add-rekvizit/add-rekvizit.component';
 import { RekvizitKarticaAdminComponent } from './rekvizit-kartica-admin/rekvizit-kartica-admin.component';
 import { RekvizitListaAdminComponent } from './rekvizit-lista-admin/rekvizit-lista-admin.component';
 import { RekvizitEditAdminComponent } from './rekvizit-edit-admin/rekvizit-edit-admin.component';
-import { CinemaListComponent } from './cinema-list/cinema-list.component';
-import { CinemaListItemComponent } from './cinema-list-item/cinema-list-item.component';
+import { LokalListComponent } from './lokal-list/lokal-list.component';
 import { HomePageVisitorComponent } from './home-page-visitor/home-page-visitor.component';
 import { TheatreListComponent } from './theatre-list/theatre-list.component';
 import { LokalProfileComponent } from './lokal-profile/lokal-profile.component';
-
+import { RepertoarBioskopComponent } from './repertoar-bioskop/repertoar-bioskop.component';
+import { LokalEditProfileComponent } from './lokal-edit-profile/lokal-edit-profile.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 const appRoutes: Routes = [
 
@@ -43,8 +44,7 @@ const appRoutes: Routes = [
   { path: 'addRekvizit', component: AddRekvizitComponent },
   { path: 'rekvizitAllEdit', component: RekvizitListaAdminComponent },
   { path: 'rekvizitEdit', component: RekvizitEditAdminComponent },
-  { path: 'cinemas', component: CinemaListComponent},
-  { path: 'theatres', component: TheatreListComponent},
+  { path: 'lokal/:type', component: LokalListComponent},
   { path: 'lokal/profil/:id', component: LokalProfileComponent}
 ];
 
@@ -65,11 +65,12 @@ const appRoutes: Routes = [
     RekvizitKarticaAdminComponent,
     RekvizitListaAdminComponent,
     RekvizitEditAdminComponent,
-    CinemaListComponent,
-    CinemaListItemComponent,
+    LokalListComponent,
     HomePageVisitorComponent,
     TheatreListComponent,
-    LokalProfileComponent
+    LokalProfileComponent,
+    RepertoarBioskopComponent,
+    LokalEditProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -80,6 +81,7 @@ const appRoutes: Routes = [
     MatStepperModule,
     MatButtonModule,
     MatSelectModule,
+    MatDialogModule,
     MatSidenavModule,
     MatIconModule,
     MatCheckboxModule,
@@ -92,7 +94,10 @@ const appRoutes: Routes = [
     MatTabsModule
   ],
   exports: [RouterModule, MatSnackBarModule, HttpClientModule],
-  providers: [],
+  providers: [ LokalEditProfileComponent ],
+  entryComponents: [
+    LokalEditProfileComponent
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

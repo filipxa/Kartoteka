@@ -1,0 +1,17 @@
+<h3 style="text-align: center">List of all {{type}}</h3>
+<br>
+<div class="container-fluid" style="padding-top: 50px;padding-left: 50px;">
+    <div class="row">
+        <div class="col-md-4" style="text-align: center;align-content: center;margin-top: 20px;" *ngFor="let i of locals" (click)="profilBioskopa(i.id)">
+
+            <div class="card border-secondary mb-6" style="max-width: 20rem;">
+                <div class="card-header">{{i.naziv}}</div>
+                <div class="card-body">
+                    <h4 class="card-title">{{i.adresa}}</h4>
+                    <p class="card-text">{{i.promotivniOpis}}</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

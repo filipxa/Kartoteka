@@ -20,6 +20,7 @@ export class LokalService {
   private lokaliSerachUrl : string = "http://localhost:8080/api/lokal/search/";
   private lokalByIdUrls : string = "http://localhost:8080/api/lokal/byId/";
   private allCinemasUrl : string = "http://localhost:8080/api/lokal/cinemas";
+  private allTheatresUrl: string = "http://localhost:8080/api/lokal/theatres";
 
   searchLokali(term: string): Observable<Lokal[]> {
     if (!term.trim()) {
@@ -41,6 +42,12 @@ export class LokalService {
     );
   }
 
+  getTheatres(): Observable<Lokal[]> {
+    return this.http.get<Lokal[]>(this.allTheatresUrl).pipe(
+      catchError(this.handleError<Lokal[]>('getTheatres'))
+    );
+  }
+
   private handleError<T> (operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
 
@@ -52,5 +59,9 @@ export class LokalService {
     };
   }
 
+  updateLokal(lokal: Lokal)
+  {
+    return this.http.post<any>("http://localhost:8080/api/lokal/update", lokal, httpOptions);
+  }
 
 }

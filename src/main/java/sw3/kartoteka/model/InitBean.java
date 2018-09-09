@@ -95,6 +95,8 @@ public class InitBean {
 		Lokal lokal = new Lokal();
 		lokal.setNaziv("Cineplexxx");
 		lokal.setIsPozoriste(false);
+		lokal.setAdresa("SVetogoroooooska 33");
+		lokal.setPromotivniOpis("Also check out: Image Overlay Slide, Image Overlay Zoom, Image Overlay Title and Image Overlay Icon.");
 		lokal.setRepertoar(rep);
 		
 		lokalService.save(lokal);
@@ -102,16 +104,42 @@ public class InitBean {
 		Lokal lokal1 = new Lokal();
 		lokal1.setNaziv("Bioskop1");
 		lokal1.setIsPozoriste(false);
+		lokal1.setAdresa("SVetogoroooooska 33");
+		lokal1.setPromotivniOpis("Also check out: Image Overlay Slide, Image Overlay Zoom, Image Overlay Title and Image Overlay Icon.");
+		
 		lokal1.setRepertoar(rep);
 		
 		lokalService.save(lokal1);
 		
 		Lokal lokal2 = new Lokal();
 		lokal2.setNaziv("Bioskop2");
+		lokal2.setAdresa("SVetogoroooooska 33");
+		lokal2.setPromotivniOpis("Also check out: Image Overlay Slide, Image Overlay Zoom, Image Overlay Title and Image Overlay Icon.");
 		lokal2.setIsPozoriste(false);
 		lokal2.setRepertoar(rep);
 		
 		lokalService.save(lokal2);
+		
+		Lokal lokal4 = new Lokal();
+		lokal4.setNaziv("ARENICA");
+		lokal4.setIsPozoriste(false);
+		lokal4.setAdresa("SVetogoroooooska 33");
+		lokal4.setPromotivniOpis("Also check out: Image Overlay Slide, Image Overlay Zoom, Image Overlay Title and Image Overlay Icon.");
+		
+		lokal4.setRepertoar(rep);
+		
+		lokalService.save(lokal4);
+		
+		
+		Lokal lokal5 = new Lokal();
+		lokal5.setNaziv("ARENICA");
+		lokal5.setIsPozoriste(false);
+		lokal5.setAdresa("SVetogoroooooska 33");
+		lokal5.setPromotivniOpis("Also check out: Image Overlay Slide, Image Overlay Zoom, Image Overlay Title and Image Overlay Icon.");
+		
+		lokal5.setRepertoar(rep);
+		
+		lokalService.save(lokal5);
 		
 		Rekvizit rekvizit = new Rekvizit();
 		rekvizit.setCena(200);

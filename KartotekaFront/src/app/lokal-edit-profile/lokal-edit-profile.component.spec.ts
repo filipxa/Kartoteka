@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CinemaListComponent } from './cinema-list.component';
+import { LokalEditProfileComponent } from './lokal-edit-profile.component';
 
-describe('CinemaListComponent', () => {
-  let component: CinemaListComponent;
-  let fixture: ComponentFixture<CinemaListComponent>;
+describe('LokalEditProfileComponent', () => {
+  let component: LokalEditProfileComponent;
+  let fixture: ComponentFixture<LokalEditProfileComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CinemaListComponent ]
+      declarations: [ LokalEditProfileComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CinemaListComponent);
+    fixture = TestBed.createComponent(LokalEditProfileComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

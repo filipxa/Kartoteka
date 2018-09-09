@@ -1,0 +1,30 @@
+<h2>Edit profile</h2>
+<br>
+<br>
+<div class="container">
+    <img src="https://www.ashfordcastle.com/-/media/ttc/rch/ashford-castle/main-carousel/mobile/ash-cinema-03-1024x576.jpg" alt="Avatar" class="image" style="width:100%">
+    <div class="middle">
+        <div (click)="chooseFile()"class="text">Change</div>
+    </div>
+</div>
+<br><br>
+Name:
+<input [(ngModel)]="lokal.naziv" type="text" placeholder="Enter name">
+<br>
+<br> Adress:
+<input [(ngModel)]="lokal.adresa" type="text" placeholder="Enter adress">
+<br>
+<br> Description:
+<textarea [(ngModel)]="lokal.promotivniOpis" style="width: 100%;min-height: 100px;" type="textarea" placeholder="Enter descrition"></textarea>
+<br>
+<br>
+<button style="float: right;margin-left: 20px !important" class="btn btn-primary" (click)="submitChange()">Save</button>
+<button style="float: right;" class="btn btn-primary" (click)="cancel()">Cancel</button>
+<!-- 
+id : number;
+    isPozoriste : boolean;
+    repertoar : Repertoar;
+    naziv : string;
+    adresa : string;
+    promotivniOpis : string;
+    sala : Array<Sala>; -->
