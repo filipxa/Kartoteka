@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Lokal } from '../models/lokal';
+import { Router } from '../../../node_modules/@angular/router';
 
 @Component({
   selector: 'app-cinema-list-item',
@@ -10,9 +11,13 @@ export class CinemaListItemComponent implements OnInit {
 
   @Input() cinema : Lokal;
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
+  }
+
+  onClick(){
+    this.router.navigate(["lokal/profil/" + this.cinema.id])
   }
 
 }

@@ -18,6 +18,17 @@ import javax.persistence.OneToMany;
 @Entity
 public class Izvedba {
 	
+	public Izvedba(Integer idIzvedba, Sala sala, List<Karta> karte, Date termin, boolean isPredstava, Naslov naslov) {
+		super();
+		this.idIzvedba = idIzvedba;
+		this.sala = sala;
+		this.karte = karte;
+		this.termin = termin;
+		this.isPredstava = isPredstava;
+		this.naslov = naslov;
+	}
+	
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(unique = true, nullable = false, name = "izvedba_id")
@@ -34,15 +45,6 @@ public class Izvedba {
 	@JoinColumn(name = "sala_id", referencedColumnName = "sala_id")
 	private Sala sala;
 	
-	public Izvedba(Integer idIzvedba, Sala sala, List<Karta> karte, Date termin, boolean isPredstava, Naslov naslov) {
-		super();
-		this.idIzvedba = idIzvedba;
-		this.sala = sala;
-		this.karte = karte;
-		this.termin = termin;
-		this.isPredstava = isPredstava;
-		this.naslov = naslov;
-	}
 	@Column
 	@OneToMany
 	private List<Karta> karte;
