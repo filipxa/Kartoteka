@@ -8,5 +8,5 @@ export class Lokal{
     naziv : string;
     adresa : string;
     promotivniOpis : string;
-    sala : Sala;
+    sala : Array<Sala>;
 }

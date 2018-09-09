@@ -1,2 +1,32 @@
-<a mat-list-item routerLink="/cinemas">Cinemas</a>
+<!-- <a mat-list-item routerLink="/cinemas">Cinemas</a>
 <a mat-list-item routerLink="/theatres">Theatres  </a>
+ -->
+ <h3>Information</h3><br>
+<div class="container-fluid" style="width: 100%;padding-left: 5px;padding-right: 5px;padding-top: 100px;">
+    <div class="row">
+        <!-- 
+        <div class="col-md-2"></div> -->
+        <div class="col-md-6" style="text-align: center;">
+            <div class="kontejn">
+                <img class="image" src="../../assets/bioskop.jpg">
+                <div class="middle">
+                    <span class="pointer" (click)="forward('cinemas')">
+                        <div class="text">Cinemas</div>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 centar">
+            <div class="kontejn">
+                <img class="image" src="../../assets/pozoriste.jpg">
+                <div class="middle">
+                    <span class="pointer" (click)="forward('theatres')">
+                        <div class="text">Theatres</div>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

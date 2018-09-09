@@ -1,0 +1,57 @@
+<div class="container-fluid" style="padding-top: 50px;">
+  <div class="row">
+
+    <div class="col-md-4">
+      <img style="width: 100%" src="https://www.ashfordcastle.com/-/media/ttc/rch/ashford-castle/main-carousel/mobile/ash-cinema-03-1024x576.jpg">
+    </div>
+
+    <div class="col-md-8">
+
+      <mat-tab-group>
+
+        <mat-tab label="Home">
+          <br>
+          <h3>
+            {{lokal.naziv}}
+          </h3>
+          <br>
+          <span style="font-size: 18px;">Adress:
+            <b>{{lokal.adresa}}</b>
+          </span>
+          <br>
+          <br>
+          <p>
+            Description:
+            <b>{{lokal.promotivniOpis}}</b>
+          </p>
+
+          <button [hidden]="!admin" class="btn btn-primary" (click)="openDialog()">Edit cinema profile.</button>
+
+        </mat-tab>
+
+        <mat-tab label="Schedule">
+          <!-- 
+            *ngFor="let i of projections.izvedbe" -->
+
+          <div class="content">
+            <img (click)="details()" class="projectImg" width="150px;" src="https://m.media-amazon.com/images/M/MV5BZmU5YmMyNzAtZmExMy00YmVjLTkwYTItNmFmNTA3NTEyYzAxXkEyXkFqcGdeQXVyMjUyNDk2ODc@._V1_.jpg">
+            <div class="description">
+              <h3 style="cursor: pointer;" (click)="details()">Naziv</h3>
+              <br>
+              <h5>reziser</h5>
+              <br>
+              <p>glumci, glumci, glumci, glumci</p>
+            </div>
+          </div>
+          <button [hidden]="!admin" class="btn btn-primary">Edit schedule.</button>
+        </mat-tab>
+
+        <mat-tab label="Discounts">
+          <button [hidden]="!admin" class="btn btn-primary">Edit discount.</button>
+        </mat-tab>
+
+      </mat-tab-group>
+    </div>
+
+  </div>
+</div>

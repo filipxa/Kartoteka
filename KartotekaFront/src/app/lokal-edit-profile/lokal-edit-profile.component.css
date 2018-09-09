@@ -1,18 +1,18 @@
-.centar
+input 
 {
-    text-align: center;
+    float: right;
 }
 
-.kontejn {
+.container {
     position: relative;
-    width: 100%;
+    width: 80%;
 }
 
 .image {
   opacity: 1;
   display: block;
-  width: 100% !important;
-  height: 100% !important;
+  width: 100%;
+  height: auto;
   transition: .5s ease;
   backface-visibility: hidden;
 }
@@ -28,11 +28,11 @@
   text-align: center;
 }
 
-.kontejn:hover .image {
+.container:hover .image {
   opacity: 0.3;
 }
 
-.kontejn:hover .middle {
+.container:hover .middle {
   opacity: 1;
 }
 
@@ -40,10 +40,8 @@
   background-color: #4CAF50;
   color: white;
   font-size: 16px;
-  padding: 16px 32px;
-}
-
-.pointer
-{
-    cursor: pointer;
+  padding: 5px 5px;
+  width: 100px;
+  height: auto;
+  cursor: pointer;
 }
