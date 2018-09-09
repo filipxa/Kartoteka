@@ -27,8 +27,9 @@
       <a mat-list-item routerLink="/cinemas">Cinemas</a>
       <a *ngIf="loggedUser && (loggedUser.tip == 'korisnik') " mat-list-item routerLink="/tickets">My Tickets</a>
       <a *ngIf="loggedUser && (loggedUser.tip == 'korisnik') " mat-list-item routerLink="/fanzone">Fan Zone</a>
+      <a *ngIf="loggedUser && (loggedUser.tip == 'korisnik') " mat-list-item routerLink="/addOglas">Add auction</a>
       <a *ngIf="loggedUser && (loggedUser.tip == 'fan') " mat-list-item routerLink="/addRekvizit">Add Item</a>
-      <a *ngIf="loggedUser && (loggedUser.tip == 'fan') " mat-list-item routerLink="/rekvizitAllEdit">Edit Item</a>
+      <a *ngIf="loggedUser && (loggedUser.tip == 'fan') " mat-list-item routerLink="/rekvizitAllEdit">Edit Items</a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content class="lowerContainer" >
@@ -62,8 +63,8 @@
 
           <a mat-list-item routerLink = "/profile">Profile</a>
           <a mat-list-item routerLink = "/friends">Friends</a>
-          <a *ngIf="userService.loggedUser && (userService.loggedUser.tip == 'fan') " mat-list-item routerLink = "/editAdminFan">Edit profile</a>
-          <a mat-list-item (click)="userService.logOut()" > Log out</a>
+          <a *ngIf="loggedUser && (loggedUser.tip == 'fan') " mat-list-item routerLink = "/editAdminFan">Edit profile</a>
+          <a mat-list-item (click)="logOut()" > Log out</a>
         </mat-nav-list>
       </mat-sidenav>
       <div class="router-out">

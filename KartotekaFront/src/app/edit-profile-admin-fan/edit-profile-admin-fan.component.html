@@ -12,7 +12,7 @@
     <input #fName matInput placeholder="First name" 
     [formControl]="fNameFormControl"
     (ngModelChange)="valuechangeName($event)"
-    value="{{userService.loggedUser.name}}"
+    value="{{oldUser.name}}"
     [errorStateMatcher]="matcher">
     <mat-error *ngIf="fNameFormControl.hasError('required')">
       first name is required
@@ -24,7 +24,7 @@
   <input  #lName matInput placeholder="Last name" 
   [formControl]="lNameFormControl"
   (ngModelChange)="valuechangeLName($event)"
-  value="{{userService.loggedUser.lName}}"
+  value="{{oldUser.lName}}"
   [errorStateMatcher]="matcher">
   <mat-error *ngIf="lNameFormControl.hasError('required')">
     last name is required
@@ -58,7 +58,7 @@
       <input #tel matInput placeholder="Tel" type="tel" 
       [formControl]="telFormControl"
       (ngModelChange)="valuechangeTel($event)"
-      value="{{userService.loggedUser.tel}}"
+      value="{{oldUser.tel}}"
       [errorStateMatcher]="matcher">
       <mat-error *ngIf="telFormControl.hasError('regexp')">
         telphone can only consists of digits
@@ -70,7 +70,7 @@
       <td><mat-form-field >
         <input #city matInput placeholder="City" type="text" 
         (ngModelChange)="valuechangeAdresa($event)"
-        value="{{userService.loggedUser.adresa}}"
+        value="{{oldUser.adresa}}"
         [formControl]="adresaFormControl" >
       </mat-form-field></td>
     </tr>

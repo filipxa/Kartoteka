@@ -16,8 +16,6 @@ import { map } from 'rxjs/internal/operators/map';
   styleUrls: ['./add-rekvizit.component.css']
 })
 export class AddRekvizitComponent implements OnInit {
-  
-
   constructor(private uploadService: UploadService,
     private rekvizitService: RekvizitService,
     private userSrvice: UserService,
@@ -25,16 +23,11 @@ export class AddRekvizitComponent implements OnInit {
     private http:HttpClient,
     private fb: FormBuilder) { }
 
-
   file: File;
-  
   form: FormGroup;
 
   ngOnInit() {
   }
-
-
-
 
   valuechangeIMG(event) {
     let fileList: FileList = event.target.files;
@@ -50,8 +43,6 @@ export class AddRekvizitComponent implements OnInit {
       file_upload: null
     });
   }
-
-
 
   NameFormControl = new FormControl('', [
     Validators.required

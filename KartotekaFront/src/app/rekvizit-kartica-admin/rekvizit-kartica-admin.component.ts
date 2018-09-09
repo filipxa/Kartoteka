@@ -12,7 +12,8 @@ import { Router } from '@angular/router'
 export class RekvizitKarticaAdminComponent implements OnInit {
   @Input() rekvizit: Rekvizit;
 
-  constructor(private rekvizitService: RekvizitService, private userSrvice: UserService,private router: Router) { }
+  constructor(private rekvizitService: RekvizitService, 
+    private userSrvice: UserService,private router: Router) { }
   
   imagePath: String;
   altPhoto: String;

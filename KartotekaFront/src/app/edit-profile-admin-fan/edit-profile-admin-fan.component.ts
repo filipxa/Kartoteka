@@ -30,17 +30,17 @@ export class EditProfileAdminFanComponent implements OnInit {
   }
 
   constructor(private userService: UserService, private router: Router, private snackBar: MatSnackBar) { }
-
+  oldUser: User = this.userService.getUserLogged();
   user: User = {
-    id: this.userService.loggedUser.id,
-    email: this.userService.loggedUser.email,
-    name: this.userService.loggedUser.name,
-    lName: this.userService.loggedUser.lName,
-    password: this.userService.loggedUser.password,
-    tip: this.userService.loggedUser.tip,
+    id: this.oldUser.id,
+    email: this.oldUser.email,
+    name: this.oldUser.name,
+    lName: this.oldUser.lName,
+    password: this.oldUser.password,
+    tip: this.oldUser.tip,
     activated: false,
-    tel: this.userService.loggedUser.tel,
-    adresa: this.userService.loggedUser.adresa
+    tel: this.oldUser.tel,
+    adresa: this.oldUser.adresa
   };
 
 
@@ -70,6 +70,7 @@ export class EditProfileAdminFanComponent implements OnInit {
   valuechangeName(newValue) {
     this.user.name = newValue;
     console.log(newValue);
+    
   }
   valuechangeLName(newValue) {
     this.user.lName = newValue;
@@ -114,8 +115,7 @@ export class EditProfileAdminFanComponent implements OnInit {
   matcher = new MyErrorStateMatcher();
 
   ngOnInit() {
-    if (this.userService.loggedUser == null) {
-      ;
+    if (this.oldUser == null) {
       this.router.navigate(["/"]);
     }
 

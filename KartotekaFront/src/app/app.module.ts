@@ -30,6 +30,12 @@ import { CinemaListItemComponent } from './cinema-list-item/cinema-list-item.com
 import { HomePageVisitorComponent } from './home-page-visitor/home-page-visitor.component';
 import { TheatreListComponent } from './theatre-list/theatre-list.component';
 import { EditProfileAdminFanComponent } from './edit-profile-admin-fan/edit-profile-admin-fan.component';
+import { OglasAddComponent } from './oglas-add/oglas-add.component';
+import { OglasKaticaAdminComponent } from './oglas-katica-admin/oglas-katica-admin.component';
+import { OglasKarticaComponent } from './oglas-kartica/oglas-kartica.component';
+import { OglasKarticaEditComponent } from './oglas-kartica-edit/oglas-kartica-edit.component';
+import { OglasEditovanjeComponent } from './oglas-editovanje/oglas-editovanje.component';
+
 
 
 const appRoutes: Routes = [
@@ -45,7 +51,9 @@ const appRoutes: Routes = [
   { path: 'rekvizitEdit', component: RekvizitEditAdminComponent },
   { path: 'editAdminFan', component: EditProfileAdminFanComponent },
   { path: 'cinemas', component: CinemaListComponent},
-  { path: 'theatres', component: TheatreListComponent}
+  { path: 'addOglas', component: OglasAddComponent},
+  { path: 'theatres', component: TheatreListComponent},
+  { path: 'ogalsEdit/:id', component: OglasEditovanjeComponent}
 ];
 
 @NgModule({
@@ -68,8 +76,13 @@ const appRoutes: Routes = [
     CinemaListComponent,
     CinemaListItemComponent,
     HomePageVisitorComponent,
-    TheatreListComponent
-    EditProfileAdminFanComponent
+    TheatreListComponent,
+    EditProfileAdminFanComponent,
+    OglasAddComponent,
+    OglasKaticaAdminComponent,
+    OglasKarticaComponent,
+    OglasKarticaEditComponent,
+    OglasEditovanjeComponent
   ],
   imports: [
     BrowserModule,

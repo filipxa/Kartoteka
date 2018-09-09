@@ -35,6 +35,12 @@ export class UserService {
     }
   }
 
+  public getUserLogged(): User{
+    return UserService.loggedUser;
+  }
+
+  
+
   private saveLoggedUser(data :Observable<User>){
     data.subscribe(result => {
        UserService.loggedUser = result;
@@ -52,7 +58,8 @@ export class UserService {
 
 
   public resetLoggedUser(user:User){
-    this.loggedUser = user;
+    //this.loggedUser = user;
+    
   }
 
   logIn(email: string, password: string): void {
