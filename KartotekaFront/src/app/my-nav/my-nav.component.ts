@@ -11,18 +11,13 @@ import { User } from '../models/user'
   styleUrls: ['./my-nav.component.css']
 })
 export class MyNavComponent {
-  loggedUser : User;
-
-    getLoggedUser() : void {
-     this.userService.getLoggedUser().subscribe(user=> this.loggedUser=user);
-      
-    }
-
-
     ngOnInit() {
-       this.getLoggedUser();
+           
     }
-
   constructor(private breakpointObserver: BreakpointObserver, private userService : UserService) {}
+
+  logOut(){
+    this.userService.logOut();
+  }
   
   }

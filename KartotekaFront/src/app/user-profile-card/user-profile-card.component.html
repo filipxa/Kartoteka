@@ -2,19 +2,19 @@
 <mat-card class="example-card" *ngIf="loggedUser">
     <mat-card-header>
       <div mat-card-avatar class="example-header-image"></div>
-      <mat-card-title>{{loggedUser.name}} {{loggedUser.lName}}</mat-card-title>
-      <mat-card-subtitle>{{loggedUser.tip}}</mat-card-subtitle>
+      <mat-card-title>{{userService.loggedUser.name}} {{userService.loggedUser.lName}}</mat-card-title>
+      <mat-card-subtitle>{{userService.loggedUser.tip}}</mat-card-subtitle>
     </mat-card-header>
    
     <mat-card-content>
         <p>
-            {{loggedUser.email}}
+            {{userService.loggedUser.email}}
         </p>
       <p>
-        +381{{loggedUser.tel}}
+        +381{{userService.loggedUser.tel}}
       </p>
       <p>
-          {{loggedUser.adresa}}
+          {{userService.loggedUser.adresa}}
         </p>
     </mat-card-content>
   </mat-card>

@@ -67,7 +67,7 @@ export class LokalProfileComponent implements OnInit {
   }
 
   isAdmin() {
-    this.userService.getLoggedUser().subscribe(data => {
+    this.userService.getLoggedUserAPI().subscribe(data => {
       if (data.tip === "fan")
         this.admin = true;
       else

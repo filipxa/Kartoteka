@@ -30,7 +30,7 @@ export class EditProfileAdminFanComponent implements OnInit {
   }
 
   constructor(private userService: UserService, private router: Router, private snackBar: MatSnackBar) { }
-  oldUser: User = this.userService.getUserLogged();
+  oldUser: User = this.userService.getLoggedIn();
   user: User = {
     id: this.oldUser.id,
     email: this.oldUser.email,
@@ -107,7 +107,6 @@ export class EditProfileAdminFanComponent implements OnInit {
       
       this.user.activated = true;
       this.userService.register(this.user);
-      this.userService.resetLoggedUser(this.user);
     }
 
   }

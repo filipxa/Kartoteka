@@ -91,7 +91,7 @@ export class OglasAddComponent implements OnInit {
         datum: this.milisecDate,
         prodat: false,
         odobren:false,
-        postavioID: this.userSrvice.getUserLogged().id
+        postavioID: this.userSrvice.getLoggedIn().id
       };
       this.oglasService.addOglas(oglas,this.file);
     }

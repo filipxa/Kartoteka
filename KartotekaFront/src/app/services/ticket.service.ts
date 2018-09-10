@@ -41,7 +41,7 @@ export class TicketService {
   }
 
   getLoggedUserTickets() : Observable<Array<Karta>>{
-   let loggedUser = this.userService.getLoggedUser();
+   let loggedUser = this.userService.getLoggedIn();
    
     return this.http.get<Array<Karta>>(getLoggedUserTicketURL , httpOptions);
   }
