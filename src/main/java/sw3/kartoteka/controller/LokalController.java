@@ -61,5 +61,17 @@ public class LokalController {
 		return new ResponseEntity<>(cinemas, HttpStatus.OK);
 	}
 	
+	@GetMapping(value = "theatres")
+	public ResponseEntity<List<Lokal>>getTheatres(){
+		List<Lokal> all = lokalService.findAll();
+		List<Lokal> theatres = new ArrayList<>();
+		for (Lokal lokal : all) {
+			if(!lokal.isPozoriste()) {
+				theatres.add(lokal);
+			}
+		}
+		return new ResponseEntity<>(theatres, HttpStatus.OK);
+	}
+	
 
 }
