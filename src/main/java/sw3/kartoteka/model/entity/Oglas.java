@@ -13,7 +13,7 @@ import javax.persistence.ManyToOne;
 
 @Entity
 public class Oglas {
-	@Column(nullable = false, unique = true)
+	@Column(nullable = false, unique = true,name = "oglas_id")
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
 	private Integer idOglasa;

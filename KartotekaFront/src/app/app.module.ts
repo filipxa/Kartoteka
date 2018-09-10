@@ -85,6 +85,7 @@ const appRoutes: Routes = [
     OglasKarticaComponent,
     OglasKarticaEditComponent,
     OglasEditovanjeComponent,
+    TheatreListComponent,
     LokalProfileComponent,
     RepertoarBioskopComponent,
     LokalEditProfileComponent
