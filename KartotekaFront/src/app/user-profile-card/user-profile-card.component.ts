@@ -12,7 +12,7 @@ export class UserProfileCardComponent implements OnInit {
   constructor(private userService : UserService) { }
 
   ngOnInit() {
-    this.userService.getLoggedUser().subscribe(user=> this.loggedUser=user);
+    this.loggedUser=this.userService.getLoggedIn();
   }
 
 }

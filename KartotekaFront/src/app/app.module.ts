@@ -32,6 +32,13 @@ import { LokalProfileComponent } from './lokal-profile/lokal-profile.component';
 import { RepertoarBioskopComponent } from './repertoar-bioskop/repertoar-bioskop.component';
 import { LokalEditProfileComponent } from './lokal-edit-profile/lokal-edit-profile.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { EditProfileAdminFanComponent } from './edit-profile-admin-fan/edit-profile-admin-fan.component';
+import { OglasAddComponent } from './oglas-add/oglas-add.component';
+import { OglasKaticaAdminComponent } from './oglas-katica-admin/oglas-katica-admin.component';
+import { OglasKarticaComponent } from './oglas-kartica/oglas-kartica.component';
+import { OglasKarticaEditComponent } from './oglas-kartica-edit/oglas-kartica-edit.component';
+import { OglasEditovanjeComponent } from './oglas-editovanje/oglas-editovanje.component';
+
 
 const appRoutes: Routes = [
 
@@ -44,6 +51,10 @@ const appRoutes: Routes = [
   { path: 'addRekvizit', component: AddRekvizitComponent },
   { path: 'rekvizitAllEdit', component: RekvizitListaAdminComponent },
   { path: 'rekvizitEdit', component: RekvizitEditAdminComponent },
+  { path: 'editAdminFan', component: EditProfileAdminFanComponent },
+  { path: 'addOglas', component: OglasAddComponent},
+  { path: 'theatres', component: TheatreListComponent},
+  { path: 'ogalsEdit/:id', component: OglasEditovanjeComponent},
   { path: 'lokal/:type', component: LokalListComponent},
   { path: 'lokal/profil/:id', component: LokalProfileComponent}
 ];
@@ -67,6 +78,13 @@ const appRoutes: Routes = [
     RekvizitEditAdminComponent,
     LokalListComponent,
     HomePageVisitorComponent,
+    TheatreListComponent,
+    EditProfileAdminFanComponent,
+    OglasAddComponent,
+    OglasKaticaAdminComponent,
+    OglasKarticaComponent,
+    OglasKarticaEditComponent,
+    OglasEditovanjeComponent,
     TheatreListComponent,
     LokalProfileComponent,
     RepertoarBioskopComponent,

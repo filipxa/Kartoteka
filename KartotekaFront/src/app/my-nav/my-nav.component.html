@@ -25,10 +25,11 @@
         <a mat-list-item routerLink="/">Home</a>
       <a mat-list-item routerLink="/theatres">Theatres</a>
       <a mat-list-item routerLink="/cinemas">Cinemas</a>
-      <a *ngIf="loggedUser && (loggedUser.tip == 'korisnik') " mat-list-item routerLink="/tickets">My Tickets</a>
-      <a *ngIf="loggedUser && (loggedUser.tip == 'korisnik') " mat-list-item routerLink="/fanzone">Fan Zone</a>
-      <a *ngIf="loggedUser && (loggedUser.tip == 'fan') " mat-list-item routerLink="/addRekvizit">Add Item</a>
-      <a *ngIf="loggedUser && (loggedUser.tip == 'fan') " mat-list-item routerLink="/rekvizitAllEdit">Edit Item</a>
+      <a *ngIf="this.userService.getLoggedIn() && (this.userService.getLoggedIn().tip == 'korisnik') " mat-list-item routerLink="/tickets">My Tickets</a>
+      <a *ngIf="this.userService.getLoggedIn() && (this.userService.getLoggedIn().tip == 'korisnik') " mat-list-item routerLink="/fanzone">Fan Zone</a>
+      <a *ngIf="this.userService.getLoggedIn() && (this.userService.getLoggedIn().tip == 'korisnik') " mat-list-item routerLink="/addOglas">Add auction</a>
+      <a *ngIf="this.userService.getLoggedIn() && (this.userService.getLoggedIn().tip == 'fan') " mat-list-item routerLink="/addRekvizit">Add Item</a>
+      <a *ngIf="this.userService.getLoggedIn() && (this.userService.getLoggedIn().tip == 'fan') " mat-list-item routerLink="/rekvizitAllEdit">Edit Items</a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content class="lowerContainer" >
@@ -43,9 +44,9 @@
         <mat-icon aria-label="Side nav toggle icon\">menu</mat-icon>
       </button>
       <span class="example-spacer"></span>
-      <app-login-small *ngIf="!loggedUser" ></app-login-small>
+      <app-login-small *ngIf="!this.userService.getLoggedIn()" ></app-login-small>
       
-      <button *ngIf="loggedUser" mat-button class="user-button" (click)="UserDrawer.toggle()" >{{loggedUser.name}}</button>
+      <button *ngIf="this.userService.getLoggedIn()" mat-button class="user-button" (click)="UserDrawer.toggle()" >{{this.userService.getLoggedIn().name}}</button>
       
     </mat-toolbar>
     
@@ -57,12 +58,13 @@
         [attr.role]= "navigation"
         mode="side"
         fixedTopGap=64
-        [opened]="loggedUser">
+        [opened]="this.userService.getLoggedIn()">
         <mat-nav-list>
 
           <a mat-list-item routerLink = "/profile">Profile</a>
           <a mat-list-item routerLink = "/friends">Friends</a>
-          <a mat-list-item (click)="userService.logOut()" > Log out</a>
+          <a *ngIf="this.userService.getLoggedIn() && (this.userService.getLoggedIn().tip == 'fan') " mat-list-item routerLink = "/editAdminFan">Edit profile</a>
+          <a mat-list-item (click)="logOut()" > Log out</a>
         </mat-nav-list>
       </mat-sidenav>
       <div class="router-out">

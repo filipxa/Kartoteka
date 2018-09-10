@@ -23,27 +23,31 @@ const getFriendsUrl: string = "http://localhost:8080/api/user/friends/";
 })
 export class UserService {
 
-  private static loggedUser: User;
+  private loggedUser: User;
   constructor(private http: HttpClient, private snackBar: MatSnackBar, private router: Router) { }
 
-  public getLoggedUser(): Observable<User> {
-    if (!UserService.loggedUser) {
-      return this.http.get<User>(loginURL, httpOptions).pipe(
-        this.saveLoggedUser);
+  public getLoggedUserAPI(): Observable<User> {
+    if (!this.loggedUser) {
+      return this.http.get<User>(loginURL, httpOptions)
+      .pipe(
+        (data) =>
+        {
+          data.subscribe((user)=> this.loggedUser=user);
+           return data;
+        }
+      );
     } else {
-      return of( UserService.loggedUser);
+      return of( this.loggedUser);
     }
   }
 
-  private saveLoggedUser(data :Observable<User>){
-    data.subscribe(result => {
-       UserService.loggedUser = result;
-    });
-    return data;
+  public getLoggedIn(): User{
+    return this.loggedUser;
   }
 
+
   public redirectIfNotLogged (adress : String){
-    this.getLoggedUser().subscribe(data=>{
+    this.getLoggedUserAPI().subscribe(data=>{
      if(data==null){
       this.router.navigate(["/"+adress])
       } 
@@ -58,7 +62,7 @@ export class UserService {
 
     this.http.post<User>(loginURL, sendData, httpOptions).subscribe(result => {
       if (result != undefined) {
-        UserService.loggedUser = result;
+        this.loggedUser = result;
         this.router.navigate(["/"]);
       } else {
         this.snackBar.open("Wrong email or password !", "", {
@@ -74,15 +78,22 @@ export class UserService {
   }
 
   public getFriends(): Observable<Array<User>> {
-    console.log(UserService.loggedUser);
-    return this.http.get<Array<User>>(getFriendsUrl + UserService.loggedUser.email, httpOptions);
+    return this.http.get<Array<User>>(getFriendsUrl + this.loggedUser.email, httpOptions);
   }
 
 
   logOut(): void {
-    UserService.loggedUser = null;
-    sessionStorage.removeItem("loggedUser");
-    this.router.navigate(["/"]);
+    this.loggedUser=null;
+   this.http.delete(loginURL,httpOptions).subscribe(
+     result => {
+      this.router.navigate(["/"]);
+     },
+     error=>{
+      this.snackBar.open("Logging out faild", "", {
+        duration: 3000,
+      });
+     }
+   )
 
   }
 

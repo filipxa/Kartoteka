@@ -1,0 +1,18 @@
+
+<mat-card class="example-card" *ngIf="!oglas.odobren && !oglas.rezervisano" >
+    <mat-card-header>
+      <mat-card-title>{{oglas.naziv}}</mat-card-title>
+      <mat-card-subtitle>Vazi do: {{oglas.datum}}</mat-card-subtitle>
+    </mat-card-header>
+    <img mat-card-image [src]="imagePath" onerror= "this.src = 'http://localhost:8080/api/downloadFile/rekviziti/alt'" alt="No Photo" class="img">
+    <mat-card-content>
+      <p>
+          {{oglas.opis}}
+      </p>
+    </mat-card-content>
+    <mat-card-actions>
+      <button type="button"  mat-button class="user-button" (click)="acceptOglas(oglas.idOglasa)" >Accept</button>
+      <button type="button"  mat-button class="user-button" (click)="deleteOglas()" >Delete</button>
+    </mat-card-actions>
+  </mat-card>
+  

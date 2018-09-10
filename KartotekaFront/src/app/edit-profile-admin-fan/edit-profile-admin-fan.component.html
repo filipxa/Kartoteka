@@ -1,0 +1,87 @@
+<div class="main">
+  <mat-card class="example-card">
+      <mat-card-header>
+          <div mat-card-avatar class="example-header-image"></div>
+          <mat-card-title>Edit profile form</mat-card-title>
+        </mat-card-header>
+
+
+      <form class="example-form" >
+<table class="table" cellspacing="0"><tr>
+  <td><mat-form-field class="example-full-width">
+    <input #fName matInput placeholder="First name" 
+    [formControl]="fNameFormControl"
+    (ngModelChange)="valuechangeName($event)"
+    value="{{oldUser.name}}"
+    [errorStateMatcher]="matcher">
+    <mat-error *ngIf="fNameFormControl.hasError('required')">
+      first name is required
+    </mat-error>
+  </mat-form-field></td>
+  
+</tr>
+<tr><td><mat-form-field class="example-full-width">
+  <input  #lName matInput placeholder="Last name" 
+  [formControl]="lNameFormControl"
+  (ngModelChange)="valuechangeLName($event)"
+  value="{{oldUser.lName}}"
+  [errorStateMatcher]="matcher">
+  <mat-error *ngIf="lNameFormControl.hasError('required')">
+    last name is required
+  </mat-error>
+</mat-form-field></td></tr>
+
+<tr>
+  <td> <mat-form-field class="example-full-width">
+    <input #password class="input" matInput placeholder="Password" type="password" 
+    [formControl]="passwordFormControl"
+    [errorStateMatcher]="matcher">
+    <mat-error *ngIf="passwordFormControl.hasError('required')">
+      password is required
+    </mat-error>
+ </mat-form-field></td>
+</tr>
+<tr>
+  <td><mat-form-field class="example-full-width" >
+    <input #password2 matInput placeholder="Repeat password" type="password" 
+    [formControl]="passwordRFormControl"
+    [errorStateMatcher]="matcher">
+    <mat-error *ngIf="passwordRFormControl.hasError('required')">
+      password is required
+    </mat-error>
+  </mat-form-field></td>
+</tr>
+<tr>
+    
+    <td><mat-form-field >
+        <span matPrefix>+381 &nbsp;</span>
+      <input #tel matInput placeholder="Tel" type="tel" 
+      [formControl]="telFormControl"
+      (ngModelChange)="valuechangeTel($event)"
+      value="{{oldUser.tel}}"
+      [errorStateMatcher]="matcher">
+      <mat-error *ngIf="telFormControl.hasError('regexp')">
+        telphone can only consists of digits
+      </mat-error>
+      
+    </mat-form-field></td>
+  </tr>
+  <tr>
+      <td><mat-form-field >
+        <input #city matInput placeholder="City" type="text" 
+        (ngModelChange)="valuechangeAdresa($event)"
+        value="{{oldUser.adresa}}"
+        [formControl]="adresaFormControl" >
+      </mat-form-field></td>
+    </tr>
+<tr>
+
+  <td>
+    <button class="button" type="button"  mat-button  (click)="onSaveClick()" > Save</button>
+  </td>
+</tr>
+</table>
+</form>
+</mat-card>  
+
+</div>

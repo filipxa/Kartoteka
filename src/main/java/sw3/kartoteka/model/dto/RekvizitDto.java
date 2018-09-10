@@ -11,11 +11,10 @@ public class RekvizitDto {
 	private String opis;
 
 	private int cena;
-	
+
 	private boolean rezervisano;
 
-	
-	public RekvizitDto(Integer idRekvizita, String naziv, String opis, int cena,boolean rezervisano) {
+	public RekvizitDto(Integer idRekvizita, String naziv, String opis, int cena, boolean rezervisano) {
 		super();
 		this.idRekvizita = idRekvizita;
 		this.naziv = naziv;
@@ -23,19 +22,20 @@ public class RekvizitDto {
 		this.cena = cena;
 		this.rezervisano = rezervisano;
 	}
-	
-	public RekvizitDto() {}
-	
+
+	public RekvizitDto() {
+	}
+
 	public RekvizitDto(Rekvizit rekvizit) {
 		this.idRekvizita = rekvizit.getIdRekvizita();
 		this.naziv = rekvizit.getNaziv();
 		this.opis = rekvizit.getOpis();
 		this.cena = rekvizit.getCena();
-		if(rekvizit.getKorisnik() == null) { 
+		if (rekvizit.getKorisnik() == null) {
 			this.rezervisano = false;
+		} else {
+			this.rezervisano = true;
 		}
-		else { 
-			this.rezervisano = true;}
 	}
 
 	public Integer getIdRekvizita() {
@@ -77,7 +77,5 @@ public class RekvizitDto {
 	public void setRezervisano(boolean rezervisano) {
 		this.rezervisano = rezervisano;
 	}
-	
-	
 
 }
