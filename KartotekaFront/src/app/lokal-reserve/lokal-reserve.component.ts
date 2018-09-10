@@ -36,6 +36,8 @@ export class LokalReserveComponent implements OnInit {
   formGroups: Array<FormGroup> = new Array<FormGroup>();
   seats: Array<Array<Sediste>> = new Array<Array<Sediste>>();
   seatsForReservation: Array<Sediste> = new Array<Sediste>();
+  
+  izvedba: Izvedba;
 
   friends: Array<User> = new Array<User>();
 
@@ -104,8 +106,10 @@ export class LokalReserveComponent implements OnInit {
   }
 
   getSeats(): void {
-    let izvedba = this.timeFormGroup.get("timeCtrl").value;
-    this.seats = Sediste.getSeats(izvedba);
+    this.izvedba = this.timeFormGroup.get("timeCtrl").value;
+    this.ticketService.getIzvedbaTickets(this.izvedba.idIzvedba).subscribe(data=>{
+      this.seats=Sediste.getSeats(this.izvedba,data);
+    });
     this.seatsForReservation = new Array<Sediste>();
 
   }
@@ -114,7 +118,9 @@ export class LokalReserveComponent implements OnInit {
 
     const id = +this.route.snapshot.paramMap.get('id');
     this.lokalService.getLokal(id)
-      .subscribe(lokal => this.initLokal(lokal));
+      .subscribe(lokal => {
+        this.initLokal(lokal);
+      });
   }
 
   getFriends(): void {

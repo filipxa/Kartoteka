@@ -15,6 +15,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Izvedba {
 	
@@ -29,18 +31,14 @@ public class Izvedba {
 	}
 	
 	
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(unique = true, nullable = false, name = "izvedba_id")
 	private Integer idIzvedba;
 	
 	
-	public Integer getIdIzvedba() {
-		return idIzvedba;
-	}
-	public void setIdIzvedba(Integer idIzvedba) {
-		this.idIzvedba = idIzvedba;
-	}
+
 	@ManyToOne
 	@JoinColumn(name = "sala_id", referencedColumnName = "sala_id")
 	private Sala sala;
@@ -49,13 +47,7 @@ public class Izvedba {
 	@OneToMany
 	private List<Karta> karte;
 	
-	
-	public List<Karta> getKarte() {
-		return karte;
-	}
-	public void setKarte(List<Karta> karte) {
-		this.karte = karte;
-	}
+
 	@Column
 	private Date termin;
 	
@@ -68,19 +60,32 @@ public class Izvedba {
 	private Naslov naslov;
 	
 
+	
+	
+	public Izvedba() {
+		
+	}
+	
+	@JsonIgnore
+	public List<Karta> getKarte() {
+		return karte;
+	}
+	public void setKarte(List<Karta> karte) {
+		this.karte = karte;
+	}
+	
+	public Integer getIdIzvedba() {
+		return idIzvedba;
+	}
+	public void setIdIzvedba(Integer idIzvedba) {
+		this.idIzvedba = idIzvedba;
+	}
 	public boolean isPredstava() {
 		return isPredstava;
 	}
 	public void setPredstava(boolean isFilm) {
 		this.isPredstava = isFilm;
 	}
-	
-	public Izvedba() {
-		
-	}
-	
-
-
 
 	
 	public Sala getSala() {

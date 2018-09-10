@@ -5,11 +5,12 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.websocket.server.PathParam;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-
+import org.springframework.web.HttpMediaTypeException;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,12 +21,16 @@ import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 
 import sw3.kartoteka.model.dto.UserDTO;
+import sw3.kartoteka.model.entity.Izvedba;
 import sw3.kartoteka.model.entity.Karta;
 import sw3.kartoteka.model.entity.Korisnik;
+import sw3.kartoteka.model.entity.Lokal;
 import sw3.kartoteka.model.entity.Sediste;
 import sw3.kartoteka.repository.KorisnikRepositorijum;
+import sw3.kartoteka.services.IzvedbaService;
 import sw3.kartoteka.services.KartaService;
 import sw3.kartoteka.services.KorisnikService;
+import sw3.kartoteka.services.LokalService;
 
 @RestController
 @RequestMapping(value = "/api/karta")
@@ -35,6 +40,9 @@ public class KartaController {
 	
 	@Autowired
 	KorisnikService korisnikService;
+	
+	@Autowired 
+	IzvedbaService izvedbaService;
 	
 
 
@@ -47,7 +55,7 @@ public class KartaController {
 	}
 	
 	@GetMapping(value = "/user")
-	public ResponseEntity<List<Karta>> getKarte(@PathVariable("id") Integer id, HttpSession session){
+	public ResponseEntity<List<Karta>> getKarte( HttpSession session){
 		Korisnik korisnik = (Korisnik)session.getAttribute("logged");
 		
 		try {
@@ -85,6 +93,19 @@ public class KartaController {
 			return new ResponseEntity<Void>(HttpStatus.OK);
 		}catch(Exception e){
 			return new ResponseEntity<Void>(HttpStatus.ACCEPTED);
+		}
+		
+	}
+	
+	@GetMapping(value="/izvedba/{id}")
+	public ResponseEntity<?> getKarteByLokal(@PathVariable("id") Integer id){
+		try {
+			Izvedba izvedba = izvedbaService.findOne(id);
+			List<Karta> karte = kartaService.findByIzvedba(izvedba);
+			return new ResponseEntity<List<Karta>>(karte, HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return ResponseEntity.badRequest().build();
 		}
 		
 	}
@@ -145,6 +166,11 @@ public class KartaController {
 		public void setSeats(List<Sediste> seats) {
 			this.seats = seats;
 		}
+		
+	}
+	
+	
+	private static class KartaDTO {
 		
 	}
 	

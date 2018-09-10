@@ -10,6 +10,7 @@ export class Karta{
     popust : number;
     cena : number;
     tip : string;
+    lokalNaziv : string;
     constructor(){
 
     } 

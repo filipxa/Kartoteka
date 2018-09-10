@@ -10,6 +10,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Transient;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Karta {
 	
@@ -23,7 +25,6 @@ public class Karta {
 	}
 	
 	@ManyToOne
-	@Transient
 	@JoinColumn(name = "izvedba_id", referencedColumnName = "izvedba_id")
 	private Izvedba izvedba;
 	
@@ -47,6 +48,10 @@ public class Karta {
 
 	public Izvedba getIzvedba() {
 		return izvedba;
+	}
+	
+	public String getLokalNaziv() {
+		return izvedba.getSala().getLokal().getNaziv();
 	}
 
 	public void setIzvedba(Izvedba izvedba) {

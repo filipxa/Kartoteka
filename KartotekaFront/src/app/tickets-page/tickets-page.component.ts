@@ -12,6 +12,7 @@ import { UserService } from '../services/user.service';
 export class TicketsPageComponent implements OnInit {
   tickets : Karta[];
   cancelTickets : Karta[];
+  kartaName : Map<Karta, String>;
   constructor(private ticketService : TicketService,  private router: Router,private userService : UserService ) { }
 
 
@@ -48,13 +49,12 @@ export class TicketsPageComponent implements OnInit {
   }
 
   kartaLokalName(ticket : Karta) : string  {
-    return Karta.getLokalName(ticket);
+    return ticket.lokalNaziv;
   }
 
   getTickets() : void{
     this.ticketService.getLoggedUserTickets().subscribe(tickets => {
       this.tickets=tickets;
-     
     } );
   }
 

@@ -5,8 +5,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import sw3.kartoteka.model.entity.Izvedba;
 import sw3.kartoteka.model.entity.Karta;
 import sw3.kartoteka.model.entity.Korisnik;
+import sw3.kartoteka.model.entity.Lokal;
 import sw3.kartoteka.model.entity.Sediste;
 import sw3.kartoteka.repository.KartaRepository;
 
@@ -22,8 +24,8 @@ public class KartaService {
 
 
 	public Karta findOne(Integer id) {
-		// TODO Auto-generated method stub
-		return kartaRepository.getOne(id);
+		
+		return kartaRepository.findById(id).get();
 	}
 
 
@@ -39,6 +41,10 @@ public class KartaService {
 	
 	public List<Karta> findByKorisnik(Korisnik korisnik) {
 		return kartaRepository.findByKorisnik(korisnik);
+	}
+	
+	public List<Karta> findByIzvedba(Izvedba izvedba){
+		return kartaRepository.findByIzvedba(izvedba);
 	}
 	
 	public Karta findbySediste(Sediste sediste) {

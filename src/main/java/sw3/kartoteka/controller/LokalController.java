@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.thymeleaf.templateparser.markup.HTMLTemplateParser;
 
+import sw3.kartoteka.model.entity.Karta;
 import sw3.kartoteka.model.entity.Lokal;
+import sw3.kartoteka.services.KartaService;
 import sw3.kartoteka.services.LokalService;
 
 
@@ -23,6 +25,9 @@ public class LokalController {
 	
 	@Autowired
 	LokalService lokalService;
+	
+	@Autowired
+	KartaService kartaService;
 	
 	
 	@GetMapping(value = "search/{term}")
@@ -47,6 +52,12 @@ public class LokalController {
 		}
 		
 		
+	}
+	
+	@GetMapping(value="karta/{id}")
+	public ResponseEntity<Lokal> getLokalByKartaId(@PathVariable("id") Integer id){
+		Karta karta = kartaService.findOne(id);
+		return new ResponseEntity<Lokal>(karta.getIzvedba().getSala().getLokal(),HttpStatus.OK);
 	}
 	
 	@GetMapping(value = "cinemas")
