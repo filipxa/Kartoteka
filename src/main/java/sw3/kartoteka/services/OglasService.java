@@ -6,9 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import sw3.kartoteka.model.entity.Oglas;
-import sw3.kartoteka.model.entity.Rekvizit;
 import sw3.kartoteka.repository.OglasRepository;
-import sw3.kartoteka.repository.RekvizitRepository;
+
 @Service
 public class OglasService {
 	@Autowired

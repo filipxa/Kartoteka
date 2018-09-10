@@ -12,9 +12,10 @@ import javax.persistence.ManyToOne;
 @Entity
 public class Rekvizit {
 	
-	@Column(nullable = false, unique = true)
+	
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
+	@Column(name = "rekvizit_id")
 	private Integer idRekvizita;
 	
 	@Column

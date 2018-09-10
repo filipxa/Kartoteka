@@ -52,10 +52,9 @@ const appRoutes: Routes = [
   { path: 'rekvizitAllEdit', component: RekvizitListaAdminComponent },
   { path: 'rekvizitEdit', component: RekvizitEditAdminComponent },
   { path: 'editAdminFan', component: EditProfileAdminFanComponent },
-  { path: 'cinemas', component: CinemaListComponent},
   { path: 'addOglas', component: OglasAddComponent},
   { path: 'theatres', component: TheatreListComponent},
-  { path: 'ogalsEdit/:id', component: OglasEditovanjeComponent}
+  { path: 'ogalsEdit/:id', component: OglasEditovanjeComponent},
   { path: 'lokal/:type', component: LokalListComponent},
   { path: 'lokal/profil/:id', component: LokalProfileComponent}
 ];
@@ -85,7 +84,7 @@ const appRoutes: Routes = [
     OglasKaticaAdminComponent,
     OglasKarticaComponent,
     OglasKarticaEditComponent,
-    OglasEditovanjeComponent
+    OglasEditovanjeComponent,
     TheatreListComponent,
     LokalProfileComponent,
     RepertoarBioskopComponent,
