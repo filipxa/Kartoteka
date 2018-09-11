@@ -27,6 +27,7 @@ import sw3.kartoteka.model.entity.Korisnik;
 import sw3.kartoteka.model.entity.Lokal;
 import sw3.kartoteka.model.entity.Sediste;
 import sw3.kartoteka.repository.KorisnikRepositorijum;
+import sw3.kartoteka.services.EMailService;
 import sw3.kartoteka.services.IzvedbaService;
 import sw3.kartoteka.services.KartaService;
 import sw3.kartoteka.services.KorisnikService;
@@ -43,6 +44,9 @@ public class KartaController {
 	
 	@Autowired 
 	IzvedbaService izvedbaService;
+	
+	@Autowired
+	EMailService emailService;
 	
 
 
@@ -113,7 +117,7 @@ public class KartaController {
 	@PostMapping(value = "/rez", consumes = { "application/json" })
 	public ResponseEntity<?> reserveTicketes(@RequestBody RezTicketDTO dto, HttpSession session) {
 		Integer loggedId = ((Korisnik)session.getAttribute("logged")).getIdKorisnika();
-		
+		StringBuilder sb = new StringBuilder("");
 		try {
 			if(loggedId==null) {
 				throw new Exception("You must be logged in.");
@@ -131,20 +135,25 @@ public class KartaController {
 				} else {
 					userId = loggedId;
 				}
-				
+								
 				karta.setTip("zauzeto");
 				Korisnik k = korisnikService.findOne(userId);
 				karta.setKorisnik(k);
 				kartaService.save(karta);
-				if(userId!= loggedId) {
-					//TODO Poslati mail prijateljima
+				if (userId != loggedId) {
+					emailService.sendMail(k, "Reservation confirmation",
+							karta.toEmailString() + "\nPlease follow link below to confirm \nhttp://localhost:4200/ticket-confirm/"
+									+ karta.getIdKarte());
 				}
+				sb.append(karta.toEmailString());
 				
 			}
-			//TODO poslati mail korisniku
+			Korisnik k = korisnikService.findOne(loggedId);
 
+			emailService.sendMail(k, "Ticket reservation", sb.toString());
 			return new ResponseEntity<Void>(HttpStatus.OK);
 		} catch (Exception e) {
+			e.printStackTrace();
 			return new ResponseEntity<String>(e.getMessage() ,HttpStatus.BAD_REQUEST);
 		}
 

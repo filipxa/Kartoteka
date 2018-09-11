@@ -38,6 +38,7 @@ import { OglasKaticaAdminComponent } from './oglas-katica-admin/oglas-katica-adm
 import { OglasKarticaComponent } from './oglas-kartica/oglas-kartica.component';
 import { OglasKarticaEditComponent } from './oglas-kartica-edit/oglas-kartica-edit.component';
 import { OglasEditovanjeComponent } from './oglas-editovanje/oglas-editovanje.component';
+import { TicketConfirmComponent } from './ticket-confirm/ticket-confirm.component';
 
 
 const appRoutes: Routes = [
@@ -88,7 +89,8 @@ const appRoutes: Routes = [
     TheatreListComponent,
     LokalProfileComponent,
     RepertoarBioskopComponent,
-    LokalEditProfileComponent
+    LokalEditProfileComponent,
+    TicketConfirmComponent
   ],
   imports: [
     BrowserModule,

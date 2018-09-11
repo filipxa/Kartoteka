@@ -102,6 +102,20 @@ public class Karta {
 		return idKarte;
 	}
 	
+	public String toEmailString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append(String.format("===============ID=%04d===============\n", getIdKarte()));
+		sb.append(izvedba.getNaslov().getNaziv());
+		sb.append("   ");
+		sb.append(izvedba.getTermin().toString());
+		sb.append("\n");
+		sb.append("Auditorium: " + izvedba.getSala().getIdSale() +"\n");
+		sb.append(String.format("Seat: row %02d   num %02d", sediste.getRed(), sediste.getKolona())+"\n");
+		sb.append("Ime i prezime: " + korisnik.getIme() + " "+ korisnik.getPrezime()+"\n");
+		sb.append("======================================\n");
+		return sb.toString();
+	}
+	
 	
 
 }
