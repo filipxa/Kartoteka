@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.test.annotation.Repeat;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,7 +16,7 @@ import org.thymeleaf.templateparser.markup.HTMLTemplateParser;
 
 import sw3.kartoteka.model.entity.Karta;
 import sw3.kartoteka.model.entity.Lokal;
-import sw3.kartoteka.services.KartaService;
+import sw3.kartoteka.model.entity.Repertoar;
 import sw3.kartoteka.services.LokalService;
 
 
@@ -71,6 +72,21 @@ public class LokalController {
 		}
 		return new ResponseEntity<>(cinemas, HttpStatus.OK);
 	}
+	
+	@GetMapping(value = "theatres")
+	public ResponseEntity<List<Lokal>>getTheatres(){
+		List<Lokal> all = lokalService.findAll();
+		List<Lokal> theatres = new ArrayList<>();
+		for (Lokal lokal : all) {
+			if(!lokal.isPozoriste()) {
+				theatres.add(lokal);
+			}
+		}
+		return new ResponseEntity<>(theatres, HttpStatus.OK);
+	}
+	
+	
+	
 	
 
 }

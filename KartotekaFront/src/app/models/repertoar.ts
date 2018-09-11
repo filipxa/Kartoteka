@@ -1,5 +1,6 @@
 import { Izvedba } from "./izvedba";
 import { Naslov } from "./naslov";
+import { Sala } from "./sala";
 
 export class Repertoar{
 
@@ -35,6 +36,28 @@ export class Repertoar{
             }
             izvedba.termin = "" + hours + ":" + minutes;
             rets.get(izvedba.naslov).push(izvedba);
+        }
+        return rets;
+      }
+
+      static extractSalaIZvedbe(rep: Repertoar) : Map<Naslov, Map<Sala, Izvedba[]>> {
+        let rets :  Map<Naslov, Map<Sala, Izvedba[]>> = new  Map<Naslov, Map<Sala, Izvedba[]>>();
+        let mapa : Map<Naslov, Izvedba[]> = Repertoar.extractNasloviIzvedbe(rep);
+        let naslovi : Array<Naslov> = Repertoar.getNaslovi(rep); 
+        for(let naslov of naslovi)
+        {
+          let izvedbe : Array<Izvedba> = mapa.get(naslov);
+          let sale : Array<Sala> = new Array<Sala>();
+          let salaIzvedba : Map<Sala, Array<Izvedba>> = new Map<Sala, Array<Izvedba>>();
+          for(let izvedba of izvedbe){
+           
+            if(!sale.includes(izvedba.sala)){
+              sale.push(izvedba.sala);
+              salaIzvedba.set(izvedba.sala, new Array<Izvedba>());
+            }
+            salaIzvedba.get(izvedba.sala).push(izvedba);
+          }
+          rets.set(naslov, salaIzvedba);
         }
         return rets;
       }

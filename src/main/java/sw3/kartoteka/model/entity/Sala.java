@@ -52,6 +52,10 @@ public class Sala {
 	public List<Sediste> getSedista() {
 		return sedista;
 	}
+	
+	public String getNaziv() {
+		return "Sala " + getIdSale();
+	}
 
 
 	public void setSedista(List<Sediste> sedista) {

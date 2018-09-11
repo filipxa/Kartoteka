@@ -14,4 +14,5 @@ export class Izvedba
     reziser : Osoba;
     glumci : Array<Osoba>;
     datum : string;
+    cene : Array<number>;
 }
