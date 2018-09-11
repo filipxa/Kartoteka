@@ -17,6 +17,7 @@ import org.thymeleaf.templateparser.markup.HTMLTemplateParser;
 import sw3.kartoteka.model.entity.Karta;
 import sw3.kartoteka.model.entity.Lokal;
 import sw3.kartoteka.model.entity.Repertoar;
+import sw3.kartoteka.services.KartaService;
 import sw3.kartoteka.services.LokalService;
 
 

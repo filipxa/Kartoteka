@@ -89,9 +89,6 @@ public class Izvedba {
 		this.isPredstava = isFilm;
 	}
 	
-	public Izvedba() {
-		
-	}
 	
 	public List<Integer> getCene(){
 		Set<Integer> set = new HashSet<Integer>();
