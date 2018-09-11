@@ -2,9 +2,11 @@ package sw3.kartoteka.model.entity;
 
 
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
-
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -79,7 +81,16 @@ public class Izvedba {
 		
 	}
 	
-
+	public List<Integer> getCene(){
+		Set<Integer> set = new HashSet<Integer>();
+		if(karte!=null) {
+			return new ArrayList<Integer>();
+		}
+		for(Karta karta: karte) {
+			set.add(karta.getCena());
+		}
+		return new ArrayList<Integer>(set);
+	}
 
 
 	

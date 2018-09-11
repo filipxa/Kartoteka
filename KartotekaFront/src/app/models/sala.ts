@@ -6,6 +6,7 @@ export class Sala{
     brRedova : number;
     brKolona : number;
     lokal : Lokal;
+    naziv : String;
     sedista : Array<Sediste>;
     
 }
