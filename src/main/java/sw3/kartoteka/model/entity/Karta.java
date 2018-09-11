@@ -19,7 +19,22 @@ public class Karta {
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
 	private Integer idKarte;
+	public Karta() {
+		
+	}
 	
+	public Karta(Integer idKarte, Izvedba izvedba, Sediste sediste, Korisnik korisnik, String tip, int popust,
+			int cena) {
+		super();
+		this.idKarte = idKarte;
+		this.izvedba = izvedba;
+		this.sediste = sediste;
+		this.korisnik = korisnik;
+		this.tip = tip;
+		this.popust = popust;
+		this.cena = cena;
+	}
+
 	public void setIdKarte(Integer idKarte) {
 		this.idKarte = idKarte;
 	}
