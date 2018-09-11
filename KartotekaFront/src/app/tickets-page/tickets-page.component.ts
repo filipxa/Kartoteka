@@ -12,7 +12,6 @@ import { UserService } from '../services/user.service';
 export class TicketsPageComponent implements OnInit {
   tickets : Karta[];
   cancelTickets : Karta[];
-  kartaName : Map<Karta, String>;
   constructor(private ticketService : TicketService,  private router: Router,private userService : UserService ) { }
 
 

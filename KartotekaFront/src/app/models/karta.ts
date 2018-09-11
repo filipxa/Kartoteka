@@ -32,9 +32,5 @@ export class Karta{
       
     }
 
-    public static getLokalName(ticket: Karta) : string{
-        return ticket.izvedba.sala.lokal.naziv;
-
-    }
     
 }

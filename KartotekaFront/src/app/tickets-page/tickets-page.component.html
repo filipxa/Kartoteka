@@ -1,13 +1,14 @@
 <div class="main">
 <h1>Ticket history</h1>
 <ul class="heroes">
-<li *ngFor="let ticket of tickets">
+<li class *ngFor="let ticket of tickets">
     
-     <a routerLink="detail/ticket/{{ticket.idKarte}}"> 
-      <span class="badge">{{kartaDisplayDate(ticket)}} <span > &emsp;  </span> {{kartaDisplayTime(ticket)}}</span>  
-      {{ticket.izvedba.naslov.naziv}}
-       <span class="badge1"> {{kartaLokalName(ticket)}} </span>
+
+      <a>
+      <span class="badge">{{kartaDisplayDate(ticket)}} &emsp;  {{kartaDisplayTime(ticket)}}</span><div class="text"> {{ticket.izvedba.naslov.naziv}}  {{kartaLokalName(ticket)}} </div>
     </a>
+
+
     
     <button class="delete" title="cancel ticket"  *ngIf="isCancable(ticket)"
     (click)="cancelTicket(ticket)">x</button>
