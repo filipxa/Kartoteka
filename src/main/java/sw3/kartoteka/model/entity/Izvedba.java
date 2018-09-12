@@ -1,7 +1,5 @@
 package sw3.kartoteka.model.entity;
 
-
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
@@ -60,8 +58,6 @@ public class Izvedba {
 	@JoinColumn(name = "naslov_id", referencedColumnName = "naslov_id")
 	private Naslov naslov;
 	
-
-	
 	
 	public Izvedba() {
 		
@@ -87,8 +83,6 @@ public class Izvedba {
 	public void setPredstava(boolean isFilm) {
 		this.isPredstava = isFilm;
 	}
-	
-	
 	public List<Integer> getCene(){
 		Set<Integer> set = new HashSet<Integer>();
 		if(karte!=null) {
@@ -100,9 +94,6 @@ public class Izvedba {
 		return new ArrayList<Integer>(set);
 	}
 
-
-
-	
 	public Sala getSala() {
 		return sala;
 	}

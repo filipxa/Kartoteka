@@ -31,8 +31,7 @@
   .heroes a {
     color: #888;
     text-decoration: none;
-    position: relative;
-    display: block;
+
   }
 
   .date{
@@ -54,8 +53,6 @@
     background-color: #607D8B;
     line-height: 1em;
     position: relative;
-    left: -1px;
-    top: -4px;
     height: 1.8em;
     min-width: 16px;
     text-align: right;
@@ -96,9 +93,12 @@
   
   button.delete {
     position: relative;
-    left: 590px;
-    top: -32px;
+    float: right;
+    top: -5px;
     background-color: gray !important;
     color: white;
+    text-align: center;
+    font-size: 12px;
+    padding-bottom: 4px;
   }
   
