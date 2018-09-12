@@ -17,7 +17,7 @@ const httpOptions = {
 
 
 const getLoggedUserTicketURL : string = "http://localhost:8080/api/karta/user/";
-const getLokalTicketURL : string = "http://localhost:8080/api/karta/izvedba/";
+const getIzvedbaTicketURL : string = "http://localhost:8080/api/karta/izvedba/";
 const cancelById : string = "http://localhost:8080/api/karta/cancel/";
 const reserveTicketUrl : string = "http://localhost:8080/api/karta/rez";
 @Injectable({
@@ -48,8 +48,8 @@ export class TicketService {
     return this.http.get<Array<Karta>>(getLoggedUserTicketURL , httpOptions);
   }
 
-  getIzvedbaTickets(localId: number): any {
-    return this.http.get<Array<Karta>>(getLokalTicketURL  + localId , httpOptions);
+  getIzvedbaTickets(izvedbaId: number): any {
+    return this.http.get<Array<Karta>>(getIzvedbaTicketURL  + izvedbaId , httpOptions);
   }
 
   reserve(sedista : Array<Sediste>, prijatelji : Array<User>) {

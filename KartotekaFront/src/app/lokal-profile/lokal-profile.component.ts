@@ -10,6 +10,7 @@ import { Naslov } from '../models/naslov';
 import { Izvedba } from '../models/izvedba';
 import { Sala } from '../models/sala';
 import { TerminCena } from '../models/terminCena';
+import { Karta } from '../models/karta';
 
 @Component({
   selector: 'app-lokal-profile',
@@ -77,7 +78,7 @@ export class LokalProfileComponent implements OnInit {
     
   }
 
-
+ 
 
   getSalaTerminiCene(salaIzvedba : Map<Sala, Izvedba[]>) : Map<String, TerminCena[]> {
     let salaTerminiCene : Map<String,TerminCena[]>  =  new Map<String, Array<TerminCena>>();
@@ -99,17 +100,48 @@ export class LokalProfileComponent implements OnInit {
       return salaTerminiCene;
   }
 
+  getKarteNaPopustuZaNaslov(idNaslova : number){
+
+    let mapa: Map<Izvedba, Karta[]> = new Map<Izvedba, Array<Karta>>();
+    mapa = Repertoar.extractPopustKarteZaNaslov(this.lokal.repertoar, idNaslova);
+    let podaci = [];
+    
+    mapa.forEach((karte : Karta[], izvedba : Izvedba) => {
+      podaci.push({
+        idIzvedbe : izvedba.idIzvedba,
+        karte : izvedba.karte,
+        termin : izvedba.termin, 
+        naslov : izvedba.naslov.naziv,
+      });
+
+      // pokupim sve razlicite termine 
+      // let datumi : Date[] = new Array<Date>();
+      // if(!datumi.includes(key.termin)){
+      //   datumi.push(key.termin);
+      // }
+
+      // napunim za svaki termin listu karata
+      // let terminKarte : Map<Date, Karta[]> = new Map<Date, Karta[]>();
+      // datumi.forEach(termin => {
+      // });
+
+      });
+    return podaci;
+  }
+
   popuniPodatkeZaPrikaz() {
 
     let mapaSvih: Map<Naslov, Map<Sala, Array<Izvedba>>> = Repertoar.extractSalaIZvedbe(this.lokal.repertoar);
     let podaci = [];
     
     mapaSvih.forEach(
-      (salaIzvedba: Map<Sala, Izvedba[]>, naslov: Naslov) => {
+      (salaIzvedba: Map<Sala,
+         Izvedba[]>, naslov: Naslov) => {
 
           let salaTerminiCene : Map<String, TerminCena[]>  = this.getSalaTerminiCene(salaIzvedba);
 
           podaci.push({
+            idFilma : naslov.id,
             nazivFilma : naslov.naziv,
             glumci : naslov.glumci,
             zanr : naslov.zanr,
@@ -125,10 +157,6 @@ export class LokalProfileComponent implements OnInit {
   }
 
 
-  
-
-
- 
   isAdmin() {
     this.userService.getLoggedUserAPI().subscribe(data => {
       if (data.tip === "fan")

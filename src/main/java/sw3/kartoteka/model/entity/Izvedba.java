@@ -33,7 +33,6 @@ public class Izvedba {
 	}
 	
 	
-	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(unique = true, nullable = false, name = "izvedba_id")

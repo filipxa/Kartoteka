@@ -1,6 +1,7 @@
 import { Izvedba } from "./izvedba";
 import { Naslov } from "./naslov";
 import { Sala } from "./sala";
+import { Karta } from "./karta";
 
 export class Repertoar{
 
@@ -18,6 +19,24 @@ export class Repertoar{
         }
         return rets;
     }
+
+    static extractPopustKarteZaNaslov(rep: Repertoar, idNaslova : number): Map<Izvedba, Array<Karta>>{
+        let rets : Map<Izvedba, Karta[]> = new Map<Izvedba, Karta[]>();
+        for(let izvedba of rep.izvedbe){
+            if(idNaslova === izvedba.naslov.id){
+                let kartePopust : Array<Karta> = new Array<Karta>();
+                izvedba.karte.forEach(karta => {
+                    if(karta.popust != 0){
+                        kartePopust.push(karta);
+                    }
+                });
+                rets.set(izvedba, kartePopust); 
+            }
+        }
+        return rets;
+    }
+
+
     static extractNasloviIzvedbe(rep: Repertoar):  Map<Naslov, Izvedba[]> {
         let rets : Map<Naslov, Izvedba[]> = new Map<Naslov, Izvedba[]>();
         for(let izvedba of rep.izvedbe){
