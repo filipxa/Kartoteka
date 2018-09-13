@@ -57,22 +57,7 @@ public class LokalController {
 	}
 	
 	
-	@GetMapping(value = "updateLokal/{id}")
-	public ResponseEntity<Lokal>updateLokal(@PathVariable("id") Integer id){
-		try {
-			List<Lokal> lokali = lokalService.findOne(id)
-			Lokal l = lokalService.findOne(Integer.parseInt(id));
-			if(l==null) {
-				throw new Exception();
-			}
-			return new ResponseEntity<Lokal>(l, HttpStatus.OK);
-			
-		} catch (Exception e) {
-			return new ResponseEntity<Lokal>( HttpStatus.BAD_REQUEST);
-		}
-		
-		
-	}
+	
 	
 	
 	
