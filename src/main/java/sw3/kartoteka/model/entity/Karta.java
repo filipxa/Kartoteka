@@ -23,10 +23,9 @@ public class Karta {
 		
 	}
 	
-	public Karta(Integer idKarte, Izvedba izvedba, Sediste sediste, Korisnik korisnik, String tip, int popust,
+	public Karta( Izvedba izvedba, Sediste sediste, Korisnik korisnik, String tip, int popust,
 			int cena) {
 		super();
-		this.idKarte = idKarte;
 		this.izvedba = izvedba;
 		this.sediste = sediste;
 		this.korisnik = korisnik;

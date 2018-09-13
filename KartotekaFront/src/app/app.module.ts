@@ -41,6 +41,8 @@ import { OglasEditovanjeComponent } from './oglas-editovanje/oglas-editovanje.co
 import { PonudaKarticaComponent } from './ponuda-kartica/ponuda-kartica.component';
 import 'rxjs';
 import { TicketConfirmComponent } from './ticket-confirm/ticket-confirm.component';
+import { NaslovProfileComponent } from './naslov-profile/naslov-profile.component';
+import { SalaEditComponent } from './sala-edit/sala-edit.component';
 
 const appRoutes: Routes = [
 
@@ -58,7 +60,8 @@ const appRoutes: Routes = [
   { path: 'theatres', component: TheatreListComponent},
   { path: 'ogalsEdit/:id', component: OglasEditovanjeComponent},
   { path: 'lokal/:type', component: LokalListComponent},
-  { path: 'lokal/profil/:id', component: LokalProfileComponent}
+  { path: 'lokal/profil/:id', component: LokalProfileComponent},
+  { path: 'naslov/:id', component: NaslovProfileComponent}
 ];
 
 @NgModule({
@@ -91,6 +94,9 @@ const appRoutes: Routes = [
     LokalProfileComponent,
     RepertoarBioskopComponent,
     LokalEditProfileComponent,
+    TicketConfirmComponent,
+    NaslovProfileComponent,
+    SalaEditComponent
     PonudaKarticaComponent,
     TicketConfirmComponent
   ],
@@ -116,9 +122,10 @@ const appRoutes: Routes = [
     MatTabsModule
   ],
   exports: [RouterModule, MatSnackBarModule, HttpClientModule],
-  providers: [ LokalEditProfileComponent ],
+  providers: [ LokalEditProfileComponent, SalaEditComponent ],
   entryComponents: [
-    LokalEditProfileComponent
+    LokalEditProfileComponent,
+    SalaEditComponent
   ],
   bootstrap: [AppComponent]
 })

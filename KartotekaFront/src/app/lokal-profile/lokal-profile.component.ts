@@ -1,16 +1,17 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { LokalService } from '../services/lokal.service';
-import { ActivatedRoute } from '../../../node_modules/@angular/router';
+import { ActivatedRoute, Router } from '../../../node_modules/@angular/router';
 import { Lokal } from '../models/lokal';
 import { UserService } from '../services/user.service';
 import { Repertoar } from '../models/repertoar';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialog } from '@angular/material';
 import { LokalEditProfileComponent } from '../lokal-edit-profile/lokal-edit-profile.component';
 import { Naslov } from '../models/naslov';
 import { Izvedba } from '../models/izvedba';
 import { Sala } from '../models/sala';
 import { TerminCena } from '../models/terminCena';
 import { Karta } from '../models/karta';
+import { SalaEditComponent } from '../sala-edit/sala-edit.component';
 
 @Component({
   selector: 'app-lokal-profile',
@@ -22,12 +23,15 @@ export class LokalProfileComponent implements OnInit {
   ID: number;
   lokal: Lokal;
   podaci : any = [];
+  profilLokala : any = [];
+  repertoarLista : any = [];
+
+
   admin: boolean;
 
-  projections: Repertoar = new Repertoar();
 
 
-  constructor(private lokalService: LokalService, private route: ActivatedRoute, private userService: UserService, public dialog: MatDialog) {
+  constructor(private lokalService: LokalService, private route: ActivatedRoute, private userService: UserService, public dialog: MatDialog, private router: Router) {
 
     this.isAdmin();
 
@@ -35,23 +39,46 @@ export class LokalProfileComponent implements OnInit {
     this.lokal = new Lokal();
     lokalService.getLokal(this.ID).subscribe(data => {
       this.lokal = data;
-      this.popuniPodatkeZaPrikaz();
-      console.log(this.podaci);
+      // this.popuniPodatkeZaPrikaz();
+      
+      // console.log(this.podaci);
+
+      // popunjava podatke za prikaz profila lokala
+      this.popuniProfilLokala();
+      console.log(this.profilLokala);
+      
+      // popunjava reperoar za prikaz
+      this.repertoarLista = this.popuniRepertoarLokala();
+      console.log(this.repertoarLista);
     });
 
-  
-    /* 
-        SERVIS ZA KUPLJENJE REPERTOARA
-        this.lokalService.getRepertoars().subscribe(data =>{
     
-          this.projections = data;
-          
+   
     
-          mogucnost 2
+  }
+
+ 
+  popuniRepertoarLokala() : any{
+     // pokupiti sve diff naslove
+     let naslovi : Naslov[] = [];
+     console.log(this.lokal);
+     
+     naslovi = Repertoar.getNaslovi(this.lokal.repertoar);
+     
+     let repPrikaz : any = [];
+     repPrikaz = Repertoar.getRepertoarZaSpisakNaslova(naslovi);
+     return repPrikaz;
     
-          moracu da pokupim izvedbe pa da ih dodelim u this.projection jer projections ima niz izvedbi, a nisam siguran da li ce mi response sa servera automatski povezati sve to 
-        }); */
-    //data iznad ce da ima id (nije bitan) i listu projekcija tj listu izvedbi, proveri da li ce lepo da dodeli ovom projection taj data
+  }
+  popuniProfilLokala(){
+   
+    this.profilLokala.push({
+      idLokala : this.lokal.id,
+      nazivLokala : this.lokal.naziv,
+      adresaLokala : this.lokal.adresa,
+      promotivniOpis : this.lokal.promotivniOpis
+
+    })
   }
 
   openDialog(): void {
@@ -72,13 +99,25 @@ export class LokalProfileComponent implements OnInit {
     });
   }
 
+  ConfSale(sala): void {
+    const dialogRef = this.dialog.open(SalaEditComponent, {
+      width: '400px',
+      data: sala
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+      }
+    });
+  }
+
 
   ngOnInit() {
    
     
   }
 
- 
+  
 
   getSalaTerminiCene(salaIzvedba : Map<Sala, Izvedba[]>) : Map<String, TerminCena[]> {
     let salaTerminiCene : Map<String,TerminCena[]>  =  new Map<String, Array<TerminCena>>();
@@ -129,6 +168,8 @@ export class LokalProfileComponent implements OnInit {
     return podaci;
   }
 
+
+  // profil predstave/filma
   popuniPodatkeZaPrikaz() {
 
     let mapaSvih: Map<Naslov, Map<Sala, Array<Izvedba>>> = Repertoar.extractSalaIZvedbe(this.lokal.repertoar);
@@ -159,11 +200,18 @@ export class LokalProfileComponent implements OnInit {
 
   isAdmin() {
     this.userService.getLoggedUserAPI().subscribe(data => {
-      if (data.tip === "fan")
-        this.admin = true;
-      else
-        this.admin = false;
+     
+        if ( data  && (data.tip === "adminBioskop" || data.tip === "adminPozoriste" ))
+          this.admin = true;
+        else
+          this.admin = false;
+      
     });
+  }
+
+  details(id)
+  {
+    this.router.navigate(['/naslov/' + id]);
   }
 
 }

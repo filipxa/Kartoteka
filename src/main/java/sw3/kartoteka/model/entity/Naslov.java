@@ -15,6 +15,24 @@ import javax.persistence.OneToMany;
 @Entity
 public class Naslov {
 
+	public Naslov() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	
+	public Naslov(String naziv, Osoba reziser, List<Osoba> glumci, String zanr, int trajanje, float ocena,
+			String opis) {
+		super();
+		
+		this.naziv = naziv;
+		this.reziser = reziser;
+		this.glumci = glumci;
+		this.zanr = zanr;
+		this.trajanje = trajanje;
+		this.ocena = ocena;
+		this.opis = opis;
+	}
+
 	@Column(nullable = false, unique = true, name = "naslov_id")
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
@@ -34,6 +52,8 @@ public class Naslov {
 	@Column
 	private String zanr;
 	
+	
+
 	@Column
 	private int trajanje;
 

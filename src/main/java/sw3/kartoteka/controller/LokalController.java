@@ -56,6 +56,12 @@ public class LokalController {
 		
 	}
 	
+	
+	
+	
+	
+	
+	
 	@GetMapping(value="karta/{id}")
 	public ResponseEntity<Lokal> getLokalByKartaId(@PathVariable("id") Integer id){
 		Karta karta = kartaService.findOne(id);
@@ -79,7 +85,7 @@ public class LokalController {
 		List<Lokal> all = lokalService.findAll();
 		List<Lokal> theatres = new ArrayList<>();
 		for (Lokal lokal : all) {
-			if(!lokal.isPozoriste()) {
+			if(lokal.isPozoriste()) {
 				theatres.add(lokal);
 			}
 		}
