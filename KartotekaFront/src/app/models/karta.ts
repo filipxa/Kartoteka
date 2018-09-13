@@ -10,6 +10,7 @@ export class Karta{
     popust : number;
     cena : number;
     tip : string;
+    lokalNaziv : string;
     constructor(){
 
     } 
@@ -31,9 +32,5 @@ export class Karta{
       
     }
 
-    public static getLokalName(ticket: Karta) : string{
-        return ticket.izvedba.sala.lokal.naziv;
-
-    }
     
 }

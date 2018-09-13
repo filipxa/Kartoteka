@@ -1,4 +1,5 @@
 import { Izvedba } from "./izvedba";
+import { Karta } from "./karta";
 
 export class Sediste {
 
@@ -7,7 +8,7 @@ export class Sediste {
     kolona : number;
     zauzeto : boolean;
 
-    static getSeats( izvedba : Izvedba): Array<Array<Sediste>> {
+    static getSeats( izvedba : Izvedba, karte : Array<Karta>): Array<Array<Sediste>> {
         let rets : Sediste[][] = [];
 
         for(let i: number = 0; i < izvedba.sala.brRedova; i++){
@@ -20,7 +21,7 @@ export class Sediste {
                 
             }
         }
-        for(let karta of izvedba.karte ){
+        for(let karta of karte ){
             rets[karta.sediste.red][karta.sediste.kolona].zauzeto=karta.tip!="slobodno";
             rets[karta.sediste.red][karta.sediste.kolona].idSedista=karta.sediste.idSedista;
         }

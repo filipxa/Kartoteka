@@ -6,8 +6,8 @@ import org.springframework.stereotype.Service;
 
 import sw3.kartoteka.model.entity.Izvedba;
 
-
 @Repository
 public interface IzvedbaRepository extends JpaRepository<Izvedba, Integer>  {
+	
 
 }

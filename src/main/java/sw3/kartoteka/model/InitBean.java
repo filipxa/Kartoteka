@@ -23,6 +23,7 @@ import sw3.kartoteka.model.entity.Repertoar;
 import sw3.kartoteka.model.entity.Sala;
 import sw3.kartoteka.model.entity.Sediste;
 import sw3.kartoteka.repository.IzvedbaRepository;
+import sw3.kartoteka.repository.LokalRepository;
 import sw3.kartoteka.repository.NaslovRepository;
 import sw3.kartoteka.repository.RepertoarRepository;
 import sw3.kartoteka.repository.SalaRepository;

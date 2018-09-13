@@ -20,8 +20,8 @@ public class LokalService {
 
 	
 	public Lokal findOne(Integer id) {
-		// TODO Auto-generated method stub
-		return lokalRepository.getOne(id);
+
+		return lokalRepository.findById(id).get();
 	}
 
 	

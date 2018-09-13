@@ -48,9 +48,7 @@
               <span *ngFor="let row of seats" class="checkbox">
                 {{(seats.indexOf(row)+1).toLocaleString('en-us', { minimumIntegerDigits: 2})}}
                   <span *ngFor="let seat of row" class="checkbox">
-                  <label>
                       <mat-checkbox class="checkbox" [class.checked]="seat.zauzeto" [disabled]="seat.zauzeto"  [value]="seat" (change) ="seatClick($event)"></mat-checkbox>
-                  </label>
                </span>  
                <p></p>  
               </span>   
@@ -68,7 +66,7 @@
                   </mat-form-field>
                 </div>
               </form>
-              <button type="button"  mat-button class="user-button" (click)="onRezClick()" > Login</button>
+              <button type="button"  mat-button class="user-button" (click)="onRezClick()" > Reserve</button>
             </mat-step>
   
   

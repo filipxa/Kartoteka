@@ -14,6 +14,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Transient;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 @Entity
 public class Sala {
@@ -37,7 +39,6 @@ public class Sala {
 	@Column
 	private int brKolona;
 	
-	@Transient
 	@ManyToOne
 	@JoinColumn(name = "lokal_id", referencedColumnName = "lokal_id", nullable = false)
 	private Lokal lokal;
@@ -50,6 +51,10 @@ public class Sala {
 	
 	public List<Sediste> getSedista() {
 		return sedista;
+	}
+	
+	public String getNaziv() {
+		return "Sala " + getIdSale();
 	}
 
 
@@ -82,6 +87,7 @@ public class Sala {
 	public void setIdSale(int idSale) {
 		this.idSale = idSale;
 	}
+	@JsonIgnore
 	public Lokal getLokal() {
 		return lokal;
 	}

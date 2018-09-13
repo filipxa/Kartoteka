@@ -15,6 +15,17 @@ import javax.persistence.OneToMany;
 public class Lokal {
 	
 
+	public Lokal(Integer id, boolean isPozoriste, Repertoar repertoar, String naziv, String adresa,
+			String promotivniOpis, List<Sala> sale) {
+		super();
+		this.id = id;
+		this.isPozoriste = isPozoriste;
+		this.repertoar = repertoar;
+		this.naziv = naziv;
+		this.adresa = adresa;
+		this.promotivniOpis = promotivniOpis;
+		this.sale = sale;
+	}
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column( nullable = false, name = "lokal_id")

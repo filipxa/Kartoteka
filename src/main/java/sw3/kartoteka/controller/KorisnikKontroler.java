@@ -178,7 +178,7 @@ public class KorisnikKontroler {
 		}
 		return new ResponseEntity<UserDTO>(rets, HttpStatus.OK);
 	}
-
+	
 	private static class LoginDTO {
 		private String username;
 		private String password;

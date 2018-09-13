@@ -40,6 +40,7 @@ import { OglasKarticaEditComponent } from './oglas-kartica-edit/oglas-kartica-ed
 import { OglasEditovanjeComponent } from './oglas-editovanje/oglas-editovanje.component';
 import { PonudaKarticaComponent } from './ponuda-kartica/ponuda-kartica.component';
 import 'rxjs';
+import { TicketConfirmComponent } from './ticket-confirm/ticket-confirm.component';
 
 const appRoutes: Routes = [
 
@@ -91,6 +92,7 @@ const appRoutes: Routes = [
     RepertoarBioskopComponent,
     LokalEditProfileComponent,
     PonudaKarticaComponent
+    TicketConfirmComponent
   ],
   imports: [
     BrowserModule,

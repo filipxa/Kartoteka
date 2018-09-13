@@ -10,6 +10,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Transient;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Karta {
 	
@@ -17,13 +19,27 @@ public class Karta {
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
 	private Integer idKarte;
+	public Karta() {
+		
+	}
 	
+	public Karta(Integer idKarte, Izvedba izvedba, Sediste sediste, Korisnik korisnik, String tip, int popust,
+			int cena) {
+		super();
+		this.idKarte = idKarte;
+		this.izvedba = izvedba;
+		this.sediste = sediste;
+		this.korisnik = korisnik;
+		this.tip = tip;
+		this.popust = popust;
+		this.cena = cena;
+	}
+
 	public void setIdKarte(Integer idKarte) {
 		this.idKarte = idKarte;
 	}
 	
 	@ManyToOne
-	@Transient
 	@JoinColumn(name = "izvedba_id", referencedColumnName = "izvedba_id")
 	private Izvedba izvedba;
 	
@@ -47,6 +63,10 @@ public class Karta {
 
 	public Izvedba getIzvedba() {
 		return izvedba;
+	}
+	
+	public String getLokalNaziv() {
+		return izvedba.getSala().getLokal().getNaziv();
 	}
 
 	public void setIzvedba(Izvedba izvedba) {
@@ -95,6 +115,20 @@ public class Karta {
 
 	public Integer getIdKarte() {
 		return idKarte;
+	}
+	
+	public String toEmailString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append(String.format("===============ID=%04d===============\n", getIdKarte()));
+		sb.append(izvedba.getNaslov().getNaziv());
+		sb.append("   ");
+		sb.append(izvedba.getTermin().toString());
+		sb.append("\n");
+		sb.append("Auditorium: " + izvedba.getSala().getIdSale() +"\n");
+		sb.append(String.format("Seat: row %02d   num %02d", sediste.getRed(), sediste.getKolona())+"\n");
+		sb.append("Ime i prezime: " + korisnik.getIme() + " "+ korisnik.getPrezime()+"\n");
+		sb.append("======================================\n");
+		return sb.toString();
 	}
 	
 	

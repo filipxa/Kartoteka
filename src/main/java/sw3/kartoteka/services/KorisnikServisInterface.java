@@ -17,4 +17,5 @@ public interface KorisnikServisInterface {
 	Korisnik findByEmail(String email);
 	
 	Korisnik findByuuid(String uuid);
+	
 }

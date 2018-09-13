@@ -48,13 +48,12 @@ export class TicketsPageComponent implements OnInit {
   }
 
   kartaLokalName(ticket : Karta) : string  {
-    return Karta.getLokalName(ticket);
+    return ticket.lokalNaziv;
   }
 
   getTickets() : void{
     this.ticketService.getLoggedUserTickets().subscribe(tickets => {
       this.tickets=tickets;
-     
     } );
   }
 

@@ -1,10 +1,10 @@
 package sw3.kartoteka.model.entity;
 
-
-
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
-
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,6 +14,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Izvedba {
@@ -35,12 +37,7 @@ public class Izvedba {
 	private Integer idIzvedba;
 	
 	
-	public Integer getIdIzvedba() {
-		return idIzvedba;
-	}
-	public void setIdIzvedba(Integer idIzvedba) {
-		this.idIzvedba = idIzvedba;
-	}
+
 	@ManyToOne
 	@JoinColumn(name = "sala_id", referencedColumnName = "sala_id")
 	private Sala sala;
@@ -49,13 +46,7 @@ public class Izvedba {
 	@OneToMany
 	private List<Karta> karte;
 	
-	
-	public List<Karta> getKarte() {
-		return karte;
-	}
-	public void setKarte(List<Karta> karte) {
-		this.karte = karte;
-	}
+
 	@Column
 	private Date termin;
 	
@@ -67,22 +58,42 @@ public class Izvedba {
 	@JoinColumn(name = "naslov_id", referencedColumnName = "naslov_id")
 	private Naslov naslov;
 	
-
+	
+	public Izvedba() {
+		
+	}
+	
+	@JsonIgnore
+	public List<Karta> getKarte() {
+		return karte;
+	}
+	public void setKarte(List<Karta> karte) {
+		this.karte = karte;
+	}
+	
+	public Integer getIdIzvedba() {
+		return idIzvedba;
+	}
+	public void setIdIzvedba(Integer idIzvedba) {
+		this.idIzvedba = idIzvedba;
+	}
 	public boolean isPredstava() {
 		return isPredstava;
 	}
 	public void setPredstava(boolean isFilm) {
 		this.isPredstava = isFilm;
 	}
-	
-	public Izvedba() {
-		
+	public List<Integer> getCene(){
+		Set<Integer> set = new HashSet<Integer>();
+		if(karte!=null) {
+			return new ArrayList<Integer>();
+		}
+		for(Karta karta: karte) {
+			set.add(karta.getCena());
+		}
+		return new ArrayList<Integer>(set);
 	}
-	
 
-
-
-	
 	public Sala getSala() {
 		return sala;
 	}

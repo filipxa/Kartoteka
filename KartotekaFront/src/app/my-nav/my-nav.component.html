@@ -23,8 +23,8 @@
     
     <mat-nav-list >
         <a mat-list-item routerLink="/">Home</a>
-      <a mat-list-item routerLink="/theatres">Theatres</a>
-      <a mat-list-item routerLink="/cinemas">Cinemas</a>
+      <a mat-list-item routerLink="lokal/theatres">Theatres</a>
+      <a mat-list-item routerLink="lokal/cinemas">Cinemas</a>
       <a *ngIf="this.userService.getLoggedIn() && (this.userService.getLoggedIn().tip == 'korisnik') " mat-list-item routerLink="/tickets">My Tickets</a>
       <a *ngIf="this.userService.getLoggedIn() && (this.userService.getLoggedIn().tip == 'korisnik') " mat-list-item routerLink="/fanzone">Fan Zone</a>
       <a *ngIf="this.userService.getLoggedIn() && (this.userService.getLoggedIn().tip == 'korisnik') " mat-list-item routerLink="/addOglas">Add auction</a>
