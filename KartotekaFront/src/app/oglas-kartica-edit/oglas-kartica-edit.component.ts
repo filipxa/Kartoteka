@@ -2,6 +2,8 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Oglas } from '../models/oglas';
 import { OglasService } from '../services/oglas.service';
 import { Router } from '@angular/router';
+import { Ponuda } from '../models/ponuda';
+import { PonudaService } from '../services/ponuda.service';
 
 @Component({
   selector: 'app-oglas-kartica-edit',
@@ -10,13 +12,33 @@ import { Router } from '@angular/router';
 })
 export class OglasKarticaEditComponent implements OnInit {
   @Input() oglas: Oglas;
-  constructor(private oglasService:OglasService, private router: Router) { }
+  constructor(private oglasService:OglasService, 
+    private router: Router,
+    private ponudaService: PonudaService) { 
+      this.prikazPonuda = false;
+      this.prikazIspis = "See offers";
+    }
 
+  ponude: Ponuda[];
   imagePath: String;
   altPhoto: String;
+  prikazPonuda:boolean;
   
+  prikazIspis:String;
+
   offersOglas(){
-    console.log("offersOglas: "+this.oglas);
+    if(this.prikazPonuda == true){
+      this.prikazPonuda = false;
+      this.prikazIspis = "See offers";
+    }
+    else{
+      this.prikazPonuda = true;
+      this.prikazIspis = "Hide offers";
+      this.ponudaService.getPonudeOglasa(this.oglas.idOglasa).subscribe(
+        x=>{this.initPonude(x)}
+      );
+    }
+    
   }
 
   editOglas(){
@@ -33,7 +55,9 @@ export class OglasKarticaEditComponent implements OnInit {
     this.oglasService.deleteOglas(this.oglas.idOglasa);
     //this.oglasService.deleteRekvizit(this.oglas);
   }
-
+  initPonude(ponude: Ponuda[]){
+    this.ponude = ponude;
+  }
   ngOnInit() {
     this.imagePath = "http://localhost:8080/api/downloadFile/oglasi/"+this.oglas.idOglasa;
     this.altPhoto = "https://www.freeiconspng.com/uploads/no-image-icon-4.png";
