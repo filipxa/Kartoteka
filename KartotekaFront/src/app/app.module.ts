@@ -91,7 +91,7 @@ const appRoutes: Routes = [
     LokalProfileComponent,
     RepertoarBioskopComponent,
     LokalEditProfileComponent,
-    PonudaKarticaComponent
+    PonudaKarticaComponent,
     TicketConfirmComponent
   ],
   imports: [
