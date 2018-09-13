@@ -10,31 +10,33 @@
       <mat-tab-group>
 
         <mat-tab label="About">
-          <div class="content">
-            <!-- <button [hidden]="!admin" class="btn btn-secondary edit">Edit projection</button>
+          <div class="content" *ngIf="naslov">
+            <!-- <button [hidden]="!admin" class="btn btn-secondary edit">Edit projection</button>-->
             <div class="description">
-              <h3>Title: {{film.naziv}}</h3>
+              <h3>Title: {{naslov.naziv}}</h3>  
               <br>
               <h4>Directed by: {{naslov.reziser.ime}} {{naslov.reziser.prezime}}</h4>
               <br>
               <h4>Description: {{naslov.opis}}</h4>
-              <h4>Genre: {{naslov.zanr}}</h4>
+              <h5>Genre: {{naslov.zanr}}</h5>
               <p>Stars:
-
+                <span *ngFor="let glumac of naslov.glumci">{{glumac.ime}} {{glumac.prezime}} | </span>
               </p>
-            </div> -->
+              <!-- </div> -->
+            </div>
           </div>
-
           <!-- <button [hidden]="!admin" class="btn btn-secondary">New schedule.</button> -->
         </mat-tab>
 
         <mat-tab label="Sale i temini">
-          <!-- <div class="card border-secondary mb-3" style="max-width: 20rem;" *ngFor="let sala of sale">
-            <div class="card-header">{{sala.naziv}}</div>
+
+          <div class="card border-secondary mb-3" style="max-width: 20rem;" *ngFor="let data of saleTerminiPodaci">
+            <div class="card-header">{{data.sala.naziv}}</div>
             <div class="card-body">
-              <p *ngFor="let termin of sala.termini; index as i">{{i}}.termin: {{termin.vreme}}</p>
+              <p *ngFor="let izvedba of data.izvedbe; index as i">{{i+1}}) {{izvedba.datum}} {{izvedba.termin}}</p>
             </div>
-          </div> -->
+          </div>
+
         </mat-tab>
       </mat-tab-group>
     </div>

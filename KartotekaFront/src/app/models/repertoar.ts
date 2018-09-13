@@ -22,6 +22,16 @@ export class Repertoar {
         return rets;
     }
 
+    public static getNaslov(repertoar : Repertoar, idNaslova : number) : Naslov{
+        
+        for (let izvedba of repertoar.izvedbe) {
+            if (izvedba.naslov.id === idNaslova) {
+                return izvedba.naslov;
+            }
+        }
+        return null;
+    }
+
     // vraca repertoar u vidu liste sa info za prikaz
     public static getRepertoarZaSpisakNaslova(naslovi: Naslov[]): any {
 
