@@ -1,5 +1,5 @@
 
-<mat-card class="example-card"  >
+<mat-card class="example-card" *ngIf="oglas.odobren && !oglas.prodat">
     <mat-card-header>
       <mat-card-title>{{oglas.naziv}}</mat-card-title>
       <mat-card-subtitle>Vazi do: {{oglas.datum}}</mat-card-subtitle>
@@ -11,9 +11,11 @@
       </p>
     </mat-card-content>
     <mat-card-actions>
-      <button type="button"  mat-button class="user-button" (click)="offersOglas()" >See offers</button>
+      <button type="button"  mat-button class="user-button" (click)="offersOglas()" >{{prikazIspis}}</button>
       <button type="button"  mat-button class="user-button" (click)="editOglas()" >Edit</button>
       <button type="button"  mat-button class="user-button" (click)="deleteOglas()" >Delete</button>
     </mat-card-actions>
   </mat-card>
-  
+  <div *ngIf="prikazPonuda">
+    <app-ponuda-kartica *ngFor="let ponuda of ponude" [ponuda]="ponuda"> </app-ponuda-kartica>
+  </div>

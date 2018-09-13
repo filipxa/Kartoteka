@@ -16,3 +16,5 @@ bin/
 src/main/resources/application\.properties
 
 uploads/rekviziti/
+
+uploads/oglasi/

@@ -21,7 +21,7 @@ export class FanzoneComponent implements OnInit {
     this.mojiOglasi = new Array();
   }
 
-  getRekvizit(): void{
+  public getRekvizit(): void{
     this.rekvizitService.getRekvizti().subscribe(rekviziti => this.initRekvizit(rekviziti));
   }
 
@@ -29,7 +29,7 @@ export class FanzoneComponent implements OnInit {
     this.rekviziti = rekviziti;
   }
 
-  getOglas(): void{
+  public getOglas(): void{
     this.oglasSrevice.getOglasi().subscribe(o => this.initOglasi(o));
   }
 
@@ -44,7 +44,7 @@ export class FanzoneComponent implements OnInit {
     console.log(this.mojiOglasi);
   }
 
-  ngOnInit() {
+  public ngOnInit() {
     this.getRekvizit();
     this.getOglas();
   }

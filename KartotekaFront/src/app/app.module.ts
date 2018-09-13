@@ -38,10 +38,11 @@ import { OglasKaticaAdminComponent } from './oglas-katica-admin/oglas-katica-adm
 import { OglasKarticaComponent } from './oglas-kartica/oglas-kartica.component';
 import { OglasKarticaEditComponent } from './oglas-kartica-edit/oglas-kartica-edit.component';
 import { OglasEditovanjeComponent } from './oglas-editovanje/oglas-editovanje.component';
+import { PonudaKarticaComponent } from './ponuda-kartica/ponuda-kartica.component';
+import 'rxjs';
 import { TicketConfirmComponent } from './ticket-confirm/ticket-confirm.component';
 import { NaslovProfileComponent } from './naslov-profile/naslov-profile.component';
 import { SalaEditComponent } from './sala-edit/sala-edit.component';
-
 
 const appRoutes: Routes = [
 
@@ -96,6 +97,8 @@ const appRoutes: Routes = [
     TicketConfirmComponent,
     NaslovProfileComponent,
     SalaEditComponent
+    PonudaKarticaComponent,
+    TicketConfirmComponent
   ],
   imports: [
     BrowserModule,

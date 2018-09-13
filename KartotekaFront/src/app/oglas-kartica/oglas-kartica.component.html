@@ -1,5 +1,5 @@
 
-<mat-card class="example-card" *ngIf="oglas.odobren && !oglas.rezervisano" >
+<mat-card class="example-card" *ngIf="oglas.odobren && !oglas.prodat" >
     <mat-card-header>
       <mat-card-title>{{oglas.naziv}}</mat-card-title>
       <mat-card-subtitle>Vazi do: {{oglas.datum}}</mat-card-subtitle>
@@ -9,11 +9,15 @@
       <p>
           {{oglas.opis}}
       </p>
+      <p *ngIf="staraPonuda">
+        <b>Current offer: {{staraPonuda.cena}} din</b>
+      </p>
+      <input matInput type = "number" placeholder="Price" [formControl]="PriceFormControl"
+        [errorStateMatcher]="matcher">
     </mat-card-content>
     <mat-card-actions>
-        <input matInput type = "number" placeholder="Price" [formControl]="PriceFormControl"
-        [errorStateMatcher]="matcher">
+        
       <button type="button"  mat-button class="user-button" (click)="offerOglas()" >Send offer</button>
+      <button *ngIf="staraPonuda" type="button"  mat-button class="user-button" (click)="cancelOfferOglas()" >Cancel offer</button>
     </mat-card-actions>
   </mat-card>
-  
