@@ -12,9 +12,8 @@ import javax.persistence.OneToMany;
 
 @Entity
 public class Repertoar {
-	public Repertoar(Integer id, List<Izvedba> listIzvedba) {
+	public Repertoar( List<Izvedba> listIzvedba) {
 		super();
-		this.id = id;
 		this.listIzvedba = listIzvedba;
 	}
 	

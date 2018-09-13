@@ -20,15 +20,19 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 public class Izvedba {
 	
-	public Izvedba(Integer idIzvedba, Sala sala, List<Karta> karte, Date termin, boolean isPredstava, Naslov naslov) {
+	
+	public Izvedba() {
+		
+	}
+	public Izvedba( Sala sala, List<Karta> karte, Date termin, boolean isPredstava, Naslov naslov) {
 		super();
-		this.idIzvedba = idIzvedba;
 		this.sala = sala;
 		this.karte = karte;
 		this.termin = termin;
 		this.isPredstava = isPredstava;
 		this.naslov = naslov;
 	}
+	
 	
 	
 	@Id
@@ -59,9 +63,7 @@ public class Izvedba {
 	private Naslov naslov;
 	
 	
-	public Izvedba() {
-		
-	}
+	
 	
 	@JsonIgnore
 	public List<Karta> getKarte() {

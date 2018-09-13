@@ -4,13 +4,10 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Random;
 
-import javax.persistence.Entity;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import sw3.kartoteka.model.entity.Izvedba;
@@ -18,6 +15,7 @@ import sw3.kartoteka.model.entity.Karta;
 import sw3.kartoteka.model.entity.Korisnik;
 import sw3.kartoteka.model.entity.Lokal;
 import sw3.kartoteka.model.entity.Naslov;
+import sw3.kartoteka.model.entity.Osoba;
 import sw3.kartoteka.model.entity.Rekvizit;
 import sw3.kartoteka.model.entity.Repertoar;
 import sw3.kartoteka.model.entity.Sala;
@@ -31,6 +29,7 @@ import sw3.kartoteka.repository.SedisteRepository;
 import sw3.kartoteka.services.KartaService;
 import sw3.kartoteka.services.KorisnikService;
 import sw3.kartoteka.services.LokalService;
+import sw3.kartoteka.services.OsobaService;
 import sw3.kartoteka.services.RekvizitService;
 
 @Service
@@ -62,6 +61,9 @@ public class InitBean {
 	@Autowired
 	RekvizitService rekvizitService;
 	
+	@Autowired
+	OsobaService osobaService;
+	
 	
 	public void fillData(){
 		Korisnik korisnik1 = new Korisnik( "korisnik", "Filip", "Micic", "filipxa@hotmail.com", "123", new ArrayList<Korisnik>(), "131232131", true, 0, 63666458, "Beograd");
@@ -75,6 +77,9 @@ public class InitBean {
 		korisnik.getListaPrijatelja().add(korisnik1);
 		korisnikService.save(korisnik1);
 		korisnikService.save(korisnik);
+		
+		
+		// administrator 
 
 		Korisnik test = korisnikService.findByEmail(korisnik1.getEmail());
 		
@@ -207,7 +212,53 @@ public class InitBean {
 		salaRepository.save(sala);
 		izvedbaRepository.save(izvedba);
 		
+
+		// podaci za pozoriste MARKO
+			
+			
+		// administrator pozorista
+		Korisnik adminPozorista = new Korisnik("adminPozoriste", "Marko", "Suhanov", "marko@m.com", "123", new ArrayList<Korisnik>(), "131232131", true, 0, 645775434, "Novi sad");
+		adminPozorista.getListaPrijatelja().add(korisnik2);
+		korisnikService.save(adminPozorista);
+				
+	
+		// administrator bioskopa
+		Korisnik adminBioskopa = new Korisnik("adminBioskop", "Milan", "Suhanov", "milan@m.com", "123", new ArrayList<Korisnik>(), "131232131", true, 0, 645775434, "Novi sad");
+		adminBioskopa.getListaPrijatelja().add(korisnik1);
+		korisnikService.save(adminBioskopa);
 		
+		
+		// reziser i glumci
+		Osoba reziser1 = new Osoba("Jim", "Jarmusch");
+		Osoba glumac1 = new Osoba("Boris", "Milivojevic");
+		Osoba glumac2 = new Osoba("Sergej", "Trifunovic");
+		osobaService.save(reziser1);
+		osobaService.save(glumac1);
+		osobaService.save(glumac2);
+//		
+		List<Osoba> glumciZaMunje = new ArrayList<>();
+//		
+		glumciZaMunje.add(glumac1);
+		glumciZaMunje.add(glumac2);
+		Naslov film1 = new Naslov( "Munje", reziser1, glumciZaMunje, "Komedija", 132, 500, "Zivot mladih u Beogradu");
+		naslovRepository.save(film1);
+		Sala sala4 = new Sala(50, 30, lokal1);
+		salaRepository.save(sala4);
+		Izvedba zvezdaIzvedba = new Izvedba( sala4, new ArrayList<>(), new Date(), false, film1);
+		izvedbaRepository.save(zvezdaIzvedba);
+		ArrayList<Izvedba> izvedbeZvezda = new ArrayList<>();
+		izvedbeZvezda.add(zvezdaIzvedba);
+		Repertoar zvezdaRepe = new Repertoar(izvedbeZvezda);
+		repertoarRepository.save(zvezdaRepe);
+		List<Sala> zvezdaSale = new ArrayList<>();
+		zvezdaSale.add(sala4);
+		Lokal zvezda = new Lokal( false, zvezdaRepe, "ZVEZDA", "Beograd", "Pustanje starih filmova", zvezdaSale);
+		lokalService.save(zvezda);
+
+	
+		
+		
+	
 
 	}
 }

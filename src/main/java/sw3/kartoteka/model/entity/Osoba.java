@@ -10,6 +10,19 @@ import javax.persistence.Id;
 @Entity
 public class Osoba {
 
+	public Osoba(String ime, String prezime) {
+		super();
+		this.ime = ime;
+		this.prezime = prezime;
+	}
+
+	
+	public Osoba() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+
 	@Column(nullable = false, unique = true, name = "osoba_id")
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
@@ -18,6 +31,7 @@ public class Osoba {
 	@Column
 	private String ime;
 
+	
 	@Column
 	private String prezime;
 
