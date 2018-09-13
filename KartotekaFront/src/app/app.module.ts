@@ -61,7 +61,7 @@ const appRoutes: Routes = [
   { path: 'ogalsEdit/:id', component: OglasEditovanjeComponent},
   { path: 'lokal/:type', component: LokalListComponent},
   { path: 'lokal/profil/:id', component: LokalProfileComponent},
-  { path: 'naslov/:id', component: NaslovProfileComponent}
+  { path: 'naslovProfil/:idNaslova/:idLokala', component: NaslovProfileComponent}
 ];
 
 @NgModule({
@@ -96,7 +96,7 @@ const appRoutes: Routes = [
     LokalEditProfileComponent,
     TicketConfirmComponent,
     NaslovProfileComponent,
-    SalaEditComponent
+    SalaEditComponent,
     PonudaKarticaComponent,
     TicketConfirmComponent
   ],

@@ -211,7 +211,7 @@ export class LokalProfileComponent implements OnInit {
 
   details(id)
   {
-    this.router.navigate(['/naslov/' + id]);
+    this.router.navigate(['/naslovProfil/' + id + "/" + this.lokal.id]);
   }
 
 }
