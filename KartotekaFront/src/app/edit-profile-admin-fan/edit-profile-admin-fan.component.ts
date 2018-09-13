@@ -40,6 +40,7 @@ export class EditProfileAdminFanComponent implements OnInit {
     tip: this.oldUser.tip,
     activated: false,
     tel: this.oldUser.tel,
+    listaLokala: new Array(),
     adresa: this.oldUser.adresa
   };
 

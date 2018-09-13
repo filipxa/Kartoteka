@@ -92,6 +92,7 @@ export class RegisterPageComponent implements OnInit {
         tip : "korisnik",
         activated: false,
         tel: this.telFormControl.value,
+        listaLokala: new Array(),
         adresa: this.adresaFormControl.value
       };
 

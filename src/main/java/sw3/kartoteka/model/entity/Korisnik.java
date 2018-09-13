@@ -1,6 +1,7 @@
 package sw3.kartoteka.model.entity;
 
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -58,7 +59,9 @@ public class Korisnik {
 	@Column
 	private String adresa;
 	
-	
+	@ManyToMany
+	@Column()
+	private List<Lokal> listaLokala;
 	
 //	private Map<Integer, Integer> ocenjeniFilmoviISerije; // <idTipaProjekcija, ocena>
 //	
@@ -120,6 +123,8 @@ public class Korisnik {
 	}
 
 
+
+
 	@JsonIgnore
 	public List<Korisnik> getListaPrijatelja() {
 		return listaPrijatelja;
@@ -154,7 +159,24 @@ public class Korisnik {
 //	public void setRekviziti(List<Rekvizit> rekviziti) {
 //		this.rekviziti = rekviziti;
 //	}
+	
+	@JsonIgnore
+	public List<Lokal> getListaLokala() {
+		return listaLokala;
+	}
 
+	public void setListaLokala(List<Lokal> listaLokala) {
+		this.listaLokala = listaLokala;
+	}
+	
+	public List<String> getAdminLokali(){
+		List<String> rets = new ArrayList<>();
+		for (Lokal lokal : listaLokala) {
+			rets.add(lokal.getId().toString());
+		}
+		return rets;
+	}
+	
 	public void setIdKorisnika(Integer idKorisnika) {
 		this.idKorisnika = idKorisnika;
 	}

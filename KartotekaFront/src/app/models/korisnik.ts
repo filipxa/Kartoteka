@@ -13,4 +13,5 @@ export class Korisnik {
     brBodova: number;
     brTelefona: number;
     adresa: string;
+    adminLokali:string[];    
   }

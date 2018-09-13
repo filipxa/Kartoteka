@@ -11,15 +11,17 @@ import { FanzoneComponent } from '../fanzone/fanzone.component';
 })
 export class PonudaKarticaComponent implements OnInit {
   @Input() ponuda:Ponuda;
-  constructor(private ponudaService:PonudaService,private router:Router, private fanic:FanzoneComponent) { }
+
+  constructor(private ponudaService:PonudaService,private router:Router) { }
+
   acceptPonuda(){
     this.ponuda.prihvacena=true;
     this.ponudaService.acceptPonuda(this.ponuda.id);
     this.router.navigate(['/fanzone']);
     window.location.reload();
   }
-  ngOnInit() {
 
+  ngOnInit() {
   }
 
 }

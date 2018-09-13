@@ -1,8 +1,11 @@
 package sw3.kartoteka.model.dto;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import sw3.kartoteka.model.entity.Korisnik;
+import sw3.kartoteka.model.entity.Lokal;
 
 public class UserDTO implements Serializable {
 
@@ -27,6 +30,8 @@ public class UserDTO implements Serializable {
 	
 	private String adresa;
 	
+	private List<String> listaLokala;
+	
 	public UserDTO() {
 		
 	}
@@ -43,12 +48,14 @@ public class UserDTO implements Serializable {
 		this.setAdresa(adresa);
 		this.setActivated(false);
 		this.tel = tel;
+		this.listaLokala = new ArrayList<>();
 
 	}
 	public UserDTO(Korisnik user){
 		this(user.getIdKorisnika(), user.getIme(), user.getPrezime(), 
 				user.getEmail(), user.getPassword(), user.getTip(), user.getAdresa(), user.getBrTelefona());
 		this.setActivated(user.getActivated());
+		this.setListaLokala(user.getAdminLokali());
 	}
 	public Integer getId() {
 		return id;
@@ -103,6 +110,14 @@ public class UserDTO implements Serializable {
 
 	public String getAdresa() {
 		return adresa;
+	}
+
+	public List<String> getListaLokala() {
+		return listaLokala;
+	}
+
+	public void setListaLokala(List<String> listaLokala) {
+		this.listaLokala = listaLokala;
 	}
 
 	public void setAdresa(String adresa) {
