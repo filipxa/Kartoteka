@@ -70,7 +70,8 @@ public class InitBean {
 		korisnikService.save(korisnik);
 		Korisnik korisnik2 = new Korisnik( "fan", "Filip", "Micic", "a@a.com", "123", new ArrayList<Korisnik>(), "131232131", true, 0, 63666458, "Beograd");
 		korisnikService.save(korisnik2);
-		
+		Korisnik korisnik3 = new Korisnik( "korisnik", "Jova", "Jovic", "vlado12310@gmail.com", "123", new ArrayList<Korisnik>(), "131232131", true, 0, 63666458, "Subotica");
+		korisnikService.save(korisnik3);
 		korisnik1.getListaPrijatelja().add(korisnik);
 		korisnik.getListaPrijatelja().add(korisnik1);
 		korisnikService.save(korisnik1);

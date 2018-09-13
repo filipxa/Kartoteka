@@ -12,7 +12,7 @@ import { User } from '../models/user'
 })
 export class MyNavComponent {
     ngOnInit() {
-           
+           this.userService.getLoggedUserAPI();
     }
   constructor(private breakpointObserver: BreakpointObserver, private userService : UserService) {}
 

@@ -25,6 +25,7 @@ import sw3.kartoteka.model.entity.Korisnik;
 import sw3.kartoteka.model.entity.Oglas;
 import sw3.kartoteka.model.entity.Ponuda;
 import sw3.kartoteka.model.entity.Rekvizit;
+import sw3.kartoteka.services.EMailService;
 import sw3.kartoteka.services.FileStorageService;
 import sw3.kartoteka.services.KorisnikService;
 import sw3.kartoteka.services.OglasService;
@@ -45,6 +46,8 @@ public class PonudaController {
 	@Autowired
 	KorisnikService korisnikService;
 	
+	@Autowired
+	EMailService emailService;
 	
 	
 	@GetMapping
@@ -129,13 +132,20 @@ public class PonudaController {
 					p.setPrihvacena(true);
 					p.setZavrsena(true);
 					System.out.println("Prihvacena: "+p);
-					//salji mejlove
+					emailService.sendMail(p.getKorisnik(), "Offer accepted",
+							"Offer name: "+ p.getOglas().getNaziv()+"\n"+
+							"Offer description: "+ p.getOglas().getOpis()+"\n"+
+							"Offer price: "+ p.getCena().toString()+"\n"+
+							"User email: "+ korisnik.getEmail()+"\n");
 				}
 				else {
 					p.setPrihvacena(false);
 					p.setZavrsena(true);
 					System.out.println("Odbijena: "+p);
-					//salji mejlove
+					emailService.sendMail(p.getKorisnik(), "Offer denied",
+							"Offer name: "+ p.getOglas().getNaziv()+"\n"+
+							"Offer description: "+ p.getOglas().getOpis()+"\n"+
+							"Offer price: "+ p.getCena().toString()+"\n");
 				}
 				ponudaService.save(p);
 			}
