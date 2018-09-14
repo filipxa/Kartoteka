@@ -62,8 +62,15 @@ export class UserService {
 
     this.http.post<User>(loginURL, sendData, httpOptions).subscribe(result => {
       if (result != undefined) {
+        console.log(result);
         this.loggedUser = result;
-        this.router.navigate(["/"]);
+        if(!this.loggedUser.activated && this.loggedUser.tip!="korisnik"){
+          console.log("Nije jos aktiviran");
+          this.router.navigate(["/firstlogin"]);
+          
+        }else{
+          this.router.navigate(["/"]);
+        }
       } else {
         this.snackBar.open("Wrong email or password !", "", {
           duration: 3000,

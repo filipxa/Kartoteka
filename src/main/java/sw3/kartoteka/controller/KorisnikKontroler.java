@@ -20,9 +20,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import sw3.kartoteka.model.dto.UserDTO;
 import sw3.kartoteka.model.entity.Korisnik;
+import sw3.kartoteka.model.entity.Lokal;
 import sw3.kartoteka.model.entity.Sediste;
 import sw3.kartoteka.services.EMailService;
 import sw3.kartoteka.services.KorisnikService;
+import sw3.kartoteka.services.LokalService;
 
 @RestController
 @RequestMapping(value = "/api/user")
@@ -30,6 +32,9 @@ public class KorisnikKontroler {
 
 	@Autowired
 	KorisnikService korisnikService;
+	
+	@Autowired
+	LokalService lokalService;
 
 	@Autowired
 	EMailService emailService;
@@ -101,6 +106,12 @@ public class KorisnikKontroler {
 				user.setTip(userDTO.getTip());
 				user.setAdresa(userDTO.getAdresa());
 				user.setBrTelefona(userDTO.getTel());
+				List<Lokal> lokali = new ArrayList<>();
+				for (String l : userDTO.getListaLokala()) {
+					lokali.add(lokalService.findOne(Integer.parseInt(l)));
+				}
+				user.setListaLokala(lokali);
+				user.setActivated(true);
 				user = korisnikService.save(user);
 				System.out.println(user);
 
@@ -113,9 +124,15 @@ public class KorisnikKontroler {
 				newUser.setTip(userDTO.getTip());
 				newUser.setAdresa(userDTO.getAdresa());
 				newUser.setBrTelefona(userDTO.getTel());
+				List<Lokal> lokali = new ArrayList<>();
+				for (String l : userDTO.getListaLokala()) {
+					lokali.add(lokalService.findOne(Integer.parseInt(l)));
+				}
+				newUser.setListaLokala(lokali);
+				System.out.println(newUser);
 				newUser = korisnikService.save(newUser);
 				try {
-					if (userDTO.isActivated() && newUser.getIme() != "") {
+					if (userDTO.isActivated() && newUser.getIme() != "" && userDTO.getTip()=="korisnik") {
 						emailService.sendMail(newUser, "Activation link",
 								"Please follow link below to activate \nhttp://localhost:8080/api/user/activate/"
 										+ newUser.getUuid());
@@ -155,7 +172,7 @@ public class KorisnikKontroler {
 		if (korisnik == null || !korisnik.getPassword().equals(loginInfo.password)) {
 			return ResponseEntity.badRequest().body("Bad login");
 		}
-		if (!korisnik.getActivated()) {
+		if (!korisnik.getActivated() && korisnik.getTip()=="korisnik") {
 			return ResponseEntity.badRequest().body("Follow link in email to activated your account.");
 		}
 		session.setAttribute("logged", korisnik);

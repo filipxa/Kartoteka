@@ -10,13 +10,19 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.test.annotation.Repeat;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 import org.thymeleaf.templateparser.markup.HTMLTemplateParser;
 
+import sw3.kartoteka.model.dto.RekvizitDto;
 import sw3.kartoteka.model.entity.Karta;
 import sw3.kartoteka.model.entity.Lokal;
+import sw3.kartoteka.model.entity.Rekvizit;
 import sw3.kartoteka.model.entity.Repertoar;
+import sw3.kartoteka.services.FileStorageService;
 import sw3.kartoteka.services.KartaService;
 import sw3.kartoteka.services.LokalService;
 
@@ -31,6 +37,8 @@ public class LokalController {
 	@Autowired
 	KartaService kartaService;
 	
+	@Autowired
+    private FileStorageService fileStorageService;
 	
 	@GetMapping(value = "search/{term}")
 	public ResponseEntity<List<Lokal>> searchLokali(@PathVariable("term") String term){
@@ -57,8 +65,40 @@ public class LokalController {
 	}
 	
 	
-	
-	
+	@PostMapping()
+	public ResponseEntity<Void> save(@RequestPart(value="file", required = false) MultipartFile file, @RequestPart("lokal") Lokal inputLokal) {
+		//AKO SE BUDE KORISTILO TREBA PROVERITI ZA STA TREBA I PREPRAVITI rDTO u Rekvizti
+		try {
+			Lokal lokal = new Lokal();
+			if(inputLokal.getId()!= -1) {
+				lokal = lokalService.findOne(inputLokal.getId());
+				//OVDE treba napraviti ostatak ovo se moze koristiti kao izmena lokala
+			}else {
+				lokal.setNaziv(inputLokal.getNaziv());
+				lokal.setIsPozoriste(inputLokal.isPozoriste());
+				lokal.setPromotivniOpis(inputLokal.getPromotivniOpis());
+				lokal.setAdresa(inputLokal.getAdresa());
+			}
+			
+		
+			Lokal lokalSave = lokalService.save(lokal);
+			System.out.println(lokalSave.getNaziv());
+			if(file!=null && !file.isEmpty()) {
+				String fileName = fileStorageService.storeFile(file,"lokal",lokalSave.getId().toString());
+				System.out.println(fileName);
+			}
+			
+			
+			
+	        // Try to determine file's content type
+	        
+			return new ResponseEntity<>(HttpStatus.OK);
+		}catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+		
+	}
 	
 	
 	

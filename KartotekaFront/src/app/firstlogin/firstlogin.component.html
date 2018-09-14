@@ -1,0 +1,36 @@
+<div class="main">
+  <mat-card class="example-card">
+    <mat-card-header>
+      <div mat-card-avatar class="example-header-image"></div>
+      <mat-card-title>Change password</mat-card-title>
+    </mat-card-header>
+    <form class="example-form" >
+      <table class="table" cellspacing="0">
+        <tr>
+          <td> <mat-form-field class="example-full-width">
+            <input #password class="input" matInput placeholder="Password" type="password" [formControl]="passwordFormControl"
+                [errorStateMatcher]="matcher">
+                <mat-error *ngIf="passwordFormControl.hasError('required')">
+                  password is required
+                </mat-error>
+             </mat-form-field></td>
+            </tr>
+            <tr>
+              <td><mat-form-field class="example-full-width" >
+                <input #password2 matInput placeholder="Repeat password" type="password" [formControl]="passwordRFormControl"
+                [errorStateMatcher]="matcher">
+                <mat-error *ngIf="passwordRFormControl.hasError('required')">
+                  password is required
+                </mat-error>
+              </mat-form-field></td>
+        </tr>
+        <tr>
+
+            <td>
+              <button class="button" type="button"  mat-button  (click)="onRegisterClick()" >Save</button>
+            </td>
+        </tr>
+      </table>
+    </form>
+  </mat-card>  
+</div>

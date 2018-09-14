@@ -30,6 +30,8 @@
       <a *ngIf="this.userService.getLoggedIn() && (this.userService.getLoggedIn().tip == 'korisnik') " mat-list-item routerLink="/addOglas">Add auction</a>
       <a *ngIf="this.userService.getLoggedIn() && (this.userService.getLoggedIn().tip == 'fan') " mat-list-item routerLink="/addRekvizit">Add Item</a>
       <a *ngIf="this.userService.getLoggedIn() && (this.userService.getLoggedIn().tip == 'fan') " mat-list-item routerLink="/rekvizitAllEdit">Edit Items</a>
+      <a *ngIf="this.userService.getLoggedIn() && (this.userService.getLoggedIn().tip == 'root') " mat-list-item routerLink="/addadmin">Add admin</a>
+      <a *ngIf="this.userService.getLoggedIn() && (this.userService.getLoggedIn().tip == 'root') " mat-list-item routerLink="/lokalAdd">Add local</a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content class="lowerContainer" >

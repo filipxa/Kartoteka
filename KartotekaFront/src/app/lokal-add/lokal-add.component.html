@@ -1,0 +1,40 @@
+<div class="main">
+  <mat-card class="example-card">
+    <mat-card-header>
+        <mat-card-title>Add local form</mat-card-title>
+      </mat-card-header>
+      <form class="example-form" >
+        <table class="table" cellspacing="0">
+          <tr>
+            <td><mat-form-field class="example-full-width">
+                <input #name matInput placeholder="Name" [formControl]="nameFormControl">
+              </mat-form-field></td>
+          </tr>
+          <tr>
+              <td><mat-form-field class="example-full-width">
+                  <input #description matInput placeholder="Description" [formControl]="descriptionFormControl">
+                </mat-form-field></td>
+            </tr>
+            <tr>
+                <td><mat-form-field class="example-full-width">
+                  <input #address matInput placeholder="Address" [formControl]="addressFormControl">
+                </mat-form-field></td>
+            </tr>
+            <tr>
+                <td><section class="example-section">
+                  <label class="example-margin">Lokal:</label><br>
+                  <mat-radio-group [formControl]="lokalFormKontrol">
+                    <mat-radio-button class="example-margin" value=true>Theatr</mat-radio-button>
+                    <mat-radio-button class="example-margin" value=false>Cinema</mat-radio-button>
+                  </mat-radio-group>
+                </section></td>
+              </tr>
+            <tr>
+                <td>
+                  <button class="button" type="button"  mat-button  (click)="onSave()" >Save</button>
+                </td>
+            </tr>
+        </table>
+     </form>
+  </mat-card>  
+</div>
