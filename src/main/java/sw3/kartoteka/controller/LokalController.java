@@ -106,6 +106,10 @@ public class LokalController {
 	
 	
 	
+	
+	
+	
+	
 	@GetMapping(value="karta/{id}")
 	public ResponseEntity<Lokal> getLokalByKartaId(@PathVariable("id") Integer id){
 		Karta karta = kartaService.findOne(id);
