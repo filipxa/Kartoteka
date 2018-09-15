@@ -7,7 +7,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MyNavComponent } from './my-nav/my-nav.component';
 import { LayoutModule } from '@angular/cdk/layout';
-import { MatToolbarModule, MatCheckboxModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule, MatSnackBarModule, MatCardModule, MatStepperModule, MatSelectModule } from '@angular/material';
+import { MatToolbarModule, MatCheckboxModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule, MatSnackBarModule, MatCardModule, MatStepperModule, MatSelectModule,MatRadioModule } from '@angular/material';
 import {MatTabsModule} from '@angular/material/tabs';
 import { LoginSmallComponent } from './login-small/login-small.component';
 import { MatInputModule } from '@angular/material/input';
@@ -43,6 +43,9 @@ import 'rxjs';
 import { TicketConfirmComponent } from './ticket-confirm/ticket-confirm.component';
 import { NaslovProfileComponent } from './naslov-profile/naslov-profile.component';
 import { SalaEditComponent } from './sala-edit/sala-edit.component';
+import { RootAdminAddComponent } from './root-admin-add/root-admin-add.component';
+import { FirstloginComponent } from './firstlogin/firstlogin.component';
+import { LokalAddComponent } from './lokal-add/lokal-add.component';
 
 const appRoutes: Routes = [
 
@@ -61,6 +64,9 @@ const appRoutes: Routes = [
   { path: 'ogalsEdit/:id', component: OglasEditovanjeComponent},
   { path: 'lokal/:type', component: LokalListComponent},
   { path: 'lokal/profil/:id', component: LokalProfileComponent},
+  { path: 'addadmin', component: RootAdminAddComponent },
+  { path: 'firstlogin', component: FirstloginComponent },
+  { path: 'lokalAdd', component: LokalAddComponent },
   { path: 'naslovProfil/:idNaslova/:idLokala', component: NaslovProfileComponent}
 ];
 
@@ -98,7 +104,10 @@ const appRoutes: Routes = [
     NaslovProfileComponent,
     SalaEditComponent,
     PonudaKarticaComponent,
-    TicketConfirmComponent
+    TicketConfirmComponent,
+    RootAdminAddComponent,
+    FirstloginComponent,
+    LokalAddComponent
   ],
   imports: [
     BrowserModule,
@@ -119,7 +128,8 @@ const appRoutes: Routes = [
     MatCardModule,
     FormsModule,
     ReactiveFormsModule,
-    MatTabsModule
+    MatTabsModule,
+    MatRadioModule
   ],
   exports: [RouterModule, MatSnackBarModule, HttpClientModule],
   providers: [ LokalEditProfileComponent, SalaEditComponent ],

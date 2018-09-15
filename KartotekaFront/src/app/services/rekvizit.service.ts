@@ -43,7 +43,7 @@ export class RekvizitService {
     this.http.post(this.allRekvizitiUrl, sendData
     ).subscribe(
       data => { 
-        console.log(data);
+        //console.log(data);
         this.snackBar.open("Item added!", "", {
           duration: 2000,
         }); 
@@ -56,11 +56,12 @@ export class RekvizitService {
       }
     );
   }
+
   editRekvizit(rekvizit: Rekvizit, file: File) {
     let sendData = new FormData();
     sendData.append('file', file);
     sendData.append('rekvizit',new Blob([JSON.stringify(rekvizit)], {type : 'application/json'}) );
-    console.log(sendData);
+    //console.log(sendData);
     this.http.post<Rekvizit>(this.allRekvizitiUrl, sendData).subscribe(param => {
       this.snackBar.open("Item changed!", "", {
         duration: 2000,

@@ -3,6 +3,8 @@ import { Observable, of } from 'rxjs';
 import { Lokal } from '../models/lokal';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { tap, catchError } from 'rxjs/operators';
+import { MatSnackBar } from '@angular/material';
+import { Router } from '@angular/router';
 import { Sala } from '../models/sala';
 
 
@@ -17,7 +19,7 @@ const httpOptions = {
 export class LokalService {
 
 
-  constructor(  private http: HttpClient) { }
+  constructor(  private http: HttpClient,private snackBar: MatSnackBar,private router:Router) { }
   private lokaliSerachUrl : string = "http://localhost:8080/api/lokal/search/";
   private lokalByIdUrls : string = "http://localhost:8080/api/lokal/byId/";
   private allCinemasUrl : string = "http://localhost:8080/api/lokal/cinemas";
@@ -60,6 +62,26 @@ export class LokalService {
     };
   }
 
+  public save(lokal:Lokal,file:File){
+    let sendData = new FormData();
+    sendData.append('file', file);
+    sendData.append('lokal',new Blob([JSON.stringify(lokal)], {type : 'application/json'}) );
+    console.log(sendData);
+    this.http.post("http://localhost:8080/api/lokal/", sendData).subscribe(
+      data => { 
+        //console.log(data);
+        this.snackBar.open("Item added!", "", {
+          duration: 2000,
+        }); 
+        this.router.navigate(["/"]);
+      },
+      error => {
+        this.snackBar.open("ERROR!", "", {
+          duration: 2000,
+        });
+      }
+    );
+  }
   updateLokal(lokal: Lokal)
   {
     return this.http.post<any>("http://localhost:8080/api/lokal/update", lokal, httpOptions);
