@@ -1,76 +1,76 @@
 <div class="container-fluid" style="padding-top: 50px;">
-  <div class="row">
-
-    <div class="col-md-4">
-      <img style="width: 100%" src="http://www.ashfordcastle.com/-/media/ttc/rch/ashford-castle/main-carousel/mobile/ash-cinema-03-1024x576.jpg">
-    </div>
-
-    <div class="col-md-8">
-
-      <mat-tab-group>
-
-        <mat-tab label="Home">
-          <br>
-          <h3>
-            {{lokal.naziv}}
-          </h3>
-          <br>
-          <span style="font-size: 18px;">Adress:
-            <b>{{lokal.adresa}}</b>
-          </span>
-          <br>
-          <br>
-          <p>
-            Description:
-            <b>{{lokal.promotivniOpis}}</b>
-          </p>
-
-          <button [hidden]="!admin" class="btn btn-primary" (click)="openDialog()">Edit cinema profile.</button>
-
-        </mat-tab>
-
-        <mat-tab label="Schedule">
-          <div class="content" *ngFor="let naslov of repertoarLista">
-            <button [hidden]="!admin" class="btn btn-secondary edit">Edit projection</button>
-            <img (click)="details(naslov.idNaslova)" class="projectImg" width="150px;" src="{{naslov.slika}}">
-            <div class="description">
-              <h3 style="cursor: pointer;" (click)="details(naslov.idNaslova)">{{naslov.naziv}}</h3>
-              <br>
-              <h5>Directed by: {{naslov.reziser.ime}} {{naslov.reziser.prezime}}</h5>
-              <br>
-              <h6>Description: {{naslov.opis}}</h6>
-              <h6>Genre: {{naslov.zanr}}</h6>
-              <p>Stars:
-                <span *ngFor="let glumac of naslov.glumci">{{glumac.ime}} {{glumac.prezime}} | </span>
-              </p>
-            </div>
-          </div>
-
-          <button [hidden]="!admin" class="btn btn-secondary">New schedule.</button>
-        </mat-tab>
-
-        <mat-tab label="Configuration">
-          <div class="conf">
-            <div class="card border-secondary mb-3" style="max-width: 13rem;" (click)="ConfSale(4)">
-              <div class="card-header">Naziv sale</div>
-              <div class="card-body">
-                <p class="card-text">Rows: </p>
-                <p class="card-text">Columns: </p>
+    <div class="row">
+  
+      <div class="col-md-4">
+        <img style="width: 100%" src="http://www.ashfordcastle.com/-/media/ttc/rch/ashford-castle/main-carousel/mobile/ash-cinema-03-1024x576.jpg">
+      </div>
+  
+      <div class="col-md-8">
+  
+        <mat-tab-group>
+  
+          <mat-tab label="Home">
+            <br>
+            <h3>
+              {{lokal.naziv}}
+            </h3>
+            <br>
+            <span style="font-size: 18px;">Adress:
+              <b>{{lokal.adresa}}</b>
+            </span>
+            <br>
+            <br>
+            <p>
+              Description:
+              <b>{{lokal.promotivniOpis}}</b>
+            </p>
+  
+            <button [hidden]="!admin" class="btn btn-primary" (click)="openDialog()">Edit cinema profile.</button>
+  
+          </mat-tab>
+  
+          <mat-tab label="Schedule">
+            <div class="content" *ngFor="let naslov of repertoarLista">
+              <button [hidden]="!admin" class="btn btn-secondary edit">Edit projection</button>
+              <img (click)="details(naslov.idNaslova)" class="projectImg" width="150px;" src="{{naslov.slika}}">
+              <div class="description">
+                <h3 style="cursor: pointer;" (click)="details(naslov.idNaslova)">{{naslov.naziv}}</h3>
+                <br>
+                <h5>Directed by: {{naslov.reziser.ime}} {{naslov.reziser.prezime}}</h5>
+                <br>
+                <h6>Description: {{naslov.opis}}</h6>
+                <h6>Genre: {{naslov.zanr}}</h6>
+                <p>Stars:
+                  <span *ngFor="let glumac of naslov.glumci">{{glumac.ime}} {{glumac.prezime}} | </span>
+                </p>
               </div>
             </div>
-
-            <!-- <div class="card border-secondary mb-3" *ngFor="let i of listasala" style="max-width: 13rem;" (click)="ConfSale(i)">
+  
+            <button [hidden]="!admin" class="btn btn-secondary">New schedule.</button>
+          </mat-tab>
+  
+          <mat-tab label="Configuration">
+            <div class="conf">
+              <!-- <div class="card border-secondary mb-3" style="max-width: 13rem;" (click)="ConfSale(4)">
                 <div class="card-header">Naziv sale</div>
                 <div class="card-body">
                   <p class="card-text">Rows: </p>
                   <p class="card-text">Columns: </p>
                 </div>
               </div> -->
-          </div>
-          <!-- <button [hidden]="!admin" class="btn btn-primary">Edit discount.</button> -->
-        </mat-tab>
-      </mat-tab-group>
+  
+              <div class="card border-secondary mb-3" *ngFor="let sala of saleZaIzmenu" style="max-width: 13rem;" (click)="ConfSale(sala.idSale)">
+                  <div class="card-header">{{sala.naziv}}</div>
+                  <div class="card-body">
+                    <p class="card-text">Rows: {{sala.brRedova}} </p>
+                    <p class="card-text">Columns: {{sala.brKolona}}</p>
+                  </div>
+                </div>
+            </div>
+            <!-- <button [hidden]="!admin" class="btn btn-primary">Edit discount.</button> -->
+          </mat-tab>
+        </mat-tab-group>
+      </div>
+  
     </div>
-
   </div>
-</div>

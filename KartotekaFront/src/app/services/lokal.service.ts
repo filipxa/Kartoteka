@@ -5,6 +5,7 @@ import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { tap, catchError } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
+import { Sala } from '../models/sala';
 
 
 const httpOptions = {
@@ -81,9 +82,22 @@ export class LokalService {
       }
     );
   }
+  updateSala(sala : Sala)
+  {
+    console.log("updateSala");
+    
+    return this.http.post("http://localhost:8080/api/sala/update", sala, httpOptions).subscribe(x=>{
+      console.log(x);
+    });
+
+  }
+
   updateLokal(lokal: Lokal)
   {
     return this.http.post<any>("http://localhost:8080/api/lokal/update", lokal, httpOptions);
   }
 
 }
+ 
+
+

@@ -169,8 +169,8 @@ public class InitBean {
 		
 		Sala sala = new Sala( 10, 10, lokal);
 		salaRepository.save(sala);
-		lokal.setSale(new ArrayList<Sala>());
-		lokal.getSale().add(sala);
+		lokal.setSala(new ArrayList<Sala>());
+		lokal.getSala().add(sala);
 		lokalService.save(lokal);
 		
 		
@@ -250,7 +250,9 @@ public class InitBean {
 		Naslov film1 = new Naslov( "Munje", reziser1, glumciZaMunje, "Komedija", 132, 500, "Zivot mladih u Beogradu");
 		naslovRepository.save(film1);
 		Sala sala4 = new Sala(50, 30, lokal1);
+		Sala novasala = new Sala(45,45, lokal1);
 		salaRepository.save(sala4);
+		salaRepository.save(novasala);
 		Izvedba zvezdaIzvedba = new Izvedba( sala4, new ArrayList<>(), new Date(), false, film1);
 		izvedbaRepository.save(zvezdaIzvedba);
 		ArrayList<Izvedba> izvedbeZvezda = new ArrayList<>();
@@ -259,6 +261,7 @@ public class InitBean {
 		repertoarRepository.save(zvezdaRepe);
 		List<Sala> zvezdaSale = new ArrayList<>();
 		zvezdaSale.add(sala4);
+		zvezdaSale.add(novasala);
 		Lokal zvezda = new Lokal( false, zvezdaRepe, "ZVEZDA", "Beograd", "Pustanje starih filmova", zvezdaSale);
 		lokalService.save(zvezda);
 		Skala skala = new Skala(10, 10, 25, 20, 50, 30);
