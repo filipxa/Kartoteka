@@ -92,6 +92,11 @@ export class LokalService {
 
   }
 
+  updateLokal(lokal: Lokal)
+  {
+    return this.http.post<any>("http://localhost:8080/api/lokal/update", lokal, httpOptions);
+  }
+
 }
  
 

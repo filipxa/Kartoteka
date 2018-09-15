@@ -16,40 +16,37 @@ export class SalaEditComponent implements OnInit {
   idSale: number;
   sala: Sala;
 
+
+
   constructor(public dialogRef: MatDialogRef<SalaEditComponent>,
     @Inject(MAT_DIALOG_DATA) public data: string, private localService: LokalService) {
     let prima: string = data;
     let podaci: string[] = [];
+    console.log(prima);
+    
     podaci = prima.split("_");
     this.idLokala = Number(podaci[0]);
     localService.getLokal(this.idLokala).subscribe(data => {
       this.lokal = data;
       console.log(this.lokal);
+      this.idSale = Number(podaci[1]);
+      this.vratiSalu(this.idSale);
     });
-    this.idSale = Number(podaci[1]);
-    console.log(this.sala);
-
-    this.vratiSalu(this.idSale);
-    console.log("Salica " + this.sala);
-
-    
-    
-    
-    
+   
     
   }
 
   private vratiSalu(idSale){
-    // let sale : Sala[] = this.lokal.sala;
-    console.log("AAAAAAAAA" + this.lokal);
+    let sale : Sala[] = this.lokal.sala;
+   
 
     
-    // sale.forEach(element => {
+    sale.forEach(element => {
       
-    //   if(element.idSale == idSale){
-    //     return element;
-    //   }
-    // });
+      if(element.idSale == idSale){
+        this.sala = element;
+      }
+    });
   }
 
 
