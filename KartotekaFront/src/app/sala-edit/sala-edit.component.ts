@@ -1,6 +1,8 @@
 import { Component, OnInit, Inject, ViewChild, ElementRef } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { LokalService } from '../services/lokal.service';
+import { Sala } from '../models/sala';
+import { Lokal } from '../models/lokal';
 
 @Component({
   selector: 'app-sala-edit',
@@ -9,12 +11,49 @@ import { LokalService } from '../services/lokal.service';
 })
 export class SalaEditComponent implements OnInit {
 
-  prima: any;
+  idLokala: number;
+  lokal: Lokal;
+  idSale: number;
+  sala: Sala;
 
   constructor(public dialogRef: MatDialogRef<SalaEditComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any, private localService: LokalService) {
-        this.prima = data;
-     }
+    @Inject(MAT_DIALOG_DATA) public data: string, private localService: LokalService) {
+    let prima: string = data;
+    let podaci: string[] = [];
+    podaci = prima.split("_");
+    this.idLokala = Number(podaci[0]);
+    localService.getLokal(this.idLokala).subscribe(data => {
+      this.lokal = data;
+      console.log(this.lokal);
+    });
+    this.idSale = Number(podaci[1]);
+    console.log(this.sala);
+
+    this.vratiSalu(this.idSale);
+    console.log("Salica " + this.sala);
+
+    
+    
+    
+    
+    
+  }
+
+  private vratiSalu(idSale){
+    // let sale : Sala[] = this.lokal.sala;
+    console.log("AAAAAAAAA" + this.lokal);
+
+    
+    // sale.forEach(element => {
+      
+    //   if(element.idSale == idSale){
+    //     return element;
+    //   }
+    // });
+  }
+
+
+
 
   ngOnInit() {
   }

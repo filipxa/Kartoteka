@@ -82,9 +82,17 @@ export class LokalService {
       }
     );
   }
-  updateLokal(lokal: Lokal)
+  updateSala(sala : Sala)
   {
-    return this.http.post<any>("http://localhost:8080/api/lokal/update", lokal, httpOptions);
+    console.log("updateSala");
+    
+    return this.http.post("http://localhost:8080/api/sala/update", sala, httpOptions).subscribe(x=>{
+      console.log(x);
+    });
+
   }
 
 }
+ 
+
+
