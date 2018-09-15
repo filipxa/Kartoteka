@@ -46,6 +46,7 @@ import { SalaEditComponent } from './sala-edit/sala-edit.component';
 import { RootAdminAddComponent } from './root-admin-add/root-admin-add.component';
 import { FirstloginComponent } from './firstlogin/firstlogin.component';
 import { LokalAddComponent } from './lokal-add/lokal-add.component';
+import { SkalaAddRootComponent } from './skala-add-root/skala-add-root.component';
 
 const appRoutes: Routes = [
 
@@ -67,6 +68,7 @@ const appRoutes: Routes = [
   { path: 'addadmin', component: RootAdminAddComponent },
   { path: 'firstlogin', component: FirstloginComponent },
   { path: 'lokalAdd', component: LokalAddComponent },
+  { path: 'skalaEdit', component: SkalaAddRootComponent },
   { path: 'naslovProfil/:idNaslova/:idLokala', component: NaslovProfileComponent}
 ];
 
@@ -107,7 +109,8 @@ const appRoutes: Routes = [
     TicketConfirmComponent,
     RootAdminAddComponent,
     FirstloginComponent,
-    LokalAddComponent
+    LokalAddComponent,
+    SkalaAddRootComponent
   ],
   imports: [
     BrowserModule,

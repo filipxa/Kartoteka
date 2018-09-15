@@ -55,7 +55,7 @@ export class OglasKarticaComponent implements OnInit {
   PriceFormControl = new FormControl('', [
     Validators.required
   ]);
-
+  vreme:String;
   getPonda(): void{
     this.ponudaService.getOglasForUser(this.oglas.idOglasa).subscribe(
       ponuda => this.initPonuda(ponuda));
@@ -65,7 +65,15 @@ export class OglasKarticaComponent implements OnInit {
     this.staraPonuda = ponuda;
     console.log(this.staraPonuda);
   }
+  nDate:Date;
+  nMil:Number;
   ngOnInit() {
+    this.nDate = new Date();
+    this.nMil = this.nDate.getTime().valueOf();
+    let datee = new Date();
+    console.log("new Date():"+datee.toLocaleString());
+    datee.setTime(this.oglas.datum);
+    this.vreme = datee.toLocaleString();
     this.imagePath = "http://localhost:8080/api/downloadFile/oglasi/"+this.oglas.idOglasa;
     this.altPhoto = "https://www.freeiconspng.com/uploads/no-image-icon-4.png";
     this.getPonda();

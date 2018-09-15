@@ -20,6 +20,7 @@ import sw3.kartoteka.model.entity.Rekvizit;
 import sw3.kartoteka.model.entity.Repertoar;
 import sw3.kartoteka.model.entity.Sala;
 import sw3.kartoteka.model.entity.Sediste;
+import sw3.kartoteka.model.entity.Skala;
 import sw3.kartoteka.repository.IzvedbaRepository;
 import sw3.kartoteka.repository.LokalRepository;
 import sw3.kartoteka.repository.NaslovRepository;
@@ -31,6 +32,7 @@ import sw3.kartoteka.services.KorisnikService;
 import sw3.kartoteka.services.LokalService;
 import sw3.kartoteka.services.OsobaService;
 import sw3.kartoteka.services.RekvizitService;
+import sw3.kartoteka.services.SkalaService;
 
 @Service
 public class InitBean {
@@ -64,6 +66,8 @@ public class InitBean {
 	@Autowired
 	OsobaService osobaService;
 	
+	@Autowired
+	SkalaService skalaService;
 	
 	public void fillData(){
 		Korisnik korisnik1 = new Korisnik( "korisnik", "Filip", "Micic", "filipxa@hotmail.com", "123", new ArrayList<Korisnik>(), "131232131", true, 0, 63666458, "Beograd");
@@ -257,10 +261,14 @@ public class InitBean {
 		zvezdaSale.add(sala4);
 		Lokal zvezda = new Lokal( false, zvezdaRepe, "ZVEZDA", "Beograd", "Pustanje starih filmova", zvezdaSale);
 		lokalService.save(zvezda);
-
-	
+		Skala skala = new Skala(10, 10, 25, 20, 50, 30);
+		skalaService.save(skala);
 		
+		List<Skala> skale = skalaService.findAll();
 		
+		for (Skala skala2 : skale) {
+			System.out.println(skala2);
+		}
 	
 
 	}

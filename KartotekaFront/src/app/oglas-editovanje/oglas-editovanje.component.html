@@ -1,21 +1,33 @@
-<form class="example-form">
-    <mat-form-field class="example-full-width">
-      <input matInput placeholder="Name" value ="{{oglas.naziv}}" [formControl]="NameFormControl" [errorStateMatcher]="matcher">
-  
-    </mat-form-field>
-    <p>
-      <input [(ngModel)]="humanDate" type="date" name="startDate"  [min]="today"/>
-    </p>
-    <br>
-    <br>
-
-    <mat-form-field class="example-full-width">
-      <textarea matInput placeholder="Description" value= "{{oglas.opis}}" [formControl]="DescriptionFormControl"></textarea>
-    </mat-form-field>
-    <br>
-    <input class="ng-hide" id="input-file-id" multiple type="file" (change)="valuechangeIMG($event)">
-    <label for="input-file-id" class="md-button md-raised md-primary">Choose Files</label>
-    <br>
-    <br>
-    <button type="button" mat-stroked-button="user-button" (click)="saveOglas()"> Save</button>
-  </form>
+<div class="main">
+  <mat-card class="example-card">
+    <mat-card-header>
+      <mat-card-title>Edit auction</mat-card-title>
+    </mat-card-header>
+    <form class="example-form" >
+      <table class="table" cellspacing="0">
+        <tr>
+          <td><mat-form-field class="example-full-width">
+              <input matInput placeholder="Name"  [formControl]="NameFormControl" [errorStateMatcher]="matcher">
+          </mat-form-field> </td>
+        </tr>
+        <tr>
+          <td><input [(ngModel)]="humanDate" type="date" name="startDate"  [min]="today"/></td>
+        </tr>
+        <tr>
+            <td><mat-form-field class="example-full-width">
+              <textarea matInput placeholder="Description"  [formControl]="DescriptionFormControl"></textarea>
+            </mat-form-field></td>
+        </tr>
+        <tr>
+          <td><input class="ng-hide" id="input-file-id" multiple type="file" (change)="valuechangeIMG($event)"></td>
+        </tr>
+        <tr>
+          <td><label for="input-file-id" class="md-button md-raised md-primary">Choose Files</label></td>
+        </tr>
+        <tr>
+          <td><button type="button" mat-stroked-button="user-button" (click)="saveOglas()"> Save</button></td>
+        </tr>
+      </table>
+    </form>
+  </mat-card>  
+</div>

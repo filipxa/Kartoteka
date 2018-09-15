@@ -4,6 +4,7 @@
       <mat-card-title>{{rekvizit.naziv}}</mat-card-title>
       <mat-card-subtitle>{{rekvizit.cena}} din</mat-card-subtitle>
     </mat-card-header>
+    <!-- onerror= "this.src = 'http://localhost:8080/api/downloadFile/rekviziti/alt'" -->
     <img mat-card-image [src]="imagePath"  alt="No Photo" class="img">
     <mat-card-content>
       <p>

@@ -1,8 +1,8 @@
 
-<mat-card class="example-card" *ngIf="oglas.odobren && !oglas.prodat" >
+<mat-card class="example-card" *ngIf="oglas.odobren && !oglas.prodat && oglas.datum>nMil" >
     <mat-card-header>
       <mat-card-title>{{oglas.naziv}}</mat-card-title>
-      <mat-card-subtitle>Vazi do: {{oglas.datum}}</mat-card-subtitle>
+      <mat-card-subtitle>Vazi do: {{vreme}}</mat-card-subtitle>
     </mat-card-header>
     <img mat-card-image [src]="imagePath" onerror= "this.src = 'http://localhost:8080/api/downloadFile/rekviziti/alt'" alt="No Photo" class="img">
     <mat-card-content>
