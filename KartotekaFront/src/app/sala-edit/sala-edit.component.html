@@ -1,3 +1,17 @@
-<p>
-  sala-edit works!
-</p>
+<div class="container">
+
+
+    <br>
+    <br> Name:
+    <input *ngIf="sala" [(ngModel)]="sala.naziv" type="text" placeholder="Name">
+    <br>
+    <br> Adress:
+    <input *ngIf="sala"  [(ngModel)]="sala.brRedova" type="number" placeholder="Numbers of rows">
+    <br>
+    <br> Description:
+    <input *ngIf="sala"  [(ngModel)]="sala.brKolona" type="number" placeholder="Numbers of columns">
+    <br>
+    <br>
+    <button style="float: right;margin-left: 20px !important" class="btn btn-primary" (click)="editSala()">Save</button>
+    <button style="float: right;" class="btn btn-primary" (click)="cancel()">Cancel</button>
+    </div>

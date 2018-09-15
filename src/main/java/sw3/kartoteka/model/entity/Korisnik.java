@@ -246,6 +246,7 @@ public class Korisnik {
 		this.brBodova = brBodova;
 		this.brTelefona = brTelefona;
 		this.adresa = adresa;
+		this.listaLokala = new ArrayList<>();
 	}
 
 
