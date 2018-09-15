@@ -87,14 +87,4 @@ export class LokalService {
     return this.http.post<any>("http://localhost:8080/api/lokal/update", lokal, httpOptions);
   }
 
-  updateSala(sala : Sala)
-  {
-    console.log("updateSala");
-    
-    return this.http.post("http://localhost:8080/api/sala/update", sala, httpOptions).subscribe(x=>{
-      console.log(x);
-    });
-
-  }
-
 }

@@ -51,21 +51,21 @@
 
         <mat-tab label="Configuration">
           <div class="conf">
-            <!-- <div class="card border-secondary mb-3" style="max-width: 13rem;" (click)="ConfSale(4)">
+            <div class="card border-secondary mb-3" style="max-width: 13rem;" (click)="ConfSale(4)">
               <div class="card-header">Naziv sale</div>
               <div class="card-body">
                 <p class="card-text">Rows: </p>
                 <p class="card-text">Columns: </p>
               </div>
-            </div> -->
+            </div>
 
-            <div class="card border-secondary mb-3" *ngFor="let sala of saleZaIzmenu" style="max-width: 13rem;" (click)="ConfSale(sala.idSale)">
-                <div class="card-header">{{sala.naziv}}</div>
+            <!-- <div class="card border-secondary mb-3" *ngFor="let i of listasala" style="max-width: 13rem;" (click)="ConfSale(i)">
+                <div class="card-header">Naziv sale</div>
                 <div class="card-body">
-                  <p class="card-text">Rows: {{sala.brRedova}} </p>
-                  <p class="card-text">Columns: {{sala.brKolona}}</p>
+                  <p class="card-text">Rows: </p>
+                  <p class="card-text">Columns: </p>
                 </div>
-              </div>
+              </div> -->
           </div>
           <!-- <button [hidden]="!admin" class="btn btn-primary">Edit discount.</button> -->
         </mat-tab>

@@ -12,7 +12,6 @@ import { Sala } from '../models/sala';
 import { TerminCena } from '../models/terminCena';
 import { Karta } from '../models/karta';
 import { SalaEditComponent } from '../sala-edit/sala-edit.component';
-import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-lokal-profile',
@@ -23,117 +22,61 @@ export class LokalProfileComponent implements OnInit {
 
   ID: number;
   lokal: Lokal;
-  podaci: any = [];
-  profilLokala: any = [];
-  repertoarLista: any = [];
+  podaci : any = [];
+  profilLokala : any = [];
+  repertoarLista : any = [];
+
+
   admin: boolean;
 
 
-  saleLokala: Sala[];
-  saleSaIzvedbama: Sala[];
-  saleZaIzmenu: Sala[];
 
+  constructor(private lokalService: LokalService, private route: ActivatedRoute, private userService: UserService, public dialog: MatDialog, private router: Router) {
 
-
-
-  constructor(private lokalService: LokalService, private route: ActivatedRoute, private userService: UserService, public dialog: MatDialog, private router: Router
-    , private location: Location) {
-
-
+    this.isAdmin();
 
     this.ID = parseInt(this.route.snapshot.paramMap.get('id'));
     this.lokal = new Lokal();
     lokalService.getLokal(this.ID).subscribe(data => {
       this.lokal = data;
-      this.repertoarLista = this.popuniRepertoarLokala();
+      // this.popuniPodatkeZaPrikaz();
+      
+      // console.log(this.podaci);
+
       // popunjava podatke za prikaz profila lokala
       this.popuniProfilLokala();
-      this.pokupiSaleLokal();
-      console.log("sale lokala");
-      console.log(this.saleLokala);
+      console.log(this.profilLokala);
       
-
-      
-      this.popuniSaleUKojimaImaIzvedbe();
-      console.log("Sale Sa izvedbana");
-      console.log(this.saleSaIzvedbama);
-      
-      
-      this.popuniSaleZaIzmenu();
-      console.log("Sale za izmenu");
-      
-      console.log(this.saleZaIzmenu);
-      
-      this.isAdmin();
-
-
-
+      // popunjava reperoar za prikaz
+      this.repertoarLista = this.popuniRepertoarLokala();
+      console.log(this.repertoarLista);
     });
-  }
 
-
-  popuniSaleZaIzmenu(){
-    // sve sale iz saleLokala koje se ne nalaze u saleIzmenaProvera su za prikaz i mogu se menjati
-    this.saleZaIzmenu = new Array(); 
-    this.saleLokala.forEach(element => {
-      if(!this.saleSaIzvedbama.includes(element)) {
-        
-        
-      }
-      this.saleSaIzvedbama.forEach(e2 => {
-        if(e2.idSale!=element.idSale){
-         
-          this.saleLokala.push(element);
-        }
-      });
-    });
-  
+    
+   
     
   }
 
-  pokupiSaleLokal() {
-    this.saleLokala = [];
-    this.lokal.sala.forEach(element => {
-      this.saleLokala.push(element);
-    });
-  }
-
-  // puni samo sale u kojima nema nijedne izvedbe
-  popuniSaleUKojimaImaIzvedbe() {
-    let mapaSvih: Map<Naslov, Map<Sala, Array<Izvedba>>> = Repertoar.extractSalaIZvedbe(this.lokal.repertoar);
+ 
+  popuniRepertoarLokala() : any{
+     // pokupiti sve diff naslove
+     let naslovi : Naslov[] = [];
+     console.log(this.lokal);
+     
+     naslovi = Repertoar.getNaslovi(this.lokal.repertoar);
+     
+     let repPrikaz : any = [];
+     repPrikaz = Repertoar.getRepertoarZaSpisakNaslova(naslovi);
+     return repPrikaz;
     
-    this.saleSaIzvedbama = [];
-
-    mapaSvih.forEach(
-      (mapa: Map<Sala, Izvedba[]>, naslov: Naslov) => {
-        mapa.forEach((iz: Izvedba[], sala: Sala) => {
-         if(iz != []){
-            this.saleSaIzvedbama.push(sala);
-         }
-        });
-      });
   }
-
-
-  popuniRepertoarLokala(): any {
-    // pokupiti sve diff naslove
-    let naslovi: Naslov[] = [];
-
-    naslovi = Repertoar.getNaslovi(this.lokal.repertoar);
-
-
-    let repPrikaz: any = [];
-    repPrikaz = Repertoar.getRepertoarZaSpisakNaslova(naslovi);
-    return repPrikaz;
-
-  }
-  popuniProfilLokala() {
-
+  popuniProfilLokala(){
+   
     this.profilLokala.push({
-      idLokala: this.lokal.id,
-      nazivLokala: this.lokal.naziv,
-      adresaLokala: this.lokal.adresa,
-      promotivniOpis: this.lokal.promotivniOpis
+      idLokala : this.lokal.id,
+      nazivLokala : this.lokal.naziv,
+      adresaLokala : this.lokal.adresa,
+      promotivniOpis : this.lokal.promotivniOpis
 
     })
   }
@@ -145,7 +88,8 @@ export class LokalProfileComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      if (result) {
+      if (result) {/* 
+        window.location.reload(); */
         this.lokal = new Lokal();
         this.lokalService.getLokal(this.ID).subscribe(data => {
           this.lokal = data;
@@ -155,60 +99,58 @@ export class LokalProfileComponent implements OnInit {
     });
   }
 
-  ConfSale(idSale): void {
-
+  ConfSale(sala): void {
     const dialogRef = this.dialog.open(SalaEditComponent, {
       width: '400px',
-      data: this.lokal.id + "_" + idSale
+      data: sala
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      window.location.reload();
       if (result) {
-
       }
     });
   }
 
 
   ngOnInit() {
-
-
+   
+    
   }
 
+  
 
-
-  getSalaTerminiCene(salaIzvedba: Map<Sala, Izvedba[]>): Map<String, TerminCena[]> {
-    let salaTerminiCene: Map<String, TerminCena[]> = new Map<String, Array<TerminCena>>();
+  getSalaTerminiCene(salaIzvedba : Map<Sala, Izvedba[]>) : Map<String, TerminCena[]> {
+    let salaTerminiCene : Map<String,TerminCena[]>  =  new Map<String, Array<TerminCena>>();
     salaIzvedba.forEach(
-      (izvedbe: Izvedba[], sala: Sala) => {
-        let listaTerminiCene: Array<TerminCena> = new Array<TerminCena>();
+      (izvedbe: Izvedba[], sala : Sala)=>
+      {
+        let listaTerminiCene : Array<TerminCena> = new Array<TerminCena>();
 
-        izvedbe.forEach((value: Izvedba, index: number) => {
-          let terminCena: TerminCena;
+        izvedbe.forEach((value : Izvedba, index: number)=>{
+          let terminCena : TerminCena;
           terminCena = new TerminCena();
-          terminCena.termin = value.datum + value.termin;
+          terminCena.termin = value.datum +  value.termin;
           terminCena.cena = value.cene;
           listaTerminiCene.push(terminCena);
         });
         salaTerminiCene.set(sala.naziv, listaTerminiCene);
-
+    
       });
-    return salaTerminiCene;
+      return salaTerminiCene;
   }
 
-  getKarteNaPopustuZaNaslov(idNaslova: number) {
+  getKarteNaPopustuZaNaslov(idNaslova : number){
 
     let mapa: Map<Izvedba, Karta[]> = new Map<Izvedba, Array<Karta>>();
     mapa = Repertoar.extractPopustKarteZaNaslov(this.lokal.repertoar, idNaslova);
     let podaci = [];
-
-    mapa.forEach((karte: Karta[], izvedba: Izvedba) => {
+    
+    mapa.forEach((karte : Karta[], izvedba : Izvedba) => {
       podaci.push({
-        idIzvedbe: izvedba.idIzvedba,
-        karte: izvedba.karte,
-        termin: izvedba.termin,
-        naslov: izvedba.naslov.naziv,
+        idIzvedbe : izvedba.idIzvedba,
+        karte : izvedba.karte,
+        termin : izvedba.termin, 
+        naslov : izvedba.naslov.naziv,
       });
 
       // pokupim sve razlicite termine 
@@ -222,7 +164,7 @@ export class LokalProfileComponent implements OnInit {
       // datumi.forEach(termin => {
       // });
 
-    });
+      });
     return podaci;
   }
 
@@ -232,42 +174,43 @@ export class LokalProfileComponent implements OnInit {
 
     let mapaSvih: Map<Naslov, Map<Sala, Array<Izvedba>>> = Repertoar.extractSalaIZvedbe(this.lokal.repertoar);
     let podaci = [];
-
+    
     mapaSvih.forEach(
       (salaIzvedba: Map<Sala,
-        Izvedba[]>, naslov: Naslov) => {
+         Izvedba[]>, naslov: Naslov) => {
 
-        let salaTerminiCene: Map<String, TerminCena[]> = this.getSalaTerminiCene(salaIzvedba);
+          let salaTerminiCene : Map<String, TerminCena[]>  = this.getSalaTerminiCene(salaIzvedba);
 
-        podaci.push({
-          idFilma: naslov.id,
-          nazivFilma: naslov.naziv,
-          glumci: naslov.glumci,
-          zanr: naslov.zanr,
-          trajanje: naslov.trajanje,
-          ocena: naslov.ocena,
-          salaTerminiCene: salaTerminiCene,
-          opis: naslov.opis
+          podaci.push({
+            idFilma : naslov.id,
+            nazivFilma : naslov.naziv,
+            glumci : naslov.glumci,
+            zanr : naslov.zanr,
+            trajanje : naslov.trajanje,
+            ocena : naslov.ocena,
+            salaTerminiCene : salaTerminiCene,
+            opis : naslov.opis
 
-        })
+          })
       });
     this.podaci = podaci;
-
+    
   }
 
 
   isAdmin() {
     this.userService.getLoggedUserAPI().subscribe(data => {
-
-      if (data && data.listaLokala.includes(this.lokal.id.toString()))
-        this.admin = true;
-      else
-        this.admin = false;
-
+     
+        if ( data  && (data.tip === "adminBioskop" || data.tip === "adminPozoriste" ))
+          this.admin = true;
+        else
+          this.admin = false;
+      
     });
   }
 
-  details(id) {
+  details(id)
+  {
     this.router.navigate(['/naslovProfil/' + id + "/" + this.lokal.id]);
   }
 

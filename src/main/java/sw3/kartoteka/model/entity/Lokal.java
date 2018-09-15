@@ -23,7 +23,7 @@ public class Lokal {
 		this.naziv = naziv;
 		this.adresa = adresa;
 		this.promotivniOpis = promotivniOpis;
-		this.sala = sale;
+		this.sale = sale;
 	}
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -48,16 +48,16 @@ public class Lokal {
 	
 	@OneToMany
 	@Column
-	private List<Sala> sala;
+	private List<Sala> sale;
 	
 	 
-	public List<Sala> getSala() {
-		return sala;
+	public List<Sala> getSale() {
+		return sale;
 	}
 
 
-	public void setSala(List<Sala> sale) {
-		this.sala = sale;
+	public void setSale(List<Sala> sale) {
+		this.sale = sale;
 	}
 
 
