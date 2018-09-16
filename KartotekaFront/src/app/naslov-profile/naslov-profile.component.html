@@ -11,7 +11,8 @@
 
         <mat-tab label="About">
           <div class="content" *ngIf="naslov">
-            <!-- <button [hidden]="!admin" class="btn btn-secondary edit">Edit projection</button>-->
+            <button [hidden]="!(this.userService.getLoggedIn() && 
+            (this.userService.getLoggedIn().tip == 'adminBioskop' || this.userService.getLoggedIn().tip == 'adminPozoriste') )" class="btn btn-secondary edit">Edit Title</button>
             <div class="description">
               <h3>Title: {{naslov.naziv}}</h3>  
               <br>
