@@ -4,7 +4,7 @@
       <mat-card-title>{{oglas.naziv}}</mat-card-title>
       <mat-card-subtitle>Vazi do: {{vreme}}</mat-card-subtitle>
     </mat-card-header>
-    <img mat-card-image [src]="imagePath" onerror= "this.src = 'http://localhost:8080/api/downloadFile/rekviziti/alt'" alt="No Photo" class="img">
+      <img  [src]="this.imagePath" onerror= "this.src = 'http://localhost:8080/api/downloadFile/rekviziti/alt'" alt="No Photo" class="img">
     <mat-card-content>
       <p>
           {{oglas.opis}}

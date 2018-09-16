@@ -1,37 +1,36 @@
-<form class="example-form">
-  <mat-form-field class="example-full-width">
-    <input matInput placeholder="Name" [formControl]="NameFormControl" [errorStateMatcher]="matcher">
-
-  </mat-form-field>
-
-  <!-- <mat-step [stepControl]="dateFormGroup" >
-        <form [formGroup]="dateFormGroup">
-          <ng-template  matStepLabel>Choose date </ng-template>
-          <mat-form-field>
-              <mat-select placeholder= "Date" required formControlName="dateCtrl" >
-                  <mat-option *ngFor="let izvedba of izvedbe" [value]="izvedba">
-                    {{izvedba.datum}}
-                  </mat-option>
-                </mat-select>
+<div class="main">
+    <mat-card class="example-card">
+      <mat-card-header>
+        <mat-card-title>Add Auction</mat-card-title>
+      </mat-card-header>
+      <form class="example-form" >
+        <table class="table" cellspacing="0">
+          <tr><td>
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Name" [formControl]="NameFormControl" [errorStateMatcher]="matcher">
           </mat-form-field>
-        </form>
-      </mat-step> -->
-  <p>
-    <input [(ngModel)]="humanDate" type="date" name="startDate"  [min]="today"/>
-  </p>
-  <br>
-  <!-- <input [ngModel]="startDate" 
-  (ngModelChange)="startDate = $event" type="startDate" name="startDate"/> -->
-  <br>
+          </td></tr>
 
+          <tr><td>
+              <input [(ngModel)]="humanDate" type="date" name="startDate"  [min]="today"/>
+          </td></tr>
+          <tr><td>
+              <mat-form-field class="example-full-width">
+                  <textarea matInput placeholder="Description" [formControl]="DescriptionFormControl"></textarea>
+                </mat-form-field>
+          </td></tr>
+          
+          <tr><td>
+              <input class="ng-hide" id="input-file-id" multiple type="file" (change)="valuechangeIMG($event)">
+              <label for="input-file-id" class="md-button md-raised md-primary">Choose Files</label>
+    
+          </td></tr>
+         <tr><td> 
+          <button type="button" mat-stroked-button="user-button" (click)="addOglas()"> Add</button>
+        </td></tr>
+          
+      </table>
+    </form>
+  </mat-card>  
+</div>
 
-  <mat-form-field class="example-full-width">
-    <textarea matInput placeholder="Description" [formControl]="DescriptionFormControl"></textarea>
-  </mat-form-field>
-  <br>
-  <input class="ng-hide" id="input-file-id" multiple type="file" (change)="valuechangeIMG($event)">
-  <label for="input-file-id" class="md-button md-raised md-primary">Choose Files</label>
-  <br>
-  <br>
-  <button type="button" mat-stroked-button="user-button" (click)="addOglas()"> Add</button>
-</form>

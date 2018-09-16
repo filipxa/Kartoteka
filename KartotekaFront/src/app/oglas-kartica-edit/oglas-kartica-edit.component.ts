@@ -63,7 +63,7 @@ export class OglasKarticaEditComponent implements OnInit {
     let datee = new Date();
     datee.setTime(this.oglas.datum);
     this.vreme = datee.toLocaleString();
-    this.imagePath = "http://localhost:8080/api/downloadFile/oglasi/"+this.oglas.idOglasa;
+    this.imagePath = "http://localhost:8080/api/downloadFile/oglasi/"+this.oglas.idOglasa+"/" + (new Date()).getTime();
     this.altPhoto = "https://www.freeiconspng.com/uploads/no-image-icon-4.png";
     console.log("sta");
   }

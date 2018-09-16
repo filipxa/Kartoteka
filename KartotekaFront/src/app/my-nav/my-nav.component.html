@@ -27,12 +27,12 @@
       <a mat-list-item routerLink="lokal/cinemas">Cinemas</a>
       <a *ngIf="this.userService.getLoggedIn() && (this.userService.getLoggedIn().tip == 'korisnik') " mat-list-item routerLink="/tickets">My Tickets</a>
       <a *ngIf="this.userService.getLoggedIn() && (this.userService.getLoggedIn().tip == 'korisnik') " mat-list-item routerLink="/fanzone">Fan Zone</a>
-      <a *ngIf="this.userService.getLoggedIn() && (this.userService.getLoggedIn().tip == 'korisnik') " mat-list-item routerLink="/addOglas">Add auction</a>
+      <a *ngIf="this.userService.getLoggedIn() && (this.userService.getLoggedIn().tip == 'korisnik') " mat-list-item routerLink="/addOglas">Add Auction</a>
       <a *ngIf="this.userService.getLoggedIn() && (this.userService.getLoggedIn().tip == 'fan') " mat-list-item routerLink="/addRekvizit">Add Item</a>
       <a *ngIf="this.userService.getLoggedIn() && (this.userService.getLoggedIn().tip == 'fan') " mat-list-item routerLink="/rekvizitAllEdit">Edit Fan Zone</a>
-      <a *ngIf="this.userService.getLoggedIn() && (this.userService.getLoggedIn().tip == 'root') " mat-list-item routerLink="/addadmin">Add admin</a>
-      <a *ngIf="this.userService.getLoggedIn() && (this.userService.getLoggedIn().tip == 'root') " mat-list-item routerLink="/lokalAdd">Add local</a>
-      <a *ngIf="this.userService.getLoggedIn() && (this.userService.getLoggedIn().tip == 'root') " mat-list-item routerLink="/skalaEdit">Edit users scale</a>
+      <a *ngIf="this.userService.getLoggedIn() && (this.userService.getLoggedIn().tip == 'root') " mat-list-item routerLink="/addadmin">Add Admin</a>
+      <a *ngIf="this.userService.getLoggedIn() && (this.userService.getLoggedIn().tip == 'root') " mat-list-item routerLink="/lokalAdd">Add Local</a>
+      <a *ngIf="this.userService.getLoggedIn() && (this.userService.getLoggedIn().tip == 'root') " mat-list-item routerLink="/skalaEdit">Edit Users Scale</a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content class="lowerContainer" >

@@ -17,7 +17,7 @@ export class PonudaKarticaComponent implements OnInit {
   acceptPonuda(){
     this.ponuda.prihvacena=true;
     this.ponudaService.acceptPonuda(this.ponuda.id);
-    this.router.navigate(['/fanzone']);
+    this.router.navigate(['/']);
     window.location.reload();
   }
 

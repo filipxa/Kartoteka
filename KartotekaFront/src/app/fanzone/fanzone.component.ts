@@ -17,7 +17,9 @@ export class FanzoneComponent implements OnInit {
   oglasi: Oglas[];
   mojiOglasi:Oglas[];
 
-  constructor(private rekvizitService: RekvizitService, private oglasSrevice:OglasService, private userSrvice : UserService) {
+  constructor(private rekvizitService: RekvizitService,
+     private oglasSrevice:OglasService,
+     private userSrvice : UserService) {
     this.mojiOglasi = new Array();
   }
 
@@ -37,9 +39,9 @@ export class FanzoneComponent implements OnInit {
     this.oglasi = oglasi;
     
     oglasi.forEach(o => {
-      // if(o.postavioID==this.userSrvice.getUserLogged().id){
+      if(o.postavioID==this.userSrvice.getLoggedIn().id){
         this.mojiOglasi.push(o);
-      // }
+       }
     });
     console.log(this.mojiOglasi);
   }

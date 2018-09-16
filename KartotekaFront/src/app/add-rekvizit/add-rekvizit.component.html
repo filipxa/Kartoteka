@@ -1,31 +1,52 @@
-<form class="example-form">
-  <mat-form-field class="example-full-width">
-    <input matInput placeholder="Name" [formControl]="NameFormControl"
-    [errorStateMatcher]="matcher">
-    <mat-error *ngIf="NameFormControl.hasError('required')">
-      Name is required
-    </mat-error>
-  </mat-form-field>
+<div class="main">
+  <mat-card class="example-card">
+    <mat-card-header>
+      <mat-card-title>Add item</mat-card-title>
+    </mat-card-header>
+    <form class="example-form" >
+      <table class="table" cellspacing="0">
+        <tr><td>
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Name" [formControl]="NameFormControl"
+            [errorStateMatcher]="matcher">
+            <mat-error *ngIf="NameFormControl.hasError('required')">
+              Name is required
+            </mat-error>
+          </mat-form-field>
+        </td></tr>
+          
+        <tr><td>
+          <mat-form-field class="example-full-width">
+            <input matInput type = "number" placeholder="Price" [formControl]="PriceFormControl"
+            [errorStateMatcher]="matcher">
+            <mat-error *ngIf="PriceFormControl.hasError('required')">
+              Name is required
+            </mat-error>
+          </mat-form-field>
+        </td></tr>
+        <tr><td>
+            <mat-form-field class="example-full-width">
+                <textarea matInput placeholder="Description" [formControl]="DescriptionFormControl"></textarea>
+            </mat-form-field>
+        </td></tr>
+          
 
-  <mat-form-field class="example-full-width">
-    <input matInput type = "number" placeholder="Price" [formControl]="PriceFormControl"
-    [errorStateMatcher]="matcher">
-    <mat-error *ngIf="PriceFormControl.hasError('required')">
-      Name is required
-    </mat-error>
-  </mat-form-field>
-
-  <mat-form-field class="example-full-width">
-    <textarea matInput placeholder="Description" [formControl]="DescriptionFormControl"></textarea>
-  </mat-form-field>
-
-  <input class="ng-hide" 
-  id="input-file-id" 
-  multiple type="file" 
-  (change)="valuechangeIMG($event)">
-  <label for="input-file-id" class="md-button md-raised md-primary">Choose Files</label>
-  <br>
-  <br>
-  <button type="button"  mat-stroked-button="user-button" (click)="addRekvizit()" > Add</button>
-</form>
+          
+        <tr><td>
+            <input class="ng-hide" 
+            id="input-file-id" 
+            multiple type="file" 
+            (change)="valuechangeIMG($event)">
+            <label for="input-file-id" class="md-button md-raised md-primary">Choose Files</label>
+  
+        </td></tr>
+          
+        <tr><td>
+            <button type="button"  mat-stroked-button="user-button" (click)="addRekvizit()" > Add</button>
+        </td></tr>
+          
+      </table>
+    </form>
+  </mat-card>  
+</div>
 

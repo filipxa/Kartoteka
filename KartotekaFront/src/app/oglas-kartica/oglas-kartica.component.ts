@@ -17,7 +17,10 @@ export class OglasKarticaComponent implements OnInit {
   constructor(private oglasService:OglasService, 
     private router: Router,
     private snackBar : MatSnackBar,
-    private ponudaService: PonudaService) { this.ponuda = new Ponuda(); }
+    private ponudaService: PonudaService) { 
+      this.ponuda = new Ponuda(); 
+      this.imagePath="";
+    }
 
   imagePath: String;
   altPhoto: String;
@@ -74,7 +77,8 @@ export class OglasKarticaComponent implements OnInit {
     console.log("new Date():"+datee.toLocaleString());
     datee.setTime(this.oglas.datum);
     this.vreme = datee.toLocaleString();
-    this.imagePath = "http://localhost:8080/api/downloadFile/oglasi/"+this.oglas.idOglasa;
+    this.imagePath="";
+    this.imagePath = "http://localhost:8080/api/downloadFile/oglasi/"+this.oglas.idOglasa + "/" + (new Date()).getTime() ;
     this.altPhoto = "https://www.freeiconspng.com/uploads/no-image-icon-4.png";
     this.getPonda();
   }
