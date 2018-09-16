@@ -13,6 +13,7 @@ import { TerminCena } from '../models/terminCena';
 import { Karta } from '../models/karta';
 import { SalaEditComponent } from '../sala-edit/sala-edit.component';
 import { Location } from '@angular/common';
+import { IzvedbaPravljenjeNoveComponent } from '../izvedba-pravljenje-nove/izvedba-pravljenje-nove.component';
 
 @Component({
   selector: 'app-lokal-profile',
@@ -21,6 +22,7 @@ import { Location } from '@angular/common';
 })
 export class LokalProfileComponent implements OnInit {
 
+  idLokala : string;
   ID: number;
   lokal: Lokal;
   podaci: any = [];
@@ -36,12 +38,20 @@ export class LokalProfileComponent implements OnInit {
 
 
 
-  constructor(private lokalService: LokalService, private route: ActivatedRoute, private userService: UserService, public dialog: MatDialog, private router: Router
-    , private location: Location) {
+  constructor(
+    private lokalService: LokalService, 
+    private route: ActivatedRoute, 
+    private userService: UserService, 
+    public dialog: MatDialog, 
+    private router: Router,
+    private location: Location) {
 
 
-
+    
+    
+    
     this.ID = parseInt(this.route.snapshot.paramMap.get('id'));
+    this.idLokala = this.ID.toString();
     this.lokal = new Lokal();
     lokalService.getLokal(this.ID).subscribe(data => {
       this.lokal = data;
@@ -51,10 +61,14 @@ export class LokalProfileComponent implements OnInit {
       this.pokupiSaleLokal();
       console.log("sale lokala");
       console.log(this.saleLokala);
-      
 
+      // console.log("PODACI");
       
-
+      // console.log(this.userService.getLoggedIn());
+      // console.log(this.userService.getLoggedIn().tip == 'adminBioskop');
+      // console.log(this.userService.getLoggedIn().tip == 'adminPozoriste');
+      // console.log(this.userService.getLoggedIn().listaLokala.includes(this.idLokala));
+      
       
       this.popuniSaleUKojimaImaIzvedbe();
       console.log("Sale Sa izvedbana");
@@ -71,6 +85,14 @@ export class LokalProfileComponent implements OnInit {
 
 
     });
+  }
+
+
+  dodajIzvedbu(){
+
+    this.router.navigate(['lokal/novaIzvedba/' + this.lokal.id]);
+
+
   }
 
 
@@ -138,7 +160,7 @@ export class LokalProfileComponent implements OnInit {
     })
   }
 
-  openDialog(): void {
+  editProfile(): void {
     const dialogRef = this.dialog.open(LokalEditProfileComponent, {
       width: '400px',
       data: this.lokal

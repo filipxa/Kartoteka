@@ -25,13 +25,15 @@
               <b>{{lokal.promotivniOpis}}</b>
             </p>
   
-            <button [hidden]="!admin" class="btn btn-primary" (click)="openDialog()">Edit cinema profile.</button>
+            <button [hidden]="!(this.userService.getLoggedIn() && 
+            (this.userService.getLoggedIn().tip == 'adminBioskop' || this.userService.getLoggedIn().tip == 'adminPozoriste') &&
+            this.userService.getLoggedIn().listaLokala.includes(idLokala))" class="btn btn-primary" (click)="editProfile()">Edit cinema profile.</button>
   
           </mat-tab>
   
-          <mat-tab label="Schedule">
+          <mat-tab label="Titles">
             <div class="content" *ngFor="let naslov of repertoarLista">
-              <button [hidden]="!admin" class="btn btn-secondary edit">Edit projection</button>
+              
               <img (click)="details(naslov.idNaslova)" class="projectImg" width="150px;" src="{{naslov.slika}}">
               <div class="description">
                 <h3 style="cursor: pointer;" (click)="details(naslov.idNaslova)">{{naslov.naziv}}</h3>
@@ -46,20 +48,20 @@
               </div>
             </div>
   
-            <button [hidden]="!admin" class="btn btn-secondary">New schedule.</button>
+            <button [hidden]="!(this.userService.getLoggedIn() && 
+            (this.userService.getLoggedIn().tip == 'adminBioskop' || this.userService.getLoggedIn().tip == 'adminPozoriste') &&
+            this.userService.getLoggedIn().listaLokala.includes(idLokala))" class="btn btn-secondary" (click)="dodajIzvedbu()">New projection</button>
           </mat-tab>
   
           <mat-tab label="Configuration">
             <div class="conf">
-              <!-- <div class="card border-secondary mb-3" style="max-width: 13rem;" (click)="ConfSale(4)">
-                <div class="card-header">Naziv sale</div>
-                <div class="card-body">
-                  <p class="card-text">Rows: </p>
-                  <p class="card-text">Columns: </p>
-                </div>
-              </div> -->
+             
   
-              <div class="card border-secondary mb-3" *ngFor="let sala of saleZaIzmenu" style="max-width: 13rem;" (click)="ConfSale(sala.idSale)">
+              <div class="card border-secondary mb-3" *ngFor="let sala of saleZaIzmenu" style="max-width: 13rem;" 
+              (click)="this.userService.getLoggedIn() && 
+              (this.userService.getLoggedIn().tip == 'adminBioskop' || this.userService.getLoggedIn().tip == 'adminPozoriste') &&
+              this.userService.getLoggedIn().listaLokala.includes(idLokala) &&
+              ConfSale(sala.idSale)">
                   <div class="card-header">{{sala.naziv}}</div>
                   <div class="card-body">
                     <p class="card-text">Rows: {{sala.brRedova}} </p>

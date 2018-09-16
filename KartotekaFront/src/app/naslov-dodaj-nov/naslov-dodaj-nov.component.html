@@ -1,0 +1,71 @@
+<form class="example-form">
+  <mat-form-field class="example-full-width">
+    <input matInput placeholder="Title" name="naziv" [(ngModel)]="naslov.naziv" >
+   
+  </mat-form-field>
+
+
+  <mat-form-field class="example-full-width">
+    <input matInput type="text" name="zanr" placeholder="Genre" [(ngModel)]="naslov.zanr">
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+      <input matInput type="text" placeholder="Description" name="opis" [(ngModel)]="naslov.opis">
+  </mat-form-field>
+
+  <tr>
+      <td>
+        <section class="example-section">
+          <label class="example-margin">Director:</label>
+          <div>
+            <mat-form-field>
+              <mat-select placeholder="Director" name="reziser">
+                <mat-option *ngFor="let reziser of sviReziseri"  [value]="reziser">
+                  {{reziser.ime}} {{reziser.prezsime}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <br>
+            <button class="btn btn-secondary" (click)="dodajRezisera()">Add director</button>
+            <br>
+          </div>
+
+        </section>
+      </td>
+    </tr>
+
+    <tr>
+        <td>
+          <section class="example-section">
+            <label class="example-margin">Actors:</label>
+            <div>
+              <mat-form-field>
+                <mat-select placeholder="Actors" name="actors">
+                  <mat-option *ngFor="let glumac of sviReziseri"  [value]="glumac">
+                    {{glumac.ime}} {{glumac.prezsime}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+              <br>
+              <button class="btn btn-secondary" (click)="dodajRezisera()">Add glumac</button>
+              <br>
+            </div>
+  
+          </section>
+        </td>
+      </tr>
+
+
+    <mat-form-field class="example-full-width">
+        <input matInput type="number" placeholder="Time" name="time" [(ngModel)]="naslov.trajanje">
+    </mat-form-field>
+
+  <input class="ng-hide" id="input-file-id" multiple type="file" (change)="valuechangeIMG($event)">
+  <label for="input-file-id" class="md-button md-raised md-primary">Choose Image</label>
+  <br>
+  <br>
+  <button type="button" style="float: right;" class="btn btn-primary" (click)="addRekvizit()"> Add</button>
+
+  <button style="float: left;" class="btn btn-primary" (click)="cancel()">Cancel</button>
+
+</form>

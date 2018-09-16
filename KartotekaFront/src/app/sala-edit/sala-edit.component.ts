@@ -39,8 +39,6 @@ export class SalaEditComponent implements OnInit {
   private vratiSalu(idSale){
     let sale : Sala[] = this.lokal.sala;
    
-
-    
     sale.forEach(element => {
       
       if(element.idSale == idSale){
@@ -48,9 +46,6 @@ export class SalaEditComponent implements OnInit {
       }
     });
   }
-
-
-
 
   ngOnInit() {
   }

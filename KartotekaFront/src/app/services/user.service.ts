@@ -41,6 +41,8 @@ export class UserService {
     }
   }
 
+  
+
   public getLoggedIn(): User{
     return this.loggedUser;
   }
