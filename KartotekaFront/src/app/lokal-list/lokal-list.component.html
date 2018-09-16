@@ -2,7 +2,10 @@
 <br>
 <div class="container-fluid" style="padding-top: 50px;padding-left: 50px;">
     <div class="row">
-        <div class="col-md-4" style="text-align: center;align-content: center;margin-top: 20px;" *ngFor="let i of locals" (click)="profilBioskopa(i.id)">
+
+
+        <div class="col-md-4" style="text-align: center;align-content: center;margin-top: 20px;" *ngFor="let i of locals" 
+        (click)="this.userService.getLoggedIn() && profilBioskopa(i.id)">
 
             <div class="card border-secondary mb-6" style="max-width: 20rem;">
                 <div class="card-header">{{i.naziv}}</div>

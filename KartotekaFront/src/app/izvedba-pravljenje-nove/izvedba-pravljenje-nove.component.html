@@ -1,0 +1,64 @@
+<div class="main">
+  <mat-card class="example-card">
+    <mat-card-header>
+      <mat-card-title>New projection</mat-card-title>
+    </mat-card-header>
+
+    <!-- NASLOV -->
+
+
+    <!-- SALA -->
+    <form class="example-form">
+      <table class="table" cellspacing="0" *ngIf="lokal">
+
+        <tr>
+          <td>
+            <section class="example-section">
+              <label class="example-margin">Title:</label>
+              <div *ngIf="naslovi">
+                <mat-form-field>
+                  <mat-select placeholder="Title of projection" (selectionChange)="postaviNaslov($event.value)" name="naslov">
+                    <mat-option [value]="naslov">
+                      NASLOVI
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+                <br>
+                <button class="btn btn-secondary" (click)="dodajNaslov()">New Title</button>
+              </div>
+            </section>
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            <section class="example-section">
+              <label class="example-margin">Sala:</label>
+              <br>
+              <mat-form-field>
+                <mat-select placeholder="Choose hall" (selectionChange)="postaviSalu($event.value)">
+                  <mat-option *ngFor="let sala of lokal.sala" [value]="sala">
+                    {{sala.naziv}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+
+            </section>
+          </td>
+        </tr>
+
+
+        <br> DODAJ DATUM
+        <br>
+        <br> DODAJ TERMIN
+        <br>
+
+        
+
+      </table>
+      <button type="button"  class="btn btn-primary" (click)="addIzvedba()"> Add</button>
+      
+    </form>
+  </mat-card>
+
+</div>

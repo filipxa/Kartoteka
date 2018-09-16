@@ -6,6 +6,7 @@ import { LokalService } from '../services/lokal.service';
 import { Naslov } from '../models/naslov';
 import { Izvedba } from '../models/izvedba';
 import { Sala } from '../models/sala';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-naslov-profile',
@@ -20,7 +21,7 @@ export class NaslovProfileComponent implements OnInit {
   saleTerminiPodaci: any[];
 
 
-  constructor(private route: ActivatedRoute, private lokalService: LokalService, private router: Router) {
+  constructor(private route: ActivatedRoute, private userService: UserService, private lokalService: LokalService, private router: Router) {
 
   };
 

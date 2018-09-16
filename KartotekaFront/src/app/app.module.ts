@@ -47,6 +47,8 @@ import { RootAdminAddComponent } from './root-admin-add/root-admin-add.component
 import { FirstloginComponent } from './firstlogin/firstlogin.component';
 import { LokalAddComponent } from './lokal-add/lokal-add.component';
 import { SkalaAddRootComponent } from './skala-add-root/skala-add-root.component';
+import { IzvedbaPravljenjeNoveComponent } from './izvedba-pravljenje-nove/izvedba-pravljenje-nove.component';
+import { NaslovDodajNovComponent } from './naslov-dodaj-nov/naslov-dodaj-nov.component';
 
 const appRoutes: Routes = [
 
@@ -68,8 +70,9 @@ const appRoutes: Routes = [
   { path: 'addadmin', component: RootAdminAddComponent },
   { path: 'firstlogin', component: FirstloginComponent },
   { path: 'lokalAdd', component: LokalAddComponent },
+  { path: 'naslovProfil/:idNaslova/:idLokala', component: NaslovProfileComponent},
+  { path: 'lokal/novaIzvedba/:idLokala', component: IzvedbaPravljenjeNoveComponent}
   { path: 'skalaEdit', component: SkalaAddRootComponent },
-  { path: 'naslovProfil/:idNaslova/:idLokala', component: NaslovProfileComponent}
 ];
 
 @NgModule({
@@ -109,8 +112,10 @@ const appRoutes: Routes = [
     TicketConfirmComponent,
     RootAdminAddComponent,
     FirstloginComponent,
-    LokalAddComponent,
     SkalaAddRootComponent
+    LokalAddComponent,
+    IzvedbaPravljenjeNoveComponent,
+    NaslovDodajNovComponent
   ],
   imports: [
     BrowserModule,
@@ -135,10 +140,12 @@ const appRoutes: Routes = [
     MatRadioModule
   ],
   exports: [RouterModule, MatSnackBarModule, HttpClientModule],
-  providers: [ LokalEditProfileComponent, SalaEditComponent ],
+  providers: [ LokalEditProfileComponent, SalaEditComponent, NaslovDodajNovComponent ],
   entryComponents: [
     LokalEditProfileComponent,
-    SalaEditComponent
+    SalaEditComponent,
+    NaslovDodajNovComponent
+    
   ],
   bootstrap: [AppComponent]
 })

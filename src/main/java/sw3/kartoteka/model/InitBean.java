@@ -229,10 +229,7 @@ public class InitBean {
 		korisnikService.save(adminPozorista);
 				
 	
-		// administrator bioskopa
-		Korisnik adminBioskopa = new Korisnik("adminBioskop", "Milan", "Suhanov", "milan@m.com", "123", new ArrayList<Korisnik>(), "131232131", true, 0, 645775434, "Novi sad");
-		adminBioskopa.getListaPrijatelja().add(korisnik1);
-		korisnikService.save(adminBioskopa);
+		
 		
 		
 		// reziser i glumci
@@ -266,6 +263,16 @@ public class InitBean {
 		lokalService.save(zvezda);
 		Skala skala = new Skala(10, 10, 25, 20, 50, 30);
 		skalaService.save(skala);
+		
+		// administrator bioskopa
+		Korisnik adminBioskopa = new Korisnik("adminBioskop", "Milan", "Suhanov", "milan@m.com", "123", new ArrayList<Korisnik>(), "131232131", true, 0, 645775434, "Novi sad");
+		adminBioskopa.getListaPrijatelja().add(korisnik1);
+		List<Lokal> lokaliAdmina = new ArrayList<>();
+		lokaliAdmina.add(lokalService.findOne(zvezda.getId()));
+		adminBioskopa.setListaLokala(lokaliAdmina);
+		korisnikService.save(adminBioskopa);
+
+	
 		
 		List<Skala> skale = skalaService.findAll();
 		
