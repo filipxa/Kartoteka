@@ -1,3 +1,13 @@
-<p>
-  ticket-confirm works!
-</p>
+
+<mat-card class="example-card" *ngIf="karta">
+  <mat-card-header>
+    <div mat-card-avatar class="example-header-image"></div>
+    <mat-card-title>{{karta.izvedba.naslov.naziv}} {{kartaLokalName(karta)}}</mat-card-title>
+    <mat-card-subtitle>{{kartaDisplayDate(karta)}}  {{kartaDisplayTime(karta)}}</mat-card-subtitle>
+  </mat-card-header>
+ 
+  <mat-card-content>
+    <button mat-button   *ngIf="isCancable(ticket)"  title="Cancel ticket" (click)="cancelClick()">Cancel</button>
+    <button mat-button  title="Confirm ticket"  (click)="confirmClick()">Confirm</button>
+  </mat-card-content>
+</mat-card>

@@ -67,9 +67,8 @@ export class LokalReserveComponent implements OnInit {
   initLokal(lokal: Lokal): any {
 
     this.lokal = lokal;
-    this.naslovi = Repertoar.getNaslovi(lokal.repertoar);
-    this.naslovIzvedbeMap = Repertoar.extractNasloviIzvedbe(lokal.repertoar);
-
+    this.naslovIzvedbeMap = Repertoar.extractNasloviIzvedbeFilterDate(lokal.repertoar);
+    this.naslovi = Array.from(this.naslovIzvedbeMap.keys());
 
   }
 
@@ -95,7 +94,7 @@ export class LokalReserveComponent implements OnInit {
   getDates() {
     let naslov = this.titleFormGroup.get("titleCtrl").value;
     this.izvedbe = this.naslovIzvedbeMap.get(naslov);
-
+    this.izvedbe.filter(i => i.datum == i.datum);
   }
 
 

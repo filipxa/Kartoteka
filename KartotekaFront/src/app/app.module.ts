@@ -55,6 +55,7 @@ const appRoutes: Routes = [
   { path: 'register', component: RegisterPageComponent },
   { path: '', component: HomePageComponent },
   { path: 'tickets', component: TicketsPageComponent },
+  { path: 'ticket-confirm/:id', component: TicketConfirmComponent},
   { path: 'fanzone', component: FanzoneComponent },
   { path: 'lokal/reserve/:id', component: LokalReserveComponent },
   { path: 'profile', component: UserProfileCardComponent },
@@ -71,8 +72,8 @@ const appRoutes: Routes = [
   { path: 'firstlogin', component: FirstloginComponent },
   { path: 'lokalAdd', component: LokalAddComponent },
   { path: 'naslovProfil/:idNaslova/:idLokala', component: NaslovProfileComponent},
-  { path: 'lokal/novaIzvedba/:idLokala', component: IzvedbaPravljenjeNoveComponent}
-  { path: 'skalaEdit', component: SkalaAddRootComponent },
+  { path: 'lokal/novaIzvedba/:idLokala', component: IzvedbaPravljenjeNoveComponent},
+  { path: 'skalaEdit', component: SkalaAddRootComponent }
 ];
 
 @NgModule({
@@ -112,7 +113,7 @@ const appRoutes: Routes = [
     TicketConfirmComponent,
     RootAdminAddComponent,
     FirstloginComponent,
-    SkalaAddRootComponent
+    SkalaAddRootComponent,
     LokalAddComponent,
     IzvedbaPravljenjeNoveComponent,
     NaslovDodajNovComponent

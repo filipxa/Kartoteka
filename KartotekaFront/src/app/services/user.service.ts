@@ -56,6 +56,15 @@ export class UserService {
     });
   }
 
+  public redirectIfLogged (adress : String){
+
+    this.getLoggedUserAPI().subscribe(data=>{
+     if(data!=null){
+      this.router.navigate(["/"+adress])
+      } 
+    });
+  }
+
   logIn(email: string, password: string): void {
 
     let sendData = {};

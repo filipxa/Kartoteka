@@ -6,7 +6,6 @@ import { ErrorStateMatcher } from '@angular/material/core';
 import { Router } from '@angular/router'
 
 import { MatSnackBar } from '@angular/material';
-import { Observable, of } from 'rxjs';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -107,7 +106,7 @@ export class RegisterPageComponent implements OnInit {
   matcher = new MyErrorStateMatcher();
 
   ngOnInit() {
-    this.userService.redirectIfNotLogged("");
+    this.userService.redirectIfLogged("");
   }
 
 }

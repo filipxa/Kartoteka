@@ -96,6 +96,19 @@ public class KartaController {
 		
 	}
 	
+	@GetMapping(value = "/{id}")
+	public ResponseEntity<?> getTicket(@PathVariable("id") Integer id){
+		try{
+			Karta karta = kartaService.findOne(id);
+			if(karta == null){throw new Exception();}
+			
+			return new ResponseEntity<Karta>(karta,HttpStatus.OK);
+		}catch(Exception e){
+			return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
+		}
+		
+	}
+	
 	@GetMapping(value="/izvedba/{id}")
 	public ResponseEntity<?> getKarteByIzvedba(@PathVariable("id") Integer id){
 		try {

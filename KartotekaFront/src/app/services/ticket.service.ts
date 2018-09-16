@@ -20,14 +20,13 @@ const getLoggedUserTicketURL : string = "http://localhost:8080/api/karta/user/";
 const getIzvedbaTicketURL : string = "http://localhost:8080/api/karta/izvedba/";
 const cancelById : string = "http://localhost:8080/api/karta/cancel/";
 const reserveTicketUrl : string = "http://localhost:8080/api/karta/rez";
+const getTicketUrl : string = "http://localhost:8080/api/karta/";
+
+
 @Injectable({
   providedIn: 'root'
 })
 export class TicketService {
-
-
-  private loggedUser : User;
-
   constructor(private userService: UserService, private http: HttpClient, private snackBar : MatSnackBar, private router: Router ) {
     
    }
@@ -43,8 +42,6 @@ export class TicketService {
   }
 
   getLoggedUserTickets() : Observable<Array<Karta>>{
-   let loggedUser = this.userService.getLoggedIn();
-   
     return this.http.get<Array<Karta>>(getLoggedUserTicketURL , httpOptions);
   }
 
@@ -68,6 +65,10 @@ export class TicketService {
           duration: 3000,
         });
       });
+  }
+
+  getTicket(ticketId: number): Observable<Karta> {
+    return this.http.get<Karta>(getTicketUrl + ticketId, httpOptions);
   }
 
 

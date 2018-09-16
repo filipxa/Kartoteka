@@ -126,7 +126,7 @@ public class Karta {
 		sb.append("Auditorium: " + izvedba.getSala().getIdSale() +"\n");
 		sb.append(String.format("Seat: row %02d   num %02d", sediste.getRed(), sediste.getKolona())+"\n");
 		sb.append("Ime i prezime: " + korisnik.getIme() + " "+ korisnik.getPrezime()+"\n");
-		sb.append("======================================\n");
+		sb.append("====================================\n");
 		return sb.toString();
 	}
 	

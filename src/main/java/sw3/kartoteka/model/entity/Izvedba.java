@@ -106,6 +106,8 @@ public class Izvedba {
 	public Date getTermin() {
 		return termin;
 	}
+	
+
 	public void setTermin(Date termin) {
 		this.termin = termin;
 	}

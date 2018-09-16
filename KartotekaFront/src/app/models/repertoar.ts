@@ -95,6 +95,40 @@ export class Repertoar {
         return rets;
     }
 
+
+    static extractNasloviIzvedbeFilterDate(rep: Repertoar): Map<Naslov, Izvedba[]> {
+        let rets: Map<Naslov, Izvedba[]> = new Map<Naslov, Izvedba[]>();
+        for (let izvedba of rep.izvedbe) {
+          
+            let dt = new Date(izvedba.termin);
+
+
+            let end = new Date();
+            end = new Date(end.getTime() - 30*60000); 
+            if(end > dt){
+                continue;
+            }
+            if (!(rets.has(izvedba.naslov))) {
+                rets.set(izvedba.naslov, new Array<Izvedba>());
+            }
+
+            izvedba.datum = dt.toDateString();
+            let hours = "" + dt.getHours();
+            while (hours.length < 2) {
+                hours = "0" + hours;
+            }
+            let minutes = "" + dt.getMinutes();
+            while (minutes.length < 2) {
+                minutes = "0" + minutes;
+            }
+            izvedba.termin = "" + hours + ":" + minutes;
+            rets.get(izvedba.naslov).push(izvedba);
+        }
+        return rets;
+    }
+
+
+
     static extractSalaIZvedbe(rep: Repertoar): Map<Naslov, Map<Sala, Izvedba[]>> {
         let rets: Map<Naslov, Map<Sala, Izvedba[]>> = new Map<Naslov, Map<Sala, Izvedba[]>>();
         let mapa: Map<Naslov, Izvedba[]> = Repertoar.extractNasloviIzvedbe(rep);
