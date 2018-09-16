@@ -29,17 +29,3 @@
     margin-top: 5%;
 
   }
-
-  .example-header-image {
-    background-image: url('https://cdn0.iconfinder.com/data/icons/cosmetic-store/25/Register-512.png');
-    background-size: cover;
-  }
-  
-  .example-section {
-    align-content: center;
-    align-items: center;
-  }
-  
-  .example-margin {
-    margin: 0 10px;
-  }

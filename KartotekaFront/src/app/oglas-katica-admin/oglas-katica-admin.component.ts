@@ -28,8 +28,11 @@ export class OglasKaticaAdminComponent implements OnInit {
     this.oglasService.deleteOglas(this.oglas.idOglasa);
     //this.oglasService.deleteRekvizit(this.oglas);
   }
-
-  ngOnInit() {
+  vreme:string;
+  ngOnInit() {    
+    let datee = new Date();
+    datee.setTime(this.oglas.datum);
+    this.vreme = datee.toLocaleString();
     this.imagePath = "http://localhost:8080/api/downloadFile/oglasi/"+this.oglas.idOglasa;
     this.altPhoto = "https://www.freeiconspng.com/uploads/no-image-icon-4.png";
   }

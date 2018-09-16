@@ -23,7 +23,10 @@ export class OglasEditovanjeComponent implements OnInit {
     private http:HttpClient,
     private fb: FormBuilder) { 
       this.startDate = new Date();
+      this.startDate = this.dateSeter(this.startDate);
+      
       this.milisecDate = this.startDate.getTime();
+
       this.oglas = new Oglas();
     }
   oglas: Oglas;
@@ -36,6 +39,21 @@ export class OglasEditovanjeComponent implements OnInit {
   milisecDate: number;
   datum:Date;
   today = new Date().toJSON().split('T')[0];
+
+  private dateSeter(inputDate:Date):Date{
+    console.log("inputDateU:"+inputDate.getTime());
+    inputDate.setDate(inputDate.getDate().valueOf()+1);
+    inputDate.setHours(0);
+    inputDate.setMinutes(0);
+    inputDate.setMinutes(0);
+    inputDate.setSeconds(0);
+    inputDate.setMilliseconds(0);
+    inputDate.setTime(inputDate.getTime()-1);
+    console.log("inputDateI:"+inputDate.getTime());
+    console.log(inputDate.toLocaleString());
+    
+    return inputDate;
+  }
   set humanDate(e){
     e = e.split('-');
     
@@ -77,11 +95,14 @@ export class OglasEditovanjeComponent implements OnInit {
     this.oglasService.getOglas(this.ulazId).subscribe(p=>{this.oglas = p;
       console.log(this.oglas);
       this.startDate = new Date(this.oglas.datum);
+      this.NameFormControl = new FormControl(this.oglas.naziv, []);
+    
+      this.DescriptionFormControl = new FormControl(this.oglas.opis, []);
     });
     
   }
   saveOglas(){
-    this.oglas.datum = this.milisecDate;
+    this.oglas.datum = this.startDate.getTime().valueOf();
     this.oglas.naziv = this.NameFormControl.value;
     this.oglas.opis = this.DescriptionFormControl.value;
     let error : boolean = false;
